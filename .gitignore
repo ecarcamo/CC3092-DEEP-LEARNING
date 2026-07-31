@@ -1,1 +1,33 @@
+# Carpeta de documentos
 docs/
+
+# Virtualenv
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Datos grandes / locales (opcional)
+data/*.csv
+*.csv
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# Secretos (si usas Kaggle API)
+.kaggle/
+kaggle.json
