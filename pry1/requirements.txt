@@ -1,0 +1,21 @@
+# Proyecto 1 - Competencia de modelación (MLP sobre Ames Housing)
+# Python 3.11
+
+# Datos y cómputo numérico
+numpy
+pandas
+scipy
+
+# Modelado
+scikit-learn
+torch
+
+# Visualización
+matplotlib
+seaborn
+statsmodels   # requerido por seaborn.regplot(lowess=True) en el EDA
+
+# Entorno de notebooks
+jupyterlab
+ipykernel
+ipywidgets

@@ -1,0 +1,46 @@
+# ============================================================================
+# .gitignore específico del Proyecto 1
+#
+# El .gitignore de la raíz del curso ya cubre lo general: venv/, __pycache__/,
+# .ipynb_checkpoints/, docs/, *.csv, IDE y secretos de Kaggle.
+# Este archivo solo añade lo propio del proyecto y reincorpora lo que la regla
+# global excluye de más.
+# ============================================================================
+
+# --- Datasets: la regla global '*.csv' los excluye, pero el enunciado (§2.6) exige
+#     que el repositorio sea reproducible, así que se versionan los de entrada.
+!data/raw/train.csv
+!data/raw/test.csv
+
+# --- Datos derivados: regenerables ejecutando los notebooks
+data/processed/*.csv
+data/processed/*.parquet
+data/interim/
+
+# --- Artefactos de entrenamiento: se versiona solo el modelo final,
+#     que debe estar disponible el día de la competencia (§3, recomendación 1).
+models/*.pt
+models/*.pth
+models/*.pkl
+models/*.joblib
+models/*.onnx
+!models/final_model.pt
+!models/final_pipeline.joblib
+
+# --- Checkpoints intermedios y logs de experimentos
+checkpoints/
+runs/
+logs/
+*.log
+lightning_logs/
+mlruns/
+wandb/
+optuna_studies/
+*.db
+
+# --- Predicciones generadas para la competencia
+submissions/*.csv
+
+# --- Entorno propio de este proyecto (además del venv/ global)
+requirements.lock.txt.bak
+.python-version
