@@ -1,0 +1,37 @@
+{
+  "iteracion": "it38",
+  "n_features": 218,
+  "n_modelos": 1,
+  "epocas_entrenamiento": 144,
+  "pre_config": {
+    "derived": true,
+    "log_skewed": true,
+    "skew_threshold": 0.75,
+    "drop_quasi_constant": true,
+    "rare_min_count": 0,
+    "scale": true
+  },
+  "model_config": {
+    "hidden": [
+      128,
+      64
+    ],
+    "dropout": 0.35,
+    "batchnorm": true,
+    "activation": "relu",
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "batch_size": 64,
+    "max_epochs": 600,
+    "patience": 80,
+    "scheduler": "cosine",
+    "loss": "mse",
+    "log_target": true,
+    "seed": 42
+  },
+  "excluir_ids": [],
+  "rmse_cv_train_dev": 28374.722099765862,
+  "rmse_test_interno": 24197.4257202533,
+  "n_train": 992,
+  "lectura_csv": "keep_default_na=False, na_values=['']"
+}

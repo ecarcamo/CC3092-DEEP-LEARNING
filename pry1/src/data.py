@@ -48,14 +48,19 @@ def split_xy(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series | None]:
     return X, y
 
 
-def price_bins(y: pd.Series, n_bins: int = 10) -> np.ndarray:
-    """Estratos por cuantil de precio, para que la cola derecha se reparta uniformemente."""
+def price_bins(y: pd.Series, n_bins: int = 20) -> np.ndarray:
+    """Estratos por cuantil de precio, para que la cola derecha se reparta uniformemente.
+
+    Se usan 20 bins y no 10: con 10, el decil superior agrupa ~117 viviendas y las pocas
+    verdaderamente extremas (>500 k) pueden caer todas del mismo lado por azar. Como el RMSE
+    está dominado por esas observaciones, eso hace que la partición no sea representativa.
+    """
     return pd.qcut(y, q=n_bins, labels=False, duplicates="drop").to_numpy()
 
 
-def holdout_split(X, y, test_size=0.15, seed=42, stratify=True):
+def holdout_split(X, y, test_size=0.15, seed=42, stratify=True, n_bins: int = 20):
     """Partición train_dev / test interno. El test interno se toca una sola vez."""
-    strat = price_bins(y) if stratify else None
+    strat = price_bins(y, n_bins) if stratify else None
     return train_test_split(X, y, test_size=test_size, random_state=seed, stratify=strat)
 
 

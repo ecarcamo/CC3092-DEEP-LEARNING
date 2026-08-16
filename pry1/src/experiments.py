@@ -61,7 +61,8 @@ class ResultadoCV:
 def cv_evaluate(X, y, pre_cfg: PreprocessConfig, model_cfg: ModelConfig,
                 n_splits: int = 5, seed: int = 42, stratify: bool = True,
                 id: str = "", descripcion: str = "", device: str = "cpu",
-                guardar_historias: bool = True) -> ResultadoCV:
+                guardar_historias: bool = True,
+                excluir_de_train: np.ndarray | None = None) -> ResultadoCV:
     """K-fold sobre train_dev.
 
     El RMSE de validación se calcula AGRUPANDO las predicciones out-of-fold en un solo
@@ -69,6 +70,11 @@ def cv_evaluate(X, y, pre_cfg: PreprocessConfig, model_cfg: ModelConfig,
     la concavidad de la raíz: repartir los errores uniformemente entre folds sube el
     promedio aunque el error total sea el mismo, lo que penalizaba artificialmente a la
     estratificación y hacía que k=3 y k=10 no fueran comparables entre sí.
+
+    `excluir_de_train` es una máscara booleana de filas que se quitan SOLO de la porción de
+    entrenamiento de cada fold. La validación se mantiene íntegra: sacar observaciones
+    difíciles del set de validación bajaría el RMSE sin que el modelo haya mejorado, y el
+    dataset de prueba de la competencia sí las va a contener.
     """
     t0 = time.perf_counter()
     if stratify:
@@ -83,6 +89,8 @@ def cv_evaluate(X, y, pre_cfg: PreprocessConfig, model_cfg: ModelConfig,
     n_features = 0
 
     for k, (i_tr, i_va) in enumerate(folds):
+        if excluir_de_train is not None:
+            i_tr = i_tr[~np.asarray(excluir_de_train)[i_tr]]   # solo del train, no del val
         X_tr, X_va = X.iloc[i_tr], X.iloc[i_va]
         y_tr, y_va = y.iloc[i_tr].to_numpy(), y.iloc[i_va].to_numpy()
 
@@ -117,7 +125,8 @@ def cv_evaluate(X, y, pre_cfg: PreprocessConfig, model_cfg: ModelConfig,
 def cv_multiseed(X, y, pre_cfg: PreprocessConfig, model_cfg: ModelConfig,
                  semillas: tuple[int, ...] = (42, 43, 44), n_splits: int = 5,
                  stratify: bool = False, id: str = "", descripcion: str = "",
-                 device: str = "cpu") -> ResultadoCV:
+                 device: str = "cpu",
+                 excluir_de_train: np.ndarray | None = None) -> ResultadoCV:
     """Repite la CV con varias semillas y promedia.
 
     Una sola semilla no basta: la varianza del estimador está dominada por un puñado de
@@ -127,7 +136,7 @@ def cv_multiseed(X, y, pre_cfg: PreprocessConfig, model_cfg: ModelConfig,
     corridas = [
         cv_evaluate(X, y, pre_cfg, model_cfg, n_splits=n_splits, seed=s, stratify=stratify,
                     id=f"{id}_s{s}", descripcion=descripcion, device=device,
-                    guardar_historias=(s == semillas[0]))
+                    guardar_historias=(s == semillas[0]), excluir_de_train=excluir_de_train)
         for s in semillas
     ]
     val = float(np.mean([c.val_rmse for c in corridas]))
@@ -149,10 +158,16 @@ def cv_multiseed(X, y, pre_cfg: PreprocessConfig, model_cfg: ModelConfig,
 class Bitacora:
     """Registro incremental de iteraciones, persistido en reports/experiments.csv."""
 
-    def __init__(self, path: Path = REGISTRO):
+    def __init__(self, path: Path = REGISTRO, reset: bool = False):
+        """`reset=True` descarta el registro previo.
+
+        El notebook de iteraciones es la única fuente de la bitácora, así que al reejecutarlo
+        debe partir de cero: arrastrar filas de corridas anteriores mezcla resultados obtenidos
+        con particiones o código distintos.
+        """
         self.path = path
         self.filas: list[dict] = []
-        if path.exists():
+        if path.exists() and not reset:
             self.filas = pd.read_csv(path).to_dict("records")
 
     def añadir(self, r: ResultadoCV) -> ResultadoCV:

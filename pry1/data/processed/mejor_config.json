@@ -1,0 +1,43 @@
+{
+  "id_iteracion": "it38",
+  "descripcion": "mejor config, entrenamiento largo",
+  "semillas_confirmacion": 8,
+  "error_estandar": 891.7319067492712,
+  "baseline_supera": true,
+  "pre": {
+    "derived": true,
+    "log_skewed": true,
+    "skew_threshold": 0.75,
+    "drop_quasi_constant": true,
+    "rare_min_count": 0,
+    "scale": true
+  },
+  "mlp": {
+    "hidden": [
+      128,
+      64
+    ],
+    "dropout": 0.35,
+    "batchnorm": true,
+    "activation": "relu",
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "batch_size": 64,
+    "max_epochs": 600,
+    "patience": 80,
+    "scheduler": "cosine",
+    "loss": "mse",
+    "log_target": true,
+    "seed": 42
+  },
+  "excluir_ids": [],
+  "val_rmse_cv": 28374.722099765862,
+  "val_std": 2522.198713051279,
+  "val_rmse_3_semillas": 30282.089287672832,
+  "train_rmse": 14886.989903725387,
+  "gap": 13487.732196040475,
+  "baseline_a_batir": {
+    "modelo": "GradientBoosting (500)",
+    "rmse": 31877.445102397967
+  }
+}

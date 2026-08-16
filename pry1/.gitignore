@@ -12,6 +12,9 @@
 !data/raw/train.csv
 !data/raw/test.csv
 
+# --- Reportes: la bitácora de iteraciones es un entregable (§2.3 del enunciado)
+!reports/*.csv
+
 # --- Datos derivados: regenerables ejecutando los notebooks
 data/processed/*.csv
 data/processed/*.parquet
