@@ -1,8 +1,8 @@
 {
   "iteracion": "it38",
-  "n_features": 218,
+  "n_features": 219,
   "n_modelos": 1,
-  "epocas_entrenamiento": 144,
+  "epocas_entrenamiento": 70,
   "pre_config": {
     "derived": true,
     "log_skewed": true,
@@ -31,7 +31,11 @@
   },
   "excluir_ids": [],
   "rmse_cv_train_dev": 28374.722099765862,
-  "rmse_test_interno": 24197.4257202533,
-  "n_train": 992,
+  "rmse_test_interno_modelo_anterior_992": 24197.4257202533,
+  "n_train": 1168,
+  "n_train_modelo_anterior": 992,
+  "reentrenado_full_dataset": true,
+  "fecha_reentrenamiento": "2026-08-16",
+  "motivo": "Aprovechar el 100% de train.csv (1168 filas) para el modelo de competencia, sin reabrir ninguna decisión de arquitectura/hiperparametros (ya confirmadas con 8 semillas en 04_iteraciones.ipynb). El RMSE de referencia para la competencia sigue siendo el de CV (28,375 +/- 892 USD), no un numero recalculado aqui, porque ya no queda un conjunto de test interno sin fuga de informacion.",
   "lectura_csv": "keep_default_na=False, na_values=['']"
 }

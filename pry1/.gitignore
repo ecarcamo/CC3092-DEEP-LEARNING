@@ -12,6 +12,10 @@
 !data/raw/train.csv
 !data/raw/test.csv
 
+# --- Archivos de muestra entregados por el catedrático el 16/08 (formato del test real)
+!data/raw/pipeline_test.csv
+!data/raw/expected_output.csv
+
 # --- Reportes: la bitácora de iteraciones es un entregable (§2.3 del enunciado)
 !reports/*.csv
 

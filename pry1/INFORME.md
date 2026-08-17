@@ -759,3 +759,105 @@ python predict.py --input <dataset_de_prueba.csv>
 
 Escribe `submissions/predicciones.csv`. Si el CSV de entrada incluye `SalePrice`, reporta además
 el RMSE. El script verifica que el pipeline y el modelo correspondan entre sí antes de predecir.
+
+---
+
+## Anexo — Validación con el archivo de muestra y reentrenamiento final (16 de agosto de 2026)
+
+*Sección añadida el día previo a la competencia, después de que el catedrático entregara un
+archivo de muestra con el formato del dataset de prueba. No modifica ni reemplaza las secciones
+2.1–2.6 anteriores, que documentan el trabajo tal como se entregó originalmente.*
+
+### Qué se recibió
+
+`data/raw/pipeline_test.csv` (5 viviendas, mismas 79 columnas que `train.csv` sin `SalePrice`) y
+`data/raw/expected_output.csv`, con la instrucción explícita del catedrático: *"El formato del
+output debe ser idéntico al formato en el archivo `expected_output.csv`. La columna `ID` es la
+misma columna `ID` del archivo de muestra."*
+
+**Aclaración importante:** los valores de `Prediction` en `expected_output.csv` son `1, 2, 3, 4, 5`
+— un marcador de posición para mostrar la forma del archivo, no precios reales. Por lo tanto este
+archivo sirve para validar **formato de salida**, no para calcular un RMSE de precisión. No se
+usó, ni se podía usar, como conjunto de validación.
+
+### Hallazgo: el formato de salida no coincidía
+
+`predict.py` escribía la columna de salida como `Id,SalePrice`. El formato exigido es
+`Id,Prediction`. Es un defecto real, no una hipótesis: de no corregirse, el script habría
+producido un archivo con el nombre de columna equivocado el día de la competencia.
+
+**Arreglo:** una constante `OUTPUT_COL = "Prediction"` en `predict.py`, que separa el nombre de la
+columna de *salida* (`Prediction`, exigido por el formato de la competencia) del nombre de la
+columna del *target* al leer datos de entrenamiento (`SalePrice`, que sigue siendo `TARGET` en
+`src/data.py` porque así se llama en `train.csv`). Verificado contra `expected_output.csv`:
+mismas columnas, mismos `Id` y en el mismo orden.
+
+### Decisión: reentrenar el modelo final con el 100 % de `train.csv`
+
+El modelo en `models/` se había entrenado únicamente con `train_dev` (992 de 1168 filas, 85 %),
+porque el 15 % restante —el test interno de 176 filas— se reservó para medir el RMSE una sola vez
+sin fuga de información (§2.2). Esa medición ya se hizo y ya está documentada
+(RMSE test interno = 24,197 USD, §2.4). No queda ninguna decisión de modelado pendiente que ese
+15 % pudiera contaminar, así que usarlo ahora para entrenar el modelo que se despliega no es fuga
+de información hacia una decisión — no hay decisión que tomar.
+
+Se reentrenó `models/final_pipeline.joblib` y `models/final_model.pt` con las 1168 filas
+completas, en el notebook nuevo [`06_reentrenamiento_final.ipynb`](notebooks/06_reentrenamiento_final.ipynb).
+**La configuración ganadora (`it38`) se mantuvo exactamente igual** — mismo `hidden=(128, 64)`,
+dropout 0.35, batch norm, weight decay 1e-2, scheduler cosine, target en `log1p` estandarizado. No
+se realizó ninguna búsqueda de hiperparámetros nueva ni se tocó ninguna decisión de la sección
+2.3: la única variable que cambia es la cantidad de datos que ve el modelo desplegado.
+
+**Por qué esto no aumenta el riesgo de sobreajuste.** El sobreajuste, documentado extensamente en
+la sección 2.4, viene de tener poca capacidad reguladora frente a muchas features (~232 features
+para 992 observaciones). Añadir un 17.7 % más de datos (992 → 1168) con exactamente la misma
+regularización relaja esa razón, no la empeora. El riesgo que sí existe —y que se reconoce como
+límite abajo— es no volver a medir el RMSE de forma independiente después de este cambio.
+
+### Qué cambió técnicamente
+
+| | Modelo anterior | Modelo reentrenado |
+|---|---|---|
+| Filas de entrenamiento | 992 (`train_dev`) | 1168 (100 % de `train.csv`) |
+| Features tras preprocesar | 218 | 219 |
+| Épocas de entrenamiento | 144 | 70 |
+| Arquitectura / regularización | `(128,64)`, dropout 0.35, bn, wd 1e-2 | **idéntica** |
+
+El número de features cambió de 218 a 219 porque el agrupamiento de categorías raras del pipeline
+(`OneHotEncoder`) se reajusta con más datos y una categoría que antes quedaba agrupada ahora tiene
+representación propia — es un efecto esperado de ajustar el pipeline sobre un conjunto distinto,
+no un cambio de diseño. Las épocas de early stopping (70 vs. 144) provienen de un split de
+early-stopping distinto (12 % de 1168 vs. 12 % de 992, semillas iguales) y no son comparables
+directamente entre sí; ambas son válidas para su propio conjunto.
+
+### Qué NO cambió y qué NO se recalculó
+
+**La estimación de referencia para la competencia sigue siendo la de la sección 2.5: 28,375 ±
+892 USD (RMSE por validación cruzada sobre `train_dev`).** No se recalculó un nuevo RMSE de test
+para el modelo reentrenado porque, al usar el 100 % de los datos para entrenar, ya no queda ningún
+subconjunto sin fuga de información con el cual medirlo honestamente. El notebook 06 corre un
+chequeo de humo (predicciones sobre los datos ya vistos en entrenamiento) únicamente para descartar
+errores gruesos —NaNs, escalas absurdas, signos invertidos—, y lo etiqueta explícitamente como *no
+es una estimación de generalización* para evitar que se confunda con una métrica válida.
+
+### Verificación de extremo a extremo
+
+El notebook 06 corre `predict.py` sobre `pipeline_test.csv` con el modelo reentrenado y compara la
+salida contra `expected_output.csv`: mismas columnas (`Id`, `Prediction`), mismos `Id` en el mismo
+orden, 5 filas predichas y 5 esperadas. El flujo completo —lectura del CSV, transformación,
+predicción, escritura— funciona sin pasos manuales, tal como debe correr el lunes.
+
+### Limitación reconocida de este cambio
+
+A diferencia del resto del proyecto, donde cada decisión se validó empíricamente contra un umbral
+de ruido medido (§2.2–2.3), esta decisión específica —entrenar con más datos manteniendo fija la
+configuración— se apoya en un argumento teórico (más datos + misma regularización ⇒ generalización
+igual o mejor) y no en una medición nueva, porque medirla habría requerido volver a reservar datos
+y perder la ventaja que se buscaba. Es la decisión más razonable disponible el día previo a la
+competencia, pero se documenta como tal: un supuesto, no un resultado medido.
+
+### Artefactos afectados
+
+`models/final_pipeline.joblib`, `models/final_model.pt` y `models/metadata.json` se sobrescribieron
+con la versión reentrenada. La versión anterior (992 filas) queda recuperable en el historial de
+git de este repositorio si hiciera falta revertir.

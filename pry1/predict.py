@@ -31,6 +31,11 @@ from src.model import MLP, ModelConfig
 ROOT = Path(__file__).resolve().parent
 MODELS = ROOT / "models"
 
+# El formato de salida de la competencia es "Id,Prediction" (ver expected_output.csv de
+# muestra), NO "Id,SalePrice". TARGET sigue siendo SalePrice porque así se llama la columna
+# del target al leer datos de entrenamiento/validación.
+OUTPUT_COL = "Prediction"
+
 
 def cargar_artefactos(dir_modelos: Path = MODELS):
     """Carga pipeline, pesos y metadatos guardados por el notebook 05.
@@ -79,7 +84,7 @@ def predecir(csv_entrada: Path, dir_modelos: Path = MODELS) -> pd.DataFrame:
         predicciones.append(np.expm1(p) if cfg.log_target else p)
     pred = np.clip(np.mean(predicciones, axis=0), 0, None)  # un precio negativo nunca es válido
 
-    salida = pd.DataFrame({ID_COL: ids.to_numpy(), TARGET: pred})
+    salida = pd.DataFrame({ID_COL: ids.to_numpy(), OUTPUT_COL: pred})
     if y_real is not None:
         salida.attrs["rmse"] = rmse(y_real, pred)
         salida.attrs["y_real"] = y_real.to_numpy()
@@ -108,8 +113,8 @@ def main() -> int:
 
     print(f"Predicciones : {len(salida)} filas → {args.output}")
     print(f"Modelos      : {json.loads((args.models / 'metadata.json').read_text())['n_modelos']} (promediados)")
-    print(f"Rango        : {salida[TARGET].min():,.0f} – {salida[TARGET].max():,.0f} USD")
-    print(f"Media        : {salida[TARGET].mean():,.0f} USD")
+    print(f"Rango        : {salida[OUTPUT_COL].min():,.0f} – {salida[OUTPUT_COL].max():,.0f} USD")
+    print(f"Media        : {salida[OUTPUT_COL].mean():,.0f} USD")
     if "rmse" in salida.attrs:
         print(f"\nRMSE         : {salida.attrs['rmse']:,.2f} USD")
     else:
