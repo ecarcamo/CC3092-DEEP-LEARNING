@@ -2,7 +2,9 @@
   "iteracion": "it38",
   "n_features": 219,
   "n_modelos": 1,
-  "epocas_entrenamiento": 70,
+  "epocas_entrenamiento": 478,
+  "max_epochs_config": 600,
+  "patience_config": 80,
   "pre_config": {
     "derived": true,
     "log_skewed": true,
@@ -31,11 +33,18 @@
   },
   "excluir_ids": [],
   "rmse_cv_train_dev": 28374.722099765862,
-  "rmse_test_interno_modelo_anterior_992": 24197.4257202533,
+  "rmse_test_interno_modelo_anterior_992": null,
   "n_train": 1168,
-  "n_train_modelo_anterior": 992,
+  "n_train_modelo_anterior": 1168,
   "reentrenado_full_dataset": true,
   "fecha_reentrenamiento": "2026-08-16",
-  "motivo": "Aprovechar el 100% de train.csv (1168 filas) para el modelo de competencia, sin reabrir ninguna decisión de arquitectura/hiperparametros (ya confirmadas con 8 semillas en 04_iteraciones.ipynb). El RMSE de referencia para la competencia sigue siendo el de CV (28,375 +/- 892 USD), no un numero recalculado aqui, porque ya no queda un conjunto de test interno sin fuga de informacion.",
+  "motivo": "Aprovechar el 100% de train.csv (1168 filas) para el modelo de competencia, sin reabrir ninguna decision de arquitectura/hiperparametros (ya confirmadas con 8 semillas en 04_iteraciones.ipynb). Ademas se corrigio un defecto de la receta de despliegue: sobrescribir max_epochs con la epoca del probe dejaba el modelo subentrenado y alteraba el T_max del scheduler cosine. Medido sin fuga con 4 semillas: 31,623 (sobrescribiendo) vs 27,562 (config tal cual), diferencia de 4,061 USD sobre un umbral de 3,074.",
+  "correccion_max_epochs": {
+    "antes": "max_epochs sobrescrito con la epoca del probe (70)",
+    "ahora": "it38 tal cual: max_epochs=600, patience=80",
+    "rmse_oof_sin_fuga_antes": 31623.0,
+    "rmse_oof_sin_fuga_ahora": 27562.0,
+    "semillas": 4
+  },
   "lectura_csv": "keep_default_na=False, na_values=['']"
 }

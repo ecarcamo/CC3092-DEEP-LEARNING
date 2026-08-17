@@ -820,25 +820,102 @@ límite abajo— es no volver a medir el RMSE de forma independiente después de
 |---|---|---|
 | Filas de entrenamiento | 992 (`train_dev`) | 1168 (100 % de `train.csv`) |
 | Features tras preprocesar | 218 | 219 |
-| Épocas de entrenamiento | 144 | 70 |
+| Épocas de entrenamiento | 144 | 478 (early stopping, de 600) |
 | Arquitectura / regularización | `(128,64)`, dropout 0.35, bn, wd 1e-2 | **idéntica** |
 
 El número de features cambió de 218 a 219 porque el agrupamiento de categorías raras del pipeline
 (`OneHotEncoder`) se reajusta con más datos y una categoría que antes quedaba agrupada ahora tiene
 representación propia — es un efecto esperado de ajustar el pipeline sobre un conjunto distinto,
-no un cambio de diseño. Las épocas de early stopping (70 vs. 144) provienen de un split de
-early-stopping distinto (12 % de 1168 vs. 12 % de 992, semillas iguales) y no son comparables
-directamente entre sí; ambas son válidas para su propio conjunto.
+no un cambio de diseño.
+
+### Auditoría del proyecto: defecto encontrado en la receta de despliegue
+
+Tras el reentrenamiento se hizo una auditoría completa del proyecto para decidir si quedaba algo
+por mejorar. Encontró un defecto real en el código que produce el modelo final —presente tanto en
+`05_final.ipynb` como en la primera versión de `06`— que **no** es una decisión de modelado sino un
+error de implementación.
+
+**El defecto.** Ambos notebooks determinaban el número de épocas con un *probe*: reservaban un 12 %
+de los datos, entrenaban con early stopping, leían la mejor época y luego **sobrescribían
+`max_epochs` con ese número** para el entrenamiento definitivo. Eso rompe dos cosas simultáneamente:
+
+1. **La estimación de la época es inservible.** El conjunto de early stopping son ~140 filas, y
+   sobre tan pocas viviendas el RMSE lo dominan un puñado de casos. Repitiendo el probe con 8
+   semillas distintas, la "mejor época" oscila entre **15 y 181** — un rango de 12×.
+2. **Sobrescribir `max_epochs` altera el scheduler.** `CosineAnnealingLR` usa `T_max=max_epochs`.
+   La configuración validada (`it38`) tiene `max_epochs=600`, de modo que en el notebook 04 el
+   cosine se midió recorriendo un ciclo de 600 épocas. Al fijar `max_epochs=70` ese ciclo se
+   comprime a 70: **el modelo que se desplegaba usaba un schedule de tasa de aprendizaje distinto
+   del que se había validado.**
+
+**La medición.** Se evaluó de forma libre de fuga —early stopping sobre un split interno del
+entrenamiento, evaluación sobre folds nunca vistos—, con `KFold(5)` × 4 semillas sobre las 1168
+filas:
+
+| Receta | RMSE OOF | Rango entre semillas |
+|---|---|---|
+| Sobrescribiendo `max_epochs` con el probe (70) | 31,623 ± 936 | 30,615 – 33,122 |
+| **`it38` tal como fue validado (`max_epochs=600`, `patience=80`)** | **27,562 ± 651** | 26,801 – 28,445 |
+
+La diferencia es de **4,061 USD**, por encima del umbral de mejora real del proyecto (3,074 USD), y
+los rangos entre semillas **no se solapan**. La curva de sensibilidad al número de épocas es
+monótona descendente y se aplana a partir de ~300:
+
+| Épocas | 20 | 40 | 70 | 120 | 200 | 300 | 400 | 600 |
+|---|---|---|---|---|---|---|---|---|
+| RMSE OOF | 37,602 | 35,535 | 32,372 | 30,054 | 28,045 | 27,815 | 27,575 | 27,636 |
+
+El diagnóstico es que el modelo estaba **subentrenado**, no sobreajustado: al entrenar más, el error
+sobre datos nunca vistos *baja*. Un modelo sobreajustado haría exactamente lo contrario. Un síntoma
+corroborante: el modelo de 70 épocas predecía como máximo 561,842 USD sobre un dataset cuyo máximo
+real es 745,000 —no alcanzaba los extremos—, mientras que el corregido llega a 743,655.
+
+**La corrección.** Consiste en *dejar de sobrescribir* la configuración: se usa `it38` exactamente
+como fue elegida y confirmada con 8 semillas en el notebook 04 (`max_epochs=600`, `patience=80`),
+con el early stopping operando normalmente sobre el split interno del 12 %. **No introduce ningún
+hiperparámetro nuevo ni reabre ninguna decisión** — al contrario, elimina una desviación no
+validada que el código de despliegue había introducido. El modelo final resultante para en la
+época 478 de 600.
+
+### Otro hallazgo de la auditoría: la cifra de la sección 2.3 es optimista
+
+El estimador de validación cruzada de [`src/experiments.py`](src/experiments.py) pasa el fold de
+validación a `fit_mlp` como conjunto de early stopping, y después puntúa sobre ese mismo fold. Es
+decir: **la época de parada se elige mirando los datos que luego se usan para medir**. Es una forma
+leve de fuga por selección que sesga a la baja el RMSE reportado.
+
+Esto **no invalida ninguna comparación entre iteraciones** —las 39 corrieron bajo el mismo sesgo,
+así que el ranking y la elección de `it38` siguen siendo válidos—, pero sí implica que el nivel
+absoluto de 28,375 USD es algo optimista. La medición libre de fuga de esta auditoría (27,562 ± 651
+sobre 1168 filas) es la referencia más honesta de que se dispone, y resulta comparable en magnitud
+porque entrena con más datos, lo que compensa aproximadamente el sesgo eliminado.
 
 ### Qué NO cambió y qué NO se recalculó
 
-**La estimación de referencia para la competencia sigue siendo la de la sección 2.5: 28,375 ±
-892 USD (RMSE por validación cruzada sobre `train_dev`).** No se recalculó un nuevo RMSE de test
-para el modelo reentrenado porque, al usar el 100 % de los datos para entrenar, ya no queda ningún
-subconjunto sin fuga de información con el cual medirlo honestamente. El notebook 06 corre un
-chequeo de humo (predicciones sobre los datos ya vistos en entrenamiento) únicamente para descartar
-errores gruesos —NaNs, escalas absurdas, signos invertidos—, y lo etiqueta explícitamente como *no
-es una estimación de generalización* para evitar que se confunda con una métrica válida.
+**La expectativa para la competencia se mantiene en el orden de ~28,000 USD.** No se recalculó un
+RMSE de test para el modelo desplegado, porque al usar el 100 % de los datos para entrenar ya no
+queda ningún subconjunto sin fuga con el cual medirlo. Lo que sí se validó, y de forma libre de
+fuga, es la **receta** que lo produce (las tablas de arriba). El notebook 06 corre además un chequeo
+de humo sobre datos ya vistos en entrenamiento únicamente para descartar errores gruesos —NaNs,
+escalas absurdas, signos invertidos—, y lo etiqueta explícitamente como *no es una estimación de
+generalización*.
+
+### Robustez del pipeline ante el dataset real
+
+Se sometió `predict.py` a 14 perturbaciones que podrían aparecer el lunes, usando las 176 filas del
+test interno como base. Pasaron 13:
+
+| Escenario | Resultado |
+|---|---|
+| Categoría nueva en `Neighborhood` / `SaleType` / `Exterior1st` | OK (one-hot en ceros) |
+| Nivel nuevo en una ordinal (`ExterQual`) | OK (imputado por mediana) |
+| `NaN` en numéricas que no tenían nulos | OK |
+| Columnas en orden distinto · columna extra · `SalePrice` presente | OK |
+| Columna categórica entera vacía · comillas literales · una sola fila · sin `Id` | OK |
+| **Falta una columna del esquema** | **Error explícito** `columns are missing: {...}` |
+
+El único fallo es el deseable: si el CSV viniera incompleto, el script se detiene con un mensaje
+claro en vez de producir predicciones silenciosamente erróneas.
 
 ### Verificación de extremo a extremo
 
@@ -847,14 +924,33 @@ salida contra `expected_output.csv`: mismas columnas (`Id`, `Prediction`), mismo
 orden, 5 filas predichas y 5 esperadas. El flujo completo —lectura del CSV, transformación,
 predicción, escritura— funciona sin pasos manuales, tal como debe correr el lunes.
 
-### Limitación reconocida de este cambio
+### Limitación reconocida de estos cambios
 
-A diferencia del resto del proyecto, donde cada decisión se validó empíricamente contra un umbral
-de ruido medido (§2.2–2.3), esta decisión específica —entrenar con más datos manteniendo fija la
-configuración— se apoya en un argumento teórico (más datos + misma regularización ⇒ generalización
-igual o mejor) y no en una medición nueva, porque medirla habría requerido volver a reservar datos
-y perder la ventaja que se buscaba. Es la decisión más razonable disponible el día previo a la
-competencia, pero se documenta como tal: un supuesto, no un resultado medido.
+De los dos cambios de este anexo, uno está medido y el otro no:
+
+- **La corrección de `max_epochs` está medida**, de forma libre de fuga y con 4 semillas, y supera
+  el umbral de ruido del proyecto con rangos que no se solapan. Cumple el mismo estándar de
+  evidencia que las decisiones de la sección 2.3.
+- **Entrenar con el 100 % de los datos no está medido.** Se apoya en un argumento teórico (más
+  datos con la misma regularización ⇒ generalización igual o mejor) y no en una medición nueva,
+  porque medirla habría exigido volver a reservar datos y perder justo la ventaja buscada. Es la
+  decisión más razonable disponible la víspera de la competencia, pero se documenta como lo que es:
+  un supuesto razonado, no un resultado medido.
+
+### Por qué se decidió no seguir buscando mejoras
+
+La auditoría revisó si valía la pena explorar más configuraciones. La conclusión es que **no**, y
+por un argumento cuantitativo tomado del propio proyecto: los 5 finalistas de la sección 2.3 quedan
+dentro de 2,233 USD entre sí, con un error estándar de ±892 — es decir, están estadísticamente
+empatados. Con 39 iteraciones ya evaluadas sobre los mismos folds, cualquier ganancia adicional
+obtenida probando más combinaciones sería, con alta probabilidad, ruido de selección y no una
+mejora real: el ganador de una búsqueda larga tiende a serlo por suerte en la partición, y esa
+suerte no se traslada al dataset de prueba.
+
+La distinción que se aplicó para decidir qué tocar y qué no fue: **corregir defectos identificados
+sí; buscar configuraciones nuevas no.** El formato de salida y el `max_epochs` sobrescrito son
+defectos con un mecanismo explicable y un efecto medido. Barrer más arquitecturas, dropouts o tasas
+de aprendizaje habría sido perseguir ruido.
 
 ### Artefactos afectados
 
