@@ -957,3 +957,250 @@ de aprendizaje habría sido perseguir ruido.
 `models/final_pipeline.joblib`, `models/final_model.pt` y `models/metadata.json` se sobrescribieron
 con la versión reentrenada. La versión anterior (992 filas) queda recuperable en el historial de
 git de este repositorio si hiciera falta revertir.
+
+---
+
+## Anexo B — Iteraciones del día de la competencia (17 de agosto de 2026)
+
+*Sección añadida el día de la presentación, después de los primeros envíos al leaderboard. No
+modifica ni reemplaza las secciones 2.1–2.6 ni el Anexo A: documenta una ronda adicional de
+experimentos realizada con el dataset de prueba ya disponible, y las decisiones —incluidas las de
+NO adoptar mejoras medidas— que llevaron al modelo finalmente entregado.*
+
+### Punto de partida
+
+El catedrático publicó `data/raw/test_features-1.csv` (292 filas, mismas 79 columnas que
+`train.csv` sin `SalePrice`) y un leaderboard público. Un dato relevante que se desprende del
+tamaño: 1168 filas de entrenamiento + 292 de prueba = 1460, exactamente el dataset completo de
+Ames. El conjunto de prueba es, por tanto, el 20 % restante del mismo dataset, no una muestra
+externa.
+
+| Envío | Modelo | RMSE en el leaderboard |
+|---|---|---|
+| #1 | `it38` — MLP único, 100 % de `train.csv` (Anexo A) | 28,229.89 |
+| #2 | `it38` + bagging de 5 semillas | 27,755.31 |
+
+El mejor resultado de la clase en ese momento era 23,176, lo que establecía que existía margen
+real de mejora —aproximadamente 4,500 USD— y no un piso impuesto por el dataset.
+
+### Restricción de alcance aplicada a todas las decisiones
+
+El enunciado fija en su tabla de información clave: **"Modelo a implementar: Multi-Layer Perceptron
+(MLP)"**, y en §3 pide generar las predicciones con "su modelo final". Esa restricción se usó como
+criterio de admisión para cada técnica considerada, antes de medir nada:
+
+| Técnica | Encuadre en el enunciado | Decisión |
+|---|---|---|
+| Feature engineering (interacciones) | §2.1 — "transformación de variables" | Admitida |
+| Target encoding de categóricas | §2.1 — "codificación de categóricas" | Admitida |
+| Embeddings de entidad | §2.2 — "arquitectura(s) de red consideradas" | Admitida |
+| Protocolo de validación cruzada | §2.2 — "estrategia de división de datos" | Admitida |
+| Bagging de semillas de una misma arquitectura | Reducción de varianza; artefacto con 5 pesos | Admitida con reservas |
+| Ensamble con GradientBoosting | Introduce un modelo de otra familia | **Rechazada** |
+| Ensamble de arquitecturas MLP distintas con pesos optimizados | Añade una capa de meta-aprendizaje sobre varios modelos | **Rechazada** |
+
+Las dos últimas se descartaron **sin llegar a medirlas**. Es una decisión deliberada: el
+GradientBoosting ya había demostrado ser competitivo (31,877 USD, §2.3) y un blend de doce
+arquitecturas era la vía con mayor ganancia esperada de todas las consideradas, pero ninguna de las
+dos deja el modelo final siendo "un MLP". Se documenta aquí precisamente porque la alternativa
+—medirlas y luego decidir— habría hecho muy difícil renunciar a ellas.
+
+### Corrección metodológica: dos protocolos de medición
+
+Durante esta ronda se hizo explícito un problema que el Anexo A ya había señalado: el estimador de
+[`src/experiments.py`](src/experiments.py) pasa el fold de validación a `fit_mlp` como conjunto de
+early stopping y después puntúa sobre ese mismo fold. La época de parada se elige mirando los datos
+que luego se usan para medir.
+
+Se implementó un **protocolo limpio**: dentro de cada fold, la porción de entrenamiento se parte
+88/12 y el 12 % sirve de early stopping, de modo que el fold de validación no se toca hasta
+puntuar. La diferencia de nivel es grande —el mismo modelo mide 24,299 con el protocolo sesgado y
+33,189 con el limpio— por dos motivos acumulados: desaparece el sesgo de selección y, además, cada
+modelo entrena con un 12 % menos de filas.
+
+**Las cifras de los dos protocolos no son comparables entre sí.** En las tablas siguientes se
+indica cuál se usó en cada ronda, y las comparaciones solo se hacen dentro de un mismo protocolo.
+
+### Ronda 1 — Bagging de semillas *(protocolo sesgado, 5 folds × 3 particiones)*
+
+Promediar las predicciones de N redes con idéntica arquitectura y distinta semilla de
+inicialización. Motivado por una cifra ya presente en el informe: la desviación entre semillas es
+de ±892 a ±2,662 USD, así que una sola corrida es una muestra ruidosa de lo que la configuración
+puede dar.
+
+| Tamaño del bag | RMSE OOF | σ entre particiones |
+|---|---|---|
+| 1 (modelo único) | 25,323 | 519 |
+| 2 | 24,899 | 289 |
+| 3 | 24,875 | 490 |
+| **5** | **24,770** | 457 |
+| 8 | 24,721 | 408 |
+
+La mejora es consistente en las 3 particiones, pero con retorno decreciente marcado: el 70 % de la
+ganancia total está ya en `bag=2`, y de 5 a 8 miembros solo se ganan 49 USD. Se eligió **5** por
+costo/beneficio. Este es el modelo del envío #2.
+
+### Ronda 2 — Pérdida ponderada y target encoding *(protocolo sesgado)*
+
+Dos hipótesis independientes, ambas derivadas del análisis de errores de §2.4:
+
+**(A) Pérdida MSE ponderada por precio.** El desglose por quintiles mostró que Q5 concentra el
+error (RMSE 41,652 frente a 7,655 en Q2). La hipótesis era que ponderar cada muestra por
+`y / media(y)` forzaría al optimizador a atender las viviendas caras.
+
+**(B) Target encoding de `Neighborhood`.** Es la categórica más predictiva (η² = 0.53) y consume
+~25 columnas one-hot en un dataset donde la razón features/observaciones es la restricción
+dominante. Se sustituye por una sola columna continua con la media de precio del barrio, suavizada
+hacia la media global, **ajustada exclusivamente con el train de cada fold**.
+
+| Variante | RMSE OOF | Δ vs. modelo único |
+|---|---|---|
+| Modelo único (referencia) | 25,323 ± 519 | — |
+| (A) pérdida ponderada por precio | 25,793 ± 437 | **+469 — empeora** |
+| (B) target encoding solo | 25,063 ± 607 | −261 (dentro del ruido) |
+| (B) + bagging de 5 | **24,299 ± 471** | **−1,025** |
+
+La pérdida ponderada se descartó. El target encoding por sí solo no superaba el ruido, pero
+combinado con el bagging la mejora se sostiene en las 3 particiones y llega a 1,025 USD. Reduce
+además las features de 219 a 195. **Este es el modelo finalmente entregado.**
+
+### Ronda 3 — Feature engineering *(protocolo limpio, 5 folds × 3 particiones)*
+
+Dos bloques nuevos de features, motivados por hechos que el EDA había establecido pero que las
+features derivadas originales no explotaban:
+
+- **FE2 — interacciones calidad × área.** `OverallQual` (r = 0.786) y `GrLivArea` (r = 0.696) son
+  las dos señales dominantes y su relación con el precio es no lineal (§2.1). Se añaden
+  `QualxGrLivArea`, `QualxTotalSF`, `Qual2`, `AgexQual`, `QualSum` (suma de las 21 ordinales de
+  calidad), `AreaPerRoom`, `SFPerBath`, `LivLotRatio`, `BsmtFinRatio`, `GarageAge` y
+  `RecentRemodel`. Once features, ninguna usa el target.
+- **PPSF — precio por pie² del barrio.** Target encoding sobre `y / TotalSF` en vez de sobre `y`,
+  más el producto `PPSF × TotalSF`. Separa el valor de ubicación del valor de tamaño.
+
+| Variante | RMSE OOF | σ | n features |
+|---|---|---|---|
+| V0 — modelo entregado (target encoding) | 33,189 | 2,121 | 191 |
+| **V1 — + FE2** | **30,422** | 1,783 | 202 |
+| V5 — V1 + dropout 0.2, wd 1e-3 | 30,438 | 2,618 | 204 |
+| V3 — + FE2 + PPSF | 30,620 | 1,927 | 204 |
+| V2 — + PPSF solo | 31,206 | 2,746 | 193 |
+| V4 — V3 + red (256, 128) | 32,246 | 3,156 | 204 |
+
+**FE2 produjo la mayor mejora de toda la investigación: 2,767 USD**, por encima de la dispersión
+entre particiones. PPSF mejora por sí solo pero no aporta nada encima de FE2 (V3 ≈ V1), señal de
+que ambos codifican información que se solapa; se descartó por el principio de preferir la variante
+más simple ante un empate.
+
+### Ronda 4 — Embeddings de entidad *(protocolo limpio)*
+
+Es el punto 2 del trabajo futuro de §2.5. Cada columna categórica pasa por una tabla de embeddings
+aprendida (dimensión ≈ √cardinalidad, con techo en 12) en lugar de one-hot; el resto de la red es
+idéntico. Comprime ~90 columnas dispersas en ~40 dimensiones densas y permite que barrios parecidos
+compartan información.
+
+| Variante | RMSE OOF | σ |
+|---|---|---|
+| Embeddings, red (256, 128) | 32,649 | 3,091 |
+| Embeddings, `it38` | 33,418 | 1,588 |
+| Embeddings, dropout 0.20 | 33,506 | 1,706 |
+| *(referencia: FE2 con one-hot)* | *30,422* | *1,783* |
+
+**Resultado negativo claro: los embeddings quedan 2,200–3,000 USD por detrás.** La interpretación
+es coherente con la restricción dominante del problema: cada fold entrena con ~820 filas bajo el
+protocolo limpio, y las tablas de embeddings añaden parámetros que hay que estimar con esos mismos
+datos. El one-hot no tiene parámetros que aprender. La técnica que el informe original señalaba
+como la segunda vía más prometedora resultó contraproducente a esta escala de datos.
+
+### Ronda 5 — Re-tuneo de hiperparámetros, y el hallazgo que invalidó su fase 2
+
+Motivación: los hiperparámetros de `it38` se eligieron sobre el conjunto de features anterior. Con
+FE2 el óptimo de regularización podía haberse movido. Se replicó el método del notebook 04:
+búsqueda por coordenadas en dos fases —16 configuraciones × 3 particiones para descartar, luego los
+finalistas con 8 particiones para elegir.
+
+La fase 1 dio un orden plausible (`silu` 29,655; `gelu` 29,959; dropout 0.15 30,238; base 30,422;
+red de 3 capas 35,632). **La fase 2 se descartó por completo**, porque destapó un defecto del
+protocolo, no de las configuraciones:
+
+```
+c00_base:  [32682, 30261, 28324, 47852, 58130, 34481, 33052, 37031]
+            └── particiones 42,43,44 ─┘  └─ 45, 46 ─┘
+```
+
+Las particiones 45 y 46 producen RMSE de 48–58 mil **en todas las configuraciones por igual**, con
+desviaciones de ±8,000 a ±11,000. El diagnóstico es que en el protocolo limpio el conjunto de early
+stopping son ~112 viviendas (12 % del train de cada fold); sobre tan pocas casas el RMSE lo dominan
+unos pocos casos extremos y ciertas semillas detienen el entrenamiento absurdamente pronto,
+dejando el modelo subentrenado. Es la misma patología que el Anexo A midió —la "mejor época" oscila
+entre 15 y 181 según la semilla— amplificada por usar un split aún más pequeño.
+
+Ninguna conclusión sobre activaciones o regularización sobrevive a este hallazgo: la fase 1, con
+solo 3 particiones y un ruido de esta magnitud, no basta para elegir.
+
+### Decisión final: qué se entregó y por qué
+
+**El modelo entregado es el de la ronda 2: target encoding de `Neighborhood` + bagging de 5
+semillas de `it38`, entrenado con el 100 % de `train.csv`.** No incorpora FE2, pese a que FE2 midió
+2,767 USD mejor.
+
+El motivo es de gestión de riesgo, no de evidencia. FE2 estaba medido pero no desplegado ni
+verificado de extremo a extremo, y las rondas 5 y siguientes habían dejado dos cosas claras: que el
+protocolo de medición tenía un defecto propio sin resolver, y que el re-tuneo sobre las features
+nuevas no se había podido completar. Desplegar una configuración cuyo entorno de validación acababa
+de mostrarse inestable, sin tiempo para revalidarla, tenía un riesgo asimétrico: la mejora esperada
+era de unos 2,700 USD medidos en un protocolo cuestionado, frente a la posibilidad de romper un
+modelo que ya había producido un envío correcto.
+
+Se aplicó la misma distinción que el Anexo A: **desplegar lo verificado; no desplegar lo que solo
+está medido.** En consecuencia se revirtió `FeatureEngineerV2` de
+[`src/preprocessing.py`](src/preprocessing.py) y se regeneró `submissions/predicciones.csv` con el
+modelo de la ronda 2, verificando fila por fila que reprodujera exactamente el envío #2 antes de
+aplicar el target encoding.
+
+Sobre el **bagging de semillas** se dejó constancia explícita de que es la única parte del modelo
+final cuya conformidad con "implementar un MLP" admite discusión: las 5 redes son idénticas en
+arquitectura (195 → 128 → 64 → 1) y solo difieren en la semilla de inicialización, pero el artefacto
+contiene 5 conjuntos de pesos y la predicción sale de promediarlos. Se conservó como técnica de
+reducción de varianza —justificada por la dispersión entre semillas ya medida en §2.3— asumiendo
+esa reserva de forma consciente.
+
+### Configuración del modelo entregado
+
+| | |
+|---|---|
+| Preprocesamiento | `AmesCleaner` → `NeighborhoodTargetEncoder` → `ColumnTransformer` |
+| Features tras codificar | 195 |
+| Arquitectura | 195 → 128 → 64 → 1, batch norm, dropout 0.35, ReLU |
+| Optimización | AdamW, lr 1e-3, weight decay 1e-2, batch 64, cosine (T_max = 600) |
+| Target | `log1p(SalePrice)` estandarizado |
+| Miembros del bag | 5 (semillas 42–46) |
+| Épocas por miembro | 533, 360, 530, 386, 569 (early stopping sobre un 12 % interno) |
+| Filas de entrenamiento | 1168 (100 % de `train.csv`) |
+| RMSE OOF (protocolo sesgado, 3 particiones) | 24,299 ± 471 |
+
+### Qué queda sin explorar
+
+En orden de retorno esperado, y con la evidencia de esta ronda:
+
+1. **Desplegar FE2**, previa revalidación con un protocolo de medición corregido. Es la mejora
+   individual más grande encontrada (2,767 USD) y la única que superó holgadamente el ruido.
+2. **Eliminar el early stopping y entrenar un número fijo de épocas.** El hallazgo de la ronda 5 y
+   la curva de sensibilidad del Anexo A (plana entre 300 y 600 épocas) apuntan a que fijar las
+   épocas eliminaría la mayor fuente de varianza del estimador, y de paso permitiría entrenar con
+   el 100 % del train de cada fold en vez del 88 %.
+3. **Stochastic Weight Averaging.** Promediar los pesos de las últimas épocas produce un único
+   conjunto de pesos —sigue siendo un MLP sin ambigüedad— y ataca el mismo problema de la lotería
+   de la época de parada. Quedó implementado pero sin ejecutar.
+4. **Re-tunear los hiperparámetros sobre FE2** con un protocolo estable y suficientes particiones.
+
+### Artefactos afectados
+
+`models/final_pipeline.joblib`, `models/final_model.pt` y `models/metadata.json` contienen el
+modelo de la ronda 2. `src/preprocessing.py` incorpora `NeighborhoodTargetEncoder` detrás del flag
+`PreprocessConfig.neighborhood_target_encoding` (por defecto `False`, de modo que la bitácora de
+39 iteraciones de §2.3 sigue siendo reproducible tal cual). `submissions/predicciones.csv` se
+regeneró con `predict.py` sobre `test_features-1.csv`, en inferencia únicamente.
+
+**En ningún momento de esta ronda se entrenó, ajustó ni seleccionó nada usando
+`data/raw/test_features-1.csv`.** Todas las cifras de este anexo provienen de validación cruzada
+sobre las 1168 filas de `train.csv`.
