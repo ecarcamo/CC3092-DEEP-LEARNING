@@ -1,8 +1,21 @@
 {
-  "iteracion": "it38",
-  "n_features": 219,
-  "n_modelos": 1,
-  "epocas_entrenamiento": 478,
+  "iteracion": "it38_te_bag5",
+  "n_features": 195,
+  "n_modelos": 5,
+  "bag_seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "epocas_entrenamiento_por_miembro": [
+    534,
+    361,
+    531,
+    387,
+    570
+  ],
   "max_epochs_config": 600,
   "patience_config": 80,
   "pre_config": {
@@ -11,7 +24,8 @@
     "skew_threshold": 0.75,
     "drop_quasi_constant": true,
     "rare_min_count": 0,
-    "scale": true
+    "scale": true,
+    "neighborhood_target_encoding": true
   },
   "model_config": {
     "hidden": [
@@ -32,19 +46,130 @@
     "seed": 42
   },
   "excluir_ids": [],
-  "rmse_cv_train_dev": 28374.722099765862,
-  "rmse_test_interno_modelo_anterior_992": null,
   "n_train": 1168,
-  "n_train_modelo_anterior": 1168,
   "reentrenado_full_dataset": true,
-  "fecha_reentrenamiento": "2026-08-16",
-  "motivo": "Aprovechar el 100% de train.csv (1168 filas) para el modelo de competencia, sin reabrir ninguna decision de arquitectura/hiperparametros (ya confirmadas con 8 semillas en 04_iteraciones.ipynb). Ademas se corrigio un defecto de la receta de despliegue: sobrescribir max_epochs con la epoca del probe dejaba el modelo subentrenado y alteraba el T_max del scheduler cosine. Medido sin fuga con 4 semillas: 31,623 (sobrescribiendo) vs 27,562 (config tal cual), diferencia de 4,061 USD sobre un umbral de 3,074.",
-  "correccion_max_epochs": {
-    "antes": "max_epochs sobrescrito con la epoca del probe (70)",
-    "ahora": "it38 tal cual: max_epochs=600, patience=80",
-    "rmse_oof_sin_fuga_antes": 31623.0,
-    "rmse_oof_sin_fuga_ahora": 27562.0,
-    "semillas": 4
+  "fecha_reentrenamiento": "2026-08-17",
+  "motivo": "Segunda ronda de mejora post-competencia (17/ago), tras el bagging de 5 semillas ya desplegado. Se probaron 2 ideas nuevas via CV StratifiedKFold(5) x 3 particiones sobre las 1168 filas: (A) perdida MSE ponderada por precio -- empeoro (+469 USD, descartada); (B) target encoding suavizado de Neighborhood en vez de one-hot -- mejoro pero dentro del ruido solo (-261 USD). Combinando (B) con el bagging de 5 semillas ya vigente, la mejora se sostiene y crece: RMSE OOF bag5-sin-TE = 24,770 +/- 457 vs combo TE+bag5 = 24,299 +/- 471, mejora de -471 USD adicional (-1,025 vs el modelo unico original), consistente en las 3 particiones probadas (nunca empeora). NeighborhoodTargetEncoder ahora vive en src/preprocessing.py detras del flag PreprocessConfig.neighborhood_target_encoding (default False, no afecta la bitacora de 39 iteraciones original). Arquitectura y demas hiperparametros de it38 sin tocar. Mismo protocolo que src/experiments.py (fold de validacion tambien sirve de early-stopping), por lo que el nivel absoluto es optimista igual que en el resto del proyecto, pero la comparacion relativa es valida. Expectativa realista en el dataset de prueba real: mejora modesta (proporcionalmente ~2%) respecto al envio anterior (27,755 USD), NO una caida a 20,000 -- la evidencia acumulada (39 iteraciones originales + 3 experimentos de esta ronda) ubica el piso del dataset entre 24,000 y 28,000 segun el protocolo de medicion. NO se entreno ni se ajusto nada usando data/raw/test_features-1.csv.",
+  "rmse_cv_bag5_sin_te_3_particiones": [
+    24769.743544041132,
+    456.99586367283825
+  ],
+  "rmse_cv_combo_te_bag5_3_particiones": [
+    24298.839673555034,
+    470.903089739671
+  ],
+  "rmse_smoke_test_con_fuga": 5208.103084061129,
+  "metadata_modelo_anterior_bag5_sin_te": {
+    "iteracion": "it38_bag5",
+    "n_features": 219,
+    "n_modelos": 5,
+    "bag_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "epocas_entrenamiento_por_miembro": [
+      478,
+      580,
+      583,
+      528,
+      467
+    ],
+    "max_epochs_config": 600,
+    "patience_config": 80,
+    "pre_config": {
+      "derived": true,
+      "log_skewed": true,
+      "skew_threshold": 0.75,
+      "drop_quasi_constant": true,
+      "rare_min_count": 0,
+      "scale": true
+    },
+    "model_config": {
+      "hidden": [
+        128,
+        64
+      ],
+      "dropout": 0.35,
+      "batchnorm": true,
+      "activation": "relu",
+      "lr": 0.001,
+      "weight_decay": 0.01,
+      "batch_size": 64,
+      "max_epochs": 600,
+      "patience": 80,
+      "scheduler": "cosine",
+      "loss": "mse",
+      "log_target": true,
+      "seed": 42
+    },
+    "excluir_ids": [],
+    "n_train": 1168,
+    "reentrenado_full_dataset": true,
+    "fecha_reentrenamiento": "2026-08-17",
+    "motivo": "Bagging de 5 semillas del MLP it38 (mismo pipeline y arquitectura, solo cambia la semilla de inicializacion/orden de minibatches por miembro). Medido con CV StratifiedKFold(5) x 3 particiones sobre las 1168 filas de train.csv, promediando predicciones dentro de cada fold: RMSE OOF bag_size=1 (modelo unico, protocolo identico) = 25,323 +/- 519; bag_size=5 = 24,770 +/- 457. Mejora de ~553 USD, consistente en las 3 particiones probadas (nunca empeora). Mismo protocolo que src/experiments.py (el fold de validacion se usa tambien como early-stopping), por lo que el nivel absoluto es optimista igual que en el resto del proyecto, pero la comparacion relativa bagging-vs-modelo-unico es valida porque el sesgo es el mismo para ambos. NO se entreno ni se ajusto nada usando data/raw/test_features-1.csv.",
+    "rmse_cv_bag1_3_particiones": [
+      25323.380012587673,
+      519.370655137651
+    ],
+    "rmse_cv_bag5_3_particiones": [
+      24769.743544041132,
+      456.99586367283825
+    ],
+    "rmse_smoke_test_con_fuga": 4674.793041758592,
+    "metadata_modelo_anterior_single": {
+      "iteracion": "it38",
+      "n_features": 219,
+      "n_modelos": 1,
+      "epocas_entrenamiento": 478,
+      "max_epochs_config": 600,
+      "patience_config": 80,
+      "pre_config": {
+        "derived": true,
+        "log_skewed": true,
+        "skew_threshold": 0.75,
+        "drop_quasi_constant": true,
+        "rare_min_count": 0,
+        "scale": true
+      },
+      "model_config": {
+        "hidden": [
+          128,
+          64
+        ],
+        "dropout": 0.35,
+        "batchnorm": true,
+        "activation": "relu",
+        "lr": 0.001,
+        "weight_decay": 0.01,
+        "batch_size": 64,
+        "max_epochs": 600,
+        "patience": 80,
+        "scheduler": "cosine",
+        "loss": "mse",
+        "log_target": true,
+        "seed": 42
+      },
+      "excluir_ids": [],
+      "rmse_cv_train_dev": 28374.722099765862,
+      "rmse_test_interno_modelo_anterior_992": null,
+      "n_train": 1168,
+      "n_train_modelo_anterior": 1168,
+      "reentrenado_full_dataset": true,
+      "fecha_reentrenamiento": "2026-08-16",
+      "motivo": "Aprovechar el 100% de train.csv (1168 filas) para el modelo de competencia, sin reabrir ninguna decision de arquitectura/hiperparametros (ya confirmadas con 8 semillas en 04_iteraciones.ipynb). Ademas se corrigio un defecto de la receta de despliegue: sobrescribir max_epochs con la epoca del probe dejaba el modelo subentrenado y alteraba el T_max del scheduler cosine. Medido sin fuga con 4 semillas: 31,623 (sobrescribiendo) vs 27,562 (config tal cual), diferencia de 4,061 USD sobre un umbral de 3,074.",
+      "correccion_max_epochs": {
+        "antes": "max_epochs sobrescrito con la epoca del probe (70)",
+        "ahora": "it38 tal cual: max_epochs=600, patience=80",
+        "rmse_oof_sin_fuga_antes": 31623.0,
+        "rmse_oof_sin_fuga_ahora": 27562.0,
+        "semillas": 4
+      },
+      "lectura_csv": "keep_default_na=False, na_values=['']"
+    },
+    "lectura_csv": "keep_default_na=False, na_values=['']"
   },
   "lectura_csv": "keep_default_na=False, na_values=['']"
 }

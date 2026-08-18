@@ -37,9 +37,50 @@ class PreprocessConfig:
     drop_quasi_constant: bool = True  # §11.9
     rare_min_count: int = 5         # §11.8 — agrupa categorías raras (0 = desactivado)
     scale: bool = True              # §11.10 — estandarizar
+    neighborhood_target_encoding: bool = False   # investigación post-competencia (17/ago)
 
     def to_dict(self) -> dict:
         return asdict(self)
+
+
+class NeighborhoodTargetEncoder(TransformerMixin, BaseEstimator):
+    """Reemplaza `Neighborhood` por la media suavizada de precio del barrio, ajustada
+    SOLO con el train de cada fold/partición.
+
+    `Neighborhood` es la categórica más predictiva del dataset (η²=0.53, ver INFORME.md)
+    y consume ~25 columnas one-hot. En un dataset de 217 features para 1168 filas, esas
+    25 columnas dispersas agravan la razón features/observaciones que el propio EDA
+    identificó como el riesgo dominante. Codificarla como una sola columna continua
+    reduce esa dimensionalidad sin perder la señal.
+
+    La media se suaviza hacia la media global con `smoothing` para que los barrios con
+    pocas observaciones en el fold no memoricen su propio precio (equivalente a un prior
+    bayesiano con `smoothing` pseudo-observaciones en la media global).
+    """
+
+    def __init__(self, col: str = "Neighborhood", smoothing: float = 10.0):
+        self.col = col
+        self.smoothing = smoothing
+
+    def fit(self, X: pd.DataFrame, y=None):
+        if y is None:
+            raise ValueError("NeighborhoodTargetEncoder necesita y en fit()")
+        y = np.asarray(y, dtype=float)
+        self.media_global_ = float(y.mean())
+        tmp = pd.DataFrame({self.col: X[self.col].to_numpy(), "y": y})
+        stats = tmp.groupby(self.col)["y"].agg(["mean", "count"])
+        self.mapa_ = (
+            (stats["count"] * stats["mean"] + self.smoothing * self.media_global_)
+            / (stats["count"] + self.smoothing)
+        ).to_dict()
+        return self
+
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        X = X.copy()
+        # Se sobrescribe con floats manteniendo el nombre de columna: el selector de
+        # numéricas la recoge automáticamente por dtype, sin tocar el resto del pipeline.
+        X[self.col] = X[self.col].map(self.mapa_).fillna(self.media_global_).astype(float)
+        return X
 
 
 class AmesCleaner(BaseEstimator, TransformerMixin):
@@ -177,8 +218,12 @@ def build_preprocessor(config: PreprocessConfig | None = None) -> Pipeline:
         ("onehot", ohe),
     ]
 
+    pasos_pipeline = [("cleaner", AmesCleaner(cfg))]
+    if cfg.neighborhood_target_encoding:
+        pasos_pipeline.append(("neigh_te", NeighborhoodTargetEncoder()))
+
     return Pipeline([
-        ("cleaner", AmesCleaner(cfg)),
+        *pasos_pipeline,
         ("encoder", ColumnTransformer([
             ("num", Pipeline(pasos_num), _selector_numericas),
             ("cat", Pipeline(pasos_cat), _selector_nominales),
