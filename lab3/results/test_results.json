@@ -3,8 +3,7 @@
     "kind": "mlp",
     "name": "mlp-05-lr-alto",
     "n_params": 2626049,
-    "train_time_s": 3.4790031909942627,
-    "best_epoch": 1,
+    "train_time_s": 4.334195137023926,
     "max_len": 300,
     "val_metrics": {
       "accuracy": 0.8814,
@@ -34,8 +33,7 @@
     "kind": "rnn",
     "name": "rnn-03-lr-bajo",
     "n_params": 2593153,
-    "train_time_s": 52.645798444747925,
-    "best_epoch": 12,
+    "train_time_s": 59.57747769355774,
     "max_len": 300,
     "val_metrics": {
       "accuracy": 0.816,
@@ -65,8 +63,7 @@
     "kind": "lstm",
     "name": "lstm-04-hidden-256",
     "n_params": 2955521,
-    "train_time_s": 54.22521996498108,
-    "best_epoch": 8,
+    "train_time_s": 55.763838052749634,
     "max_len": 300,
     "val_metrics": {
       "accuracy": 0.871,
