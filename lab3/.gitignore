@@ -1,0 +1,5 @@
+# Checkpoints de modelos (pesados, se regeneran con los scripts)
+checkpoints/
+*.pt
+# Cache de HuggingFace local
+.cache/

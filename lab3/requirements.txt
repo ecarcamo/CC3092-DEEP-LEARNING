@@ -1,0 +1,11 @@
+# Laboratorio 3 - RNN y LSTM (IMDB)
+# Instalado sobre el venv compartido del curso (DEEP_LEARNING/venv)
+torch>=2.5
+datasets>=3.0
+scikit-learn>=1.5
+matplotlib>=3.9
+numpy>=1.26
+pandas>=2.2
+tqdm>=4.66
+jupyter
+nbconvert
