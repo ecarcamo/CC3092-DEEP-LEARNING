@@ -140,4 +140,4 @@ LSTM_CONFIGS = [
 ALL_CONFIGS = MLP_CONFIGS + RNN_CONFIGS + LSTM_CONFIGS
 
 # Longitudes del experimento de la sección 4.1: contexto muy corto vs. reseña casi completa.
-LENGTH_EXPERIMENT_LENS = [50, 500]
+LENGTH_EXPERIMENT_LENS = [50, 200, 500]
