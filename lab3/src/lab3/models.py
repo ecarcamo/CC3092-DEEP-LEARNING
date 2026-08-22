@@ -53,7 +53,9 @@ class MLPBaseline(nn.Module):
     def forward(self, x: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
         emb = self.embedding(x)                                  # (B, T, E)
         mask = (x != PAD_IDX).unsqueeze(-1).float()              # (B, T, 1)
-        pooled = (emb * mask).sum(dim=1) / lengths.unsqueeze(1).clamp(min=1).float()
+        # El denominador sale de la propia máscara (y no de `lengths`) porque `lengths`
+        # vive en CPU: las recurrentes lo necesitan así para pack_padded_sequence.
+        pooled = (emb * mask).sum(dim=1) / mask.sum(dim=1).clamp(min=1.0)
         return self.head(pooled).squeeze(-1)                     # (B,)
 
 
