@@ -1,0 +1,95 @@
+[
+  {
+    "kind": "mlp",
+    "name": "mlp-05-lr-alto",
+    "n_params": 2626049,
+    "train_time_s": 3.4790031909942627,
+    "best_epoch": 1,
+    "max_len": 300,
+    "val_metrics": {
+      "accuracy": 0.8814,
+      "precision": 0.8816423581631279,
+      "recall": 0.8814,
+      "f1": 0.8813811680742435
+    },
+    "test_loss": 0.31728811906814575,
+    "test_metrics": {
+      "accuracy": 0.86836,
+      "precision": 0.8683606813199162,
+      "recall": 0.86836,
+      "f1": 0.8683599391296359
+    },
+    "confusion_matrix": [
+      [
+        10863,
+        1637
+      ],
+      [
+        1654,
+        10846
+      ]
+    ]
+  },
+  {
+    "kind": "rnn",
+    "name": "rnn-03-lr-bajo",
+    "n_params": 2593153,
+    "train_time_s": 52.645798444747925,
+    "best_epoch": 12,
+    "max_len": 300,
+    "val_metrics": {
+      "accuracy": 0.816,
+      "precision": 0.8167055693355887,
+      "recall": 0.8160000000000001,
+      "f1": 0.815897462250575
+    },
+    "test_loss": 0.4751910233974457,
+    "test_metrics": {
+      "accuracy": 0.80396,
+      "precision": 0.8043704003860719,
+      "recall": 0.80396,
+      "f1": 0.8038938946713972
+    },
+    "confusion_matrix": [
+      [
+        9820,
+        2680
+      ],
+      [
+        2221,
+        10279
+      ]
+    ]
+  },
+  {
+    "kind": "lstm",
+    "name": "lstm-04-hidden-256",
+    "n_params": 2955521,
+    "train_time_s": 54.22521996498108,
+    "best_epoch": 8,
+    "max_len": 300,
+    "val_metrics": {
+      "accuracy": 0.871,
+      "precision": 0.8733180963200133,
+      "recall": 0.871,
+      "f1": 0.8707994342096897
+    },
+    "test_loss": 0.34482729679107665,
+    "test_metrics": {
+      "accuracy": 0.8656,
+      "precision": 0.8668927869462546,
+      "recall": 0.8655999999999999,
+      "f1": 0.8654815023325604
+    },
+    "confusion_matrix": [
+      [
+        10449,
+        2051
+      ],
+      [
+        1309,
+        11191
+      ]
+    ]
+  }
+]
