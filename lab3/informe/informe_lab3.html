@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><title>Laboratorio 3 — RNN y LSTM</title>
+<style>
+@page { size: A4; margin: 12mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: "Times New Roman", Georgia, serif; font-size: 8.6pt; line-height: 1.33;
+       color: #111; margin: 0; }
+h1 { font-size: 14pt; margin: 0 0 1mm; }
+h2 { font-size: 10pt; margin: 3.2mm 0 1.2mm; border-bottom: 1px solid #999; padding-bottom: 0.6mm; }
+h3 { font-size: 8.9pt; margin: 2.2mm 0 0.8mm; }
+p  { margin: 0 0 1.4mm; text-align: justify; }
+ul { margin: 0 0 1.4mm; padding-left: 4.2mm; }
+li { margin-bottom: 0.5mm; }
+table { width: 100%; border-collapse: collapse; font-size: 7.3pt; margin: 1mm 0 2mm; }
+th, td { border: 0.4pt solid #bbb; padding: 0.7mm 1.1mm; text-align: center; }
+th { background: #eceff3; font-weight: bold; }
+td.l, th.l { text-align: left; }
+.sub { color: #555; font-size: 8pt; margin-bottom: 2mm; }
+.cols { column-count: 2; column-gap: 5mm; }
+code { font-family: "DejaVu Sans Mono", monospace; font-size: 7.4pt; background: #f2f2f2; padding: 0 0.5mm; }
+.best { background: #dff0d8; font-weight: bold; }
+.fig { width: 100%; margin: 1mm 0 1.5mm; }
+.cap { font-size: 7pt; color: #555; text-align: center; margin: -0.5mm 0 2mm; }
+.pb { break-before: page; }
+.note { background: #f7f7f7; border-left: 2pt solid #888; padding: 1mm 2mm; margin: 1.5mm 0; }
+</style></head><body>
+
+<h1>Laboratorio 3 — Redes Neuronales Recurrentes y LSTM</h1>
+<div class="sub"><b>CC3092 · Deep Learning y Sistemas Inteligentes</b> — Esteban Cárcamo ·
+Clasificación binaria de sentimiento sobre IMDB Reviews (50 000 reseñas, 2 clases balanceadas).
+Split: 20 000 train / 5 000 validación / 25 000 test (usado una sola vez).</div>
+
+<h2>1. Investigación: capas de PyTorch para RNN y LSTM</h2>
+<div class="cols">
+<p><b><code>nn.Embedding</code></b> — tabla de búsqueda entrenable que mapea un id de token a un
+vector denso; equivale a multiplicar un one-hot por una matriz <code>|V|×d</code> pero implementado
+como indexación. Parámetros: <code>num_embeddings</code> (vocabulario), <code>embedding_dim</code>,
+y <code>padding_idx</code>, cuyo embedding se inicializa en cero y <b>nunca recibe gradiente</b>
+(lo usamos con <code>&lt;pad&gt;</code>=0). Es la capa con más parámetros: 20 000×128 = 2.56 M,
+frente a ~132 K de una LSTM de 128 unidades.</p>
+
+<p><b><code>nn.RNN</code></b> — recurrencia de Elman,
+<i>h<sub>t</sub></i> = tanh(<i>W<sub>ih</sub>x<sub>t</sub></i> + <i>W<sub>hh</sub>h<sub>t−1</sub></i> + <i>b</i>),
+con pesos compartidos en todos los pasos. Parámetros relevantes: <code>input_size</code>,
+<code>hidden_size</code>, <code>num_layers</code>, <code>nonlinearity</code> ('tanh'/'relu'),
+<code>batch_first</code>, <code>dropout</code> (solo <i>entre</i> capas apiladas) y
+<code>bidirectional</code>. Devuelve <code>output</code> (todos los pasos) y <code>h_n</code>
+(estado final por capa); en many-to-one usamos <code>h_n[-1]</code>.</p>
+
+<p><b><code>nn.LSTM</code></b> — misma interfaz, pero mantiene <b>dos</b> estados (oculto
+<i>h<sub>t</sub></i> y de celda <i>c<sub>t</sub></i>) y tres compuertas sigmoides (olvido
+<i>f</i>, entrada <i>i</i>, salida <i>o</i>) con
+<i>c<sub>t</sub></i> = <i>f<sub>t</sub></i>⊙<i>c<sub>t−1</sub></i> + <i>i<sub>t</sub></i>⊙<i>c̃<sub>t</sub></i>
+y <i>h<sub>t</sub></i> = <i>o<sub>t</sub></i>⊙tanh(<i>c<sub>t</sub></i>). Tiene 4× los parámetros de
+una RNN del mismo <code>hidden_size</code> y devuelve la tupla <code>(h_n, c_n)</code>.</p>
+
+<p><b><code>pad_sequence</code> / <code>pack_padded_sequence</code> /
+<code>pad_packed_sequence</code></b> — la primera apila tensores de longitud distinta en un
+rectángulo <code>(B, T<sub>max</sub>)</code> rellenando con <code>padding_value</code>; la segunda
+lo convierte en un <code>PackedSequence</code> que hace que la recurrente <b>salte los
+<code>&lt;pad&gt;</code></b> (<code>enforce_sorted=False</code> evita ordenar el batch a mano); la
+tercera revierte al rectángulo, necesaria solo si se usan las salidas de todos los pasos. <b>Sin
+packing, <code>h_T</code> de una reseña de 40 tokens en un batch de 300 sería el resultado de
+digerir 260 pasos de relleno</b>; lo verificamos numéricamente en el notebook.</p>
+
+<p><b><code>clip_grad_norm_</code></b> — calcula la norma global del gradiente y, si supera
+<code>max_norm</code>, reescala todos los gradientes por el mismo factor (preserva la dirección,
+acota la magnitud). Se llama <b>entre <code>loss.backward()</code> y
+<code>optimizer.step()</code></b>. Es la defensa estándar contra el exploding gradient.</p>
+
+<p><b><code>nn.Dropout</code> en recurrentes</b> — el argumento <code>dropout=</code> de
+<code>nn.RNN</code>/<code>nn.LSTM</code> solo actúa <i>entre capas apiladas</i>: con
+<code>num_layers=1</code> no hace nada. Aplicar dropout en cada paso de tiempo con máscaras
+distintas inyecta ruido que se acumula y rompe la memoria. Por eso lo aplicamos donde sí es seguro:
+sobre los embeddings (antes de la recurrencia) y sobre <i>h<sub>T</sub></i> (antes de la lineal).</p>
+
+<h3>Conceptos</h3>
+<p><b>Estado oculto vs. de celda.</b> <i>c<sub>t</sub></i> es la memoria de largo plazo, actualizada
+de forma <b>aditiva</b>: la información puede viajar muchos pasos casi intacta si la compuerta de
+olvido lo permite. <i>h<sub>t</sub></i> es la vista filtrada de esa memoria que se expone al
+exterior (<i>h<sub>t</sub></i> = <i>o<sub>t</sub></i>⊙tanh(<i>c<sub>t</sub></i>)). Una RNN simple
+solo tiene <i>h<sub>t</sub></i>: su memoria y su salida son la misma cosa, no puede recordar algo
+sin usarlo ahora.</p>
+
+<p><b>Vanishing / exploding gradient.</b> En BPTT, ∂<i>h<sub>T</sub></i>/∂<i>h<sub>k</sub></i> =
+∏<sub>t=k+1..T</sub> <i>W<sub>hh</sub><sup>⊤</sup></i>·diag(tanh′), esencialmente una potencia de
+matriz: si el factor por paso es &lt;1 el gradiente <b>decae exponencialmente</b> en <i>T</i>, si es
+&gt;1 explota. Es exponencial en la longitud: un factor 0.9 deja 0.5 % del gradiente a 50 pasos,
+pero 10<sup>−14</sup> a 300 — de ahí la severidad en secuencias largas.</p>
+
+<p><b>Cómo ayudan las compuertas.</b> La ruta <i>c<sub>t−1</sub></i>→<i>c<sub>t</sub></i> es una
+suma con multiplicación elemento a elemento por <i>f<sub>t</sub></i>, no por una matriz de pesos: su
+derivada es simplemente <i>f<sub>t</sub></i>, y con <i>f</i>≈1 el gradiente se propaga casi sin
+atenuación (un "camino de gradiente constante" análogo a una conexión residual). Además las
+compuertas son aprendidas y dependen de la entrada. El <i>exploding</i> no lo resuelven — para eso
+está el clipping —, pero el <i>vanishing</i> sí queda muy mitigado.</p>
+</div>
+
+<h2>2. Datos y protocolo experimental</h2>
+<div class="cols">
+<p><b>Tokenización</b> word-level con regex (minúsculas, se elimina <code>&lt;br /&gt;</code>, se
+conservan apóstrofes y los signos <code>!</code> <code>?</code>). <b>Vocabulario</b>: 20 000
+palabras más frecuentes de train (min_freq 2) de 79 124 tipos; solo 2.75 % de los tokens de train
+y 3.49 % de los de test caen en <code>&lt;unk&gt;</code>. Construido <b>solo con train</b> para
+evitar leakage.</p>
+<p><b>Longitudes</b>: mín. 10, máx. 2 503, promedio 235, mediana 176 (cola derecha larga).
+<b>Padding</b> dinámico por batch: un batch es un tensor rectangular, así que hay que rellenar; con
+<code>max_len=300</code> se conserva el 81 % de los tokens y el 77 % de las reseñas completas a un
+tercio del costo del peor caso. Todos los modelos usan Adam, <code>BCEWithLogitsLoss</code>,
+batch 64, semilla 42, y <b>early stopping sobre val_loss</b> restaurando el mejor epoch.</p>
+</div>
+
+<h2 class="pb">3. Iteraciones (15: 5 por arquitectura, cambiando una cosa a la vez)</h2>
+<table>
+<tr><th class="l">Iteración</th><th class="l">Qué cambia respecto a la anterior</th><th>Params</th>
+<th>Epoch</th><th>val_loss</th><th>Acc</th><th>Prec</th><th>Rec</th><th>F1</th><th>t (s)</th></tr>
+
+<tr><td class="l">mlp-01-base</td><td class="l">emb 64, cabeza (64), sin regularización</td><td>1 284 225</td><td>4/7</td><td>0.3216</td><td>0.8724</td><td>0.8726</td><td>0.8724</td><td>0.8723</td><td>5.0</td></tr>
+<tr><td class="l">mlp-02-capacidad</td><td class="l">emb 128, cabeza (256,128)</td><td>2 626 049</td><td>3/6</td><td>0.3172</td><td>0.8768</td><td>0.8768</td><td>0.8768</td><td>0.8768</td><td>5.2</td></tr>
+<tr><td class="l">mlp-03-dropout</td><td class="l">+ dropout 0.5</td><td>2 626 049</td><td>4/7</td><td>0.3172</td><td>0.8748</td><td>0.8749</td><td>0.8748</td><td>0.8748</td><td>6.0</td></tr>
+<tr><td class="l">mlp-04-weight-decay</td><td class="l">+ weight decay 1e-4</td><td>2 626 049</td><td>7/10</td><td>0.3061</td><td>0.8764</td><td>0.8764</td><td>0.8764</td><td>0.8764</td><td>9.7</td></tr>
+<tr class="best"><td class="l">mlp-05-lr-alto</td><td class="l">lr 1e-3 → 1e-2 (sin weight decay)</td><td>2 626 049</td><td>1/4</td><td>0.3002</td><td>0.8814</td><td>0.8814</td><td>0.8814</td><td>0.8814</td><td>3.7</td></tr>
+
+<tr><td class="l">rnn-01-base</td><td class="l">1 capa, sin dropout ni clipping</td><td>2 593 153</td><td>6/10</td><td>0.5849</td><td>0.7140</td><td>0.7205</td><td>0.7140</td><td>0.7113</td><td>34.9</td></tr>
+<tr><td class="l">rnn-02-clip</td><td class="l">+ gradient clipping 1.0</td><td>2 593 153</td><td>4/8</td><td>0.5302</td><td>0.7514</td><td>0.7515</td><td>0.7514</td><td>0.7513</td><td>28.0</td></tr>
+<tr class="best"><td class="l">rnn-03-lr-bajo</td><td class="l">lr 1e-3 → 3e-4</td><td>2 593 153</td><td>12/16</td><td>0.4556</td><td>0.8160</td><td>0.8160</td><td>0.8160</td><td>0.8159</td><td>55.1</td></tr>
+<tr><td class="l">rnn-04-hidden-256</td><td class="l">hidden 128 → 256, dropout 0.3</td><td>2 659 073</td><td>16/20</td><td>0.4678</td><td>0.7980</td><td>0.7980</td><td>0.7980</td><td>0.7980</td><td>72.5</td></tr>
+<tr><td class="l">rnn-05-bidireccional</td><td class="l">bidireccional, dropout 0.3</td><td>2 626 305</td><td>8/12</td><td>0.5133</td><td>0.7560</td><td>0.7562</td><td>0.7560</td><td>0.7558</td><td>63.9</td></tr>
+
+<tr><td class="l">lstm-01-base</td><td class="l">espejo exacto de rnn-01</td><td>2 692 225</td><td>7/11</td><td>0.3869</td><td>0.8562</td><td>0.8563</td><td>0.8562</td><td>0.8562</td><td>39.6</td></tr>
+<tr><td class="l">lstm-02-clip</td><td class="l">+ gradient clipping 1.0</td><td>2 692 225</td><td>5/9</td><td>0.3687</td><td>0.8532</td><td>0.8532</td><td>0.8532</td><td>0.8532</td><td>33.9</td></tr>
+<tr><td class="l">lstm-03-dropout</td><td class="l">+ dropout 0.5</td><td>2 692 225</td><td>11/15</td><td>0.4119</td><td>0.8694</td><td>0.8700</td><td>0.8694</td><td>0.8692</td><td>55.6</td></tr>
+<tr class="best"><td class="l">lstm-04-hidden-256</td><td class="l">hidden 128 → 256</td><td>2 955 521</td><td>8/12</td><td>0.3354</td><td>0.8710</td><td>0.8714</td><td>0.8710</td><td>0.8708</td><td>54.9</td></tr>
+<tr><td class="l">lstm-05-bidireccional</td><td class="l">bidireccional + weight decay 1e-5</td><td>3 351 041</td><td>7/11</td><td>0.3438</td><td>0.8704</td><td>0.8709</td><td>0.8704</td><td>0.8700</td><td>81.2</td></tr>
+</table>
+<div class="cap">Métricas sobre <b>validación</b> en el epoch seleccionado por early stopping;
+precision/recall/F1 macro. En verde, la mejor configuración de cada arquitectura (criterio:
+val_loss). Las curvas de pérdida train/val de las 15 iteraciones están en el notebook.</div>
+
+<h2>4. Comparación de arquitecturas (test, una única evaluación)</h2>
+<table>
+<tr><th class="l">Arquitectura</th><th class="l">Config. ganadora</th><th>Params</th>
+<th>% en embedding</th><th>t entren.</th><th>val acc</th><th>test acc</th><th>test prec</th>
+<th>test rec</th><th>test F1</th><th>FP / FN</th></tr>
+<tr><td class="l">MLP (baseline)</td><td class="l">mlp-05-lr-alto</td><td>2 626 049</td><td>97.5 %</td><td>3.7 s</td><td>0.8814</td><td><b>0.8684</b></td><td>0.8684</td><td>0.8684</td><td>0.8684</td><td>1637 / 1654</td></tr>
+<tr><td class="l">RNN simple</td><td class="l">rnn-03-lr-bajo</td><td>2 593 153</td><td>98.7 %</td><td>55.1 s</td><td>0.8160</td><td>0.8040</td><td>0.8044</td><td>0.8040</td><td>0.8039</td><td>2680 / 2221</td></tr>
+<tr><td class="l">LSTM</td><td class="l">lstm-04-hidden-256</td><td>2 955 521</td><td>86.6 %</td><td>54.9 s</td><td>0.8710</td><td>0.8656</td><td>0.8669</td><td>0.8656</td><td>0.8655</td><td>2051 / 1309</td></tr>
+</table>
+
+<table>
+<tr><th class="l">Sección 4.1 — max_len</th><th>50</th><th>200</th><th>500</th><th class="l">Ganancia 50→500</th></tr>
+<tr><td class="l">RNN — val accuracy</td><td>0.7214</td><td>0.7908</td><td>0.8228</td><td class="l">+10.1 puntos</td></tr>
+<tr><td class="l">LSTM — val accuracy</td><td>0.7720</td><td>0.8520</td><td>0.8884</td><td class="l">+11.6 puntos</td></tr>
+<tr><td class="l"><b>Brecha LSTM − RNN</b></td><td><b>+5.1</b></td><td><b>+6.1</b></td><td><b>+6.6</b></td><td class="l">la brecha crece con la longitud</td></tr>
+</table>
+
+<p><b>Parámetros vs. calidad: no hay relación.</b> Los tres modelos rondan 2.6–3.0 M de parámetros
+y el 87–99 % están en la capa de embedding, que es idéntica en los tres. Los 6 puntos de diferencia
+los deciden decenas de miles de parámetros de recurrencia. La RNN, el modelo más pequeño, es la
+peor; la LSTM, el más grande, no gana. <b>Costo:</b> el MLP entrena 13–15× más rápido porque su
+cómputo es una suma paralelizable sobre el tiempo, mientras que las recurrentes ejecutan 300 pasos
+inherentemente secuenciales — la GPU paraleliza el batch, no el tiempo.</p>
+
+<h2 class="pb">5. Análisis de resultados</h2>
+<div class="cols">
+<p><b>Hiperparámetro de mayor impacto.</b> <i>MLP</i>: positivo, subir el lr a 1e-2 (+0.7 pts, mejor
+val_loss del grupo) — resultado inesperado que se explica leyendo la curva: el modelo alcanza su
+óptimo de generalización en el <b>primer epoch</b> y el early stopping se queda ahí, así que la
+configuración ganadora es también la más frágil. Negativo: dropout 0.5 (−0.2 pts). <i>RNN</i>:
+positivo, bajar el lr a 3e-4 (<b>+6.5 pts</b>) y activar clipping (+3.7 pts) — juntos, casi 10
+puntos, el efecto más grande del laboratorio; negativo, subir hidden a 256 (−1.8 pts) y la versión
+bidireccional (−6 pts). <i>LSTM</i>: positivo, hidden 128→256 (−0.077 de val_loss, el mayor salto
+en la métrica de selección); negativo, dropout 0.5 aislado (+0.043 de val_loss). <b>El mismo cambio
+de capacidad que perjudica a la RNN beneficia a la LSTM</b>: la RNN no está limitada por capacidad
+sino por su capacidad de entrenarse.</p>
+
+<p><b>¿Ayudó la regularización?</b> Solo cuando ataca el problema real. El <b>MLP</b> es el único
+que sobreajusta de verdad y ahí el ganador fue el <b>weight decay</b> (val_loss 0.3172→0.3061), no
+el dropout: el sobreajuste vive en la matriz de embeddings y el weight decay penaliza exactamente
+esos pesos. En la <b>RNN</b> el método que rindió no regulariza nada: el <b>gradient clipping</b>
+(+3.7 pts) combate inestabilidad numérica, no sobreajuste — la RNN <i>underfittea</i>. En la
+<b>LSTM</b>, clipping ligeramente positivo y dropout rentable solo <i>combinado</i> con más
+capacidad.</p>
+
+<p><b>MLP vs. RNN vs. LSTM en test</b> (0.8684 &gt; 0.8656 ≫ 0.8040). La lectura ingenua —"gana el
+modelo que ignora el orden, luego el orden no importa"— es incorrecta. La señal de sentimiento en
+IMDB es en gran medida <b>léxica</b>, y promediar embeddings es un estimador robusto y baratísimo de
+esa señal: el MLP alcanza el techo léxico de forma trivial. La LSTM llega al mismo sitio pero
+teniendo que <i>aprender</i> a hacerlo a través de una recurrencia, y con 20 000 ejemplos y
+embeddings desde cero no tiene datos para explotar del todo su ventaja — aunque con
+<code>max_len=500</code> llega a <b>0.8884</b> en validación, por encima de cualquier MLP de la
+rejilla. La comparación limpia es <b>RNN vs. LSTM</b>, idénticas salvo por las compuertas:
+<b>+6.2 puntos</b> en test. Ese es, aislado, el valor de la memoria protegida.</p>
+
+<p><b>¿La RNN pierde desempeño con secuencias largas?</b> No en términos absolutos, pero sí
+relativos. Ambas mejoran al alargar la secuencia porque a 50 tokens el factor dominante es la
+<b>pérdida de información</b> (solo se ve el 21 % de los tokens del corpus), y ese efecto enmascara
+cualquier degradación. La señal de vanishing gradient está en la <b>brecha creciente</b>: +5.1 →
++6.1 → +6.6 puntos a favor de la LSTM. La RNN convierte cada token adicional en menos desempeño.
+Es exactamente lo que predice la teoría: a 500 pasos, el producto de jacobianos deja sin señal de
+aprendizaje al principio de la reseña, así que la RNN entrena de facto solo su final, mientras que
+la ruta aditiva de la celda LSTM mantiene el gradiente vivo mucho más lejos. Dos evidencias
+colaterales apuntan a lo mismo: el clipping le dio +3.7 pts a la RNN y casi nada a la LSTM, y la
+capacidad extra ayudó solo a la LSTM.</p>
+
+<p><b>¿Dónde se equivoca cada modelo?</b> (i) <b>Todos caen con las reseñas largas</b>: de
+&lt;100 a &gt;500 tokens, la accuracy baja de 0.878→0.801 en el MLP, 0.885→0.799 en la LSTM y
+0.827→0.709 en la RNN. Parte de la caída es truncamiento (con max_len 300, las reseñas de &gt;500
+se ven a medias), pero <b>la RNN cae 1.5× más rápido</b> que las otras dos. (ii) <b>La LSTM tiene
+un sesgo asimétrico</b>: 2 051 falsos positivos contra 1 309 falsos negativos — le cuesta reconocer
+las negativas, coherente con que las reseñas negativas de IMDB describen la trama en tono neutro y
+guardan el veredicto para el final, mientras las positivas reparten adjetivos entusiastas por todo
+el texto. El MLP, que promedia, falla de forma casi simétrica (1 637 / 1 654). (iii) <b>1 374
+reseñas (5.5 % del test) fallan en los tres modelos</b> y comparten un patrón claro: <b>sentimiento
+mixto con veredicto tardío</b> — párrafos elogiando la actuación y la fotografía, y al final la
+conclusión de que la película no funciona; la etiqueta viene de la calificación en estrellas, así
+que es negativa aunque el 80 % del texto sea positivo. Ninguna arquitectura lo resuelve: el MLP
+porque promedia (gana el volumen de palabras positivas) y las recurrentes porque ese veredicto suele
+caer <b>después del corte de 300 tokens</b>. El sarcasmo produce el mismo tipo de error.</p>
+
+<p><b>¿Qué desplegaríamos en producción?</b> Priorizando exactitud <i>y</i> eficiencia y para este
+problema concreto, <b>el MLP sobre embeddings promediados</b>: empata a la LSTM en test con 13×
+menos tiempo de entrenamiento, inferencia trivialmente paralelizable (una suma, no 300 pasos
+secuenciales), sin estado que arrastrar y servible en CPU. Cambiaríamos de opinión en dos casos:
+si el dominio dependiera del orden (negación, sarcasmo, veredicto tardío, más clases), donde una
+LSTM con la secuencia completa es el mínimo viable; y si hubiera presupuesto para un
+<b>Transformer preentrenado</b>, que cambia la respuesta por completo — un DistilBERT afinado llega
+a ~93 % en IMDB porque trae conocimiento lingüístico de miles de millones de tokens en vez de
+aprender el idioma desde cero con 20 000 reseñas, y además su atención <b>se paraleliza sobre el
+tiempo</b>, resolviendo a la vez el problema de calidad y el cuello de botella secuencial que aquí
+nos obligó a elegir. Su costo es de inferencia (dos órdenes de magnitud más de cómputo por reseña)
+y de memoria.</p>
+</div>
+
+<h2>6. Conclusiones</h2>
+<ul>
+<li><b>Las compuertas valen 6.2 puntos.</b> RNN y LSTM configuradas de forma idéntica salvo por el
+tipo de celda: 0.8040 vs 0.8656 en test. Es la medición más limpia del laboratorio.</li>
+<li><b>La RNN simple está limitada por la optimización, no por la capacidad.</b> Sus dos mayores
+mejoras fueron bajar el lr (+6.5 pts) y el clipping (+3.7 pts); darle más capacidad la empeoró. La
+LSTM se comporta al revés en ambos casos.</li>
+<li><b>El vanishing gradient se observa como brecha creciente, no como caída absoluta:</b> de 50 a
+500 tokens ambas mejoran, pero la ventaja de la LSTM crece de +5.1 a +6.6 puntos.</li>
+<li><b>Un baseline sin noción de orden es competitivo en sentiment analysis:</b> 0.8684 en test
+entrenando en 4 segundos. Vale la pena entrenarlo siempre antes de asumir que hace falta una
+arquitectura secuencial.</li>
+<li><b>El conteo de parámetros no explica nada aquí:</b> 87–99 % de los pesos están en el embedding
+compartido; los 6 puntos de diferencia los deciden decenas de miles de parámetros de recurrencia.</li>
+<li><b>El techo real son las reseñas de sentimiento mixto</b> (5.5 % del test falla en los tres
+modelos). Superarlas exige más contexto y modelar la estructura retórica del texto — terreno de los
+Transformers preentrenados.</li>
+</ul>
+
+<p style="margin-top:3mm"><b>Repositorio:</b>
+<a href="https://github.com/ecarcamo/CC3092-DEEP-LEARNING/tree/main/lab3">https://github.com/ecarcamo/CC3092-DEEP-LEARNING/tree/main/lab3</a>
+— notebook completo y comentado en <code>lab3/notebooks/lab3_rnn_lstm.ipynb</code>.</p>
+
+</body></html>
