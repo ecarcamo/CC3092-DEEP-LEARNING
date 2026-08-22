@@ -10,7 +10,7 @@ h2 { font-size: 10pt; margin: 3.2mm 0 1.2mm; border-bottom: 1px solid #999; padd
 h3 { font-size: 8.9pt; margin: 2.2mm 0 0.8mm; }
 p  { margin: 0 0 1.4mm; text-align: justify; }
 ul { margin: 0 0 1.4mm; padding-left: 4.2mm; }
-li { margin-bottom: 0.5mm; }
+li { margin-bottom: 0.3mm; }
 table { width: 100%; border-collapse: collapse; font-size: 7.3pt; margin: 1mm 0 2mm; }
 th, td { border: 0.4pt solid #bbb; padding: 0.7mm 1.1mm; text-align: center; }
 th { background: #eceff3; font-weight: bold; }
@@ -154,12 +154,22 @@ val_loss). Las curvas de pérdida train/val de las 15 iteraciones están en el n
 <tr><td class="l"><b>Brecha LSTM − RNN</b></td><td><b>+5.1</b></td><td><b>+6.1</b></td><td><b>+6.6</b></td><td class="l">la brecha crece con la longitud</td></tr>
 </table>
 
+<table style="border:none"><tr style="border:none">
+<td style="border:none;width:57%"><img class="fig" src="../results/figures/06_matrices_confusion.png">
+<div class="cap">Matrices de confusión sobre test. La LSTM sobre-predice POSITIVO (2 051 FP vs
+1 309 FN); el MLP falla de forma casi simétrica.</div></td>
+<td style="border:none;width:43%"><img class="fig" src="../results/figures/05_experimento_longitud.png">
+<div class="cap">Sección 4.1: ambas mejoran con más contexto, pero la brecha a favor de la LSTM
+crece de +5.1 a +6.6 puntos.</div></td></tr></table>
+
 <p><b>Parámetros vs. calidad: no hay relación.</b> Los tres modelos rondan 2.6–3.0 M de parámetros
 y el 87–99 % están en la capa de embedding, que es idéntica en los tres. Los 6 puntos de diferencia
 los deciden decenas de miles de parámetros de recurrencia. La RNN, el modelo más pequeño, es la
 peor; la LSTM, el más grande, no gana. <b>Costo:</b> el MLP entrena 13–15× más rápido porque su
 cómputo es una suma paralelizable sobre el tiempo, mientras que las recurrentes ejecutan 300 pasos
 inherentemente secuenciales — la GPU paraleliza el batch, no el tiempo.</p>
+
+<div style="break-inside:avoid"><img src="../results/figures/04_curvas_lstm.png" style="width:80%;display:block;margin:1.5mm auto 0"><div class="cap">Curvas de pérdida train/val de las 5 iteraciones de la LSTM (línea punteada: epoch elegido por early stopping). Las 15 curvas están en el notebook: el MLP sobreajusta desde el epoch 3-4 y la RNN <i>underfittea</i> con curvas ruidosas.</div></div>
 
 <h2 class="pb">5. Análisis de resultados</h2>
 <div class="cols">
@@ -233,7 +243,7 @@ y de memoria.</p>
 </div>
 
 <h2>6. Conclusiones</h2>
-<ul>
+<ul style="font-size:8.2pt">
 <li><b>Las compuertas valen 6.2 puntos.</b> RNN y LSTM configuradas de forma idéntica salvo por el
 tipo de celda: 0.8040 vs 0.8656 en test. Es la medición más limpia del laboratorio.</li>
 <li><b>La RNN simple está limitada por la optimización, no por la capacidad.</b> Sus dos mayores
