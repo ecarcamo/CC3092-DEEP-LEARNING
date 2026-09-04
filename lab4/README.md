@@ -42,4 +42,21 @@ O bien abrir el notebook en Jupyter y ejecutar todas las celdas de arriba a abaj
    recompensa por episodio y una política simple para CartPole-v1 comparada contra el
    agente aleatorio.
 
-<!-- La tabla de resultados se completa al final del laboratorio. -->
+## Resultados del módulo de prueba
+
+Agente aleatorio y política simple evaluados sobre 20 episodios (gymnasium 1.3.0,
+semillas fijas). Retorno = recompensa total acumulada por episodio.
+
+| Entorno | Agente | Retorno medio | Desv. estándar | Nota |
+|---|---|---|---|---|
+| CartPole-v1 | aleatorio | 19.50 | 9.59 | recompensa densa (+1 por paso) |
+| CartPole-v1 | **política simple** | **194.80** | 34.36 | ~10× mejor que el aleatorio, sin aprender |
+| FrozenLake-v1 | aleatorio | 0.05 | 0.22 | 1/20 éxitos (≈2.4 % en 500 episodios) |
+
+Figuras en `results/figures/` y métricas completas en `results/summary.json`:
+
+- `cartpole_random_rewards.png` — recompensa por episodio del agente aleatorio en CartPole-v1.
+- `frozenlake_random_rewards.png` — recompensa por episodio del agente aleatorio en FrozenLake-v1.
+- `cartpole_policy_comparison.png` — política simple vs. agente aleatorio en CartPole-v1.
+
+El análisis y la discusión completos se desarrollan en el informe escrito (PDF).
