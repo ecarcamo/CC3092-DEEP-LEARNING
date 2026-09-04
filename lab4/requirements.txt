@@ -1,0 +1,8 @@
+# Laboratorio 4 - Fundamentos de RL y Gymnasium
+# Instalado sobre el venv compartido del curso (DEEP_LEARNING/venv)
+gymnasium[classic-control,toy-text]>=1.0
+numpy>=1.26
+matplotlib>=3.9
+pandas>=2.2
+jupyter
+nbconvert
