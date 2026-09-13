@@ -1,0 +1,25 @@
+# Laboratorio 5 - Agentes en el Arcade Learning Environment (ALE): Space Invaders
+# Entorno propio del lab: lab5/.venv (Python 3.11)
+#   uv venv .venv --python 3.11
+#   uv pip install --python .venv/bin/python -r requirements.txt
+
+# --- Núcleo RL ---
+gymnasium>=1.0,<2.0          # API de entornos (Env, wrappers, RecordVideo)
+ale-py>=0.10                 # Arcade Learning Environment + ROMs incluidos (ya no hace falta AutoROM)
+
+# --- Grabación de video ---
+moviepy>=1.0                 # RecordVideo de Gymnasium escribe el .mp4 con ImageSequenceClip
+imageio-ffmpeg>=0.5          # binario de ffmpeg para moviepy (respaldo del ffmpeg del sistema)
+
+# --- Preprocesamiento Atari ---
+opencv-python>=4.10          # requerido por gymnasium.wrappers.AtariPreprocessing (resize a 84x84)
+
+# --- Análisis y gráficas ---
+numpy>=1.26
+matplotlib>=3.9
+pandas>=2.2
+
+# --- Notebook ---
+jupyter
+ipykernel
+nbconvert
