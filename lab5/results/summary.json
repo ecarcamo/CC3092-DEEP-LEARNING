@@ -1,0 +1,180 @@
+{
+  "entorno": "ALE/SpaceInvaders-v5",
+  "versiones": {
+    "gymnasium": "1.3.0",
+    "ale_py": "0.12.1"
+  },
+  "videos": [
+    {
+      "episodio": 0,
+      "entorno": "ALE/SpaceInvaders-v5",
+      "agente": "agente_aleatorio",
+      "semilla": 0,
+      "pasos": 298,
+      "recompensa_total": 35.0,
+      "video": "aleatorio_spaceinvaders-episode-0.mp4"
+    },
+    {
+      "episodio": 0,
+      "entorno": "ALE/SpaceInvaders-v5",
+      "agente": "agente_regla_simple",
+      "semilla": 0,
+      "pasos": 552,
+      "recompensa_total": 260.0,
+      "video": "regla_simple_spaceinvaders-episode-0.mp4"
+    }
+  ],
+  "episodios": [
+    {
+      "agente": "aleatorio",
+      "semilla": 0,
+      "pasos": 298,
+      "retorno": 35.0
+    },
+    {
+      "agente": "aleatorio",
+      "semilla": 1,
+      "pasos": 493,
+      "retorno": 155.0
+    },
+    {
+      "agente": "aleatorio",
+      "semilla": 2,
+      "pasos": 522,
+      "retorno": 150.0
+    },
+    {
+      "agente": "aleatorio",
+      "semilla": 3,
+      "pasos": 580,
+      "retorno": 210.0
+    },
+    {
+      "agente": "aleatorio",
+      "semilla": 4,
+      "pasos": 512,
+      "retorno": 180.0
+    },
+    {
+      "agente": "aleatorio",
+      "semilla": 5,
+      "pasos": 385,
+      "retorno": 80.0
+    },
+    {
+      "agente": "aleatorio",
+      "semilla": 6,
+      "pasos": 705,
+      "retorno": 235.0
+    },
+    {
+      "agente": "aleatorio",
+      "semilla": 7,
+      "pasos": 436,
+      "retorno": 30.0
+    },
+    {
+      "agente": "aleatorio",
+      "semilla": 8,
+      "pasos": 331,
+      "retorno": 55.0
+    },
+    {
+      "agente": "aleatorio",
+      "semilla": 9,
+      "pasos": 348,
+      "retorno": 105.0
+    },
+    {
+      "agente": "regla_simple",
+      "semilla": 0,
+      "pasos": 552,
+      "retorno": 260.0
+    },
+    {
+      "agente": "regla_simple",
+      "semilla": 1,
+      "pasos": 420,
+      "retorno": 155.0
+    },
+    {
+      "agente": "regla_simple",
+      "semilla": 2,
+      "pasos": 561,
+      "retorno": 285.0
+    },
+    {
+      "agente": "regla_simple",
+      "semilla": 3,
+      "pasos": 560,
+      "retorno": 240.0
+    },
+    {
+      "agente": "regla_simple",
+      "semilla": 4,
+      "pasos": 502,
+      "retorno": 260.0
+    },
+    {
+      "agente": "regla_simple",
+      "semilla": 5,
+      "pasos": 560,
+      "retorno": 240.0
+    },
+    {
+      "agente": "regla_simple",
+      "semilla": 6,
+      "pasos": 502,
+      "retorno": 260.0
+    },
+    {
+      "agente": "regla_simple",
+      "semilla": 7,
+      "pasos": 560,
+      "retorno": 240.0
+    },
+    {
+      "agente": "regla_simple",
+      "semilla": 8,
+      "pasos": 502,
+      "retorno": 260.0
+    },
+    {
+      "agente": "regla_simple",
+      "semilla": 9,
+      "pasos": 502,
+      "retorno": 260.0
+    }
+  ],
+  "resumen": {
+    "aleatorio": {
+      "retorno_medio": 123.5,
+      "retorno_min": 30.0,
+      "retorno_max": 235.0,
+      "retorno_std": 73.3,
+      "pasos_medios": 461.0
+    },
+    "regla_simple": {
+      "retorno_medio": 246.0,
+      "retorno_min": 155.0,
+      "retorno_max": 285.0,
+      "retorno_std": 34.8,
+      "pasos_medios": 522.1
+    }
+  },
+  "control_solo_disparar": {
+    "retorno_medio": 285.0,
+    "retornos": [
+      285.0,
+      285.0,
+      285.0,
+      285.0,
+      285.0,
+      285.0,
+      285.0,
+      285.0,
+      285.0,
+      285.0
+    ]
+  }
+}
