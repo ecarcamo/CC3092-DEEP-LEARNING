@@ -165,6 +165,21 @@ de los dos últimos cuadros** del salto en lugar del último.
 va a usar `AtariPreprocessing` (que implementa su propio `frame_skip=4` con *max-pooling*), el
 entorno base debe crearse con `frameskip=1`, o el salto efectivo será de 16 cuadros.
 
+**Medición propia del parpadeo.** Ejecutando 1 200 cuadros del juego con la acción `NOOP` —es
+decir, sin disparar nunca, de modo que todo proyectil visible es enemigo— y contando en cuántas
+observaciones aparece el color de los proyectiles en la franja entre la formación y el cañón:
+
+| Configuración | Observaciones con proyectil visible |
+|---|---|
+| `frameskip=1` | **346 de 1 200** |
+| `frameskip=4` (defecto de la v5) | **0 de 300** |
+
+Con el salto por defecto los proyectiles **no aparecen nunca**: se dibujan justo en los cuadros
+que el salto descarta. No es que se vean poco, es que son invisibles. Esto tiene una consecuencia
+que va más allá de lo estético: un agente reactivo que trabaje sobre la observación por defecto
+**no puede esquivar**, porque las bombas enemigas no existen para él. Es la justificación
+empírica, y no meramente teórica, del *max-pooling* de los dos últimos cuadros.
+
 ### 1.5 Space Invaders: mecánica, objetivo y recompensa
 
 **Origen.** Space Invaders es un arcade de Taito (1978) que Atari adaptó al 2600 en 1980. Fue
@@ -209,9 +224,9 @@ Consecuencias para el diseño del agente:
 - El **retorno del episodio** (suma de recompensas sin descontar) coincide exactamente con la
   puntuación final de la partida, que es la métrica que se reporta en la literatura.
 
-*Referencia medida en este laboratorio:* un agente **aleatorio** con semilla 0 sobrevivió
-**441 pasos** y obtuvo un retorno de **80.0 puntos**. Ese es el punto de partida contra el que
-se compara cualquier agente posterior.
+*Referencia medida en este laboratorio:* sobre 10 episodios, un agente **aleatorio** obtiene
+un retorno medio de **123.5 puntos** (mínimo 30, máximo 235) sobreviviendo 461 pasos de media.
+Ese es el punto de partida contra el que se compara cualquier agente posterior.
 
 ---
 
