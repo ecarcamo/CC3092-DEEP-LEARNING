@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<title>Laboratorio 5 — ALE y Space Invaders</title>
+<style>
+@page { size: A4; margin: 10mm 14mm; }
+* { box-sizing: border-box; }
+body { font-family: "Times New Roman", Georgia, serif; font-size: 10.3pt;
+        line-height: 1.15; color: #000; margin: 0; }
+h1 { font-size: 15pt; text-align: center; margin: 0 0 1mm; }
+h2 { font-size: 12pt; margin: 2.2mm 0 1mm; }
+h3 { font-size: 10.8pt; margin: 1.6mm 0 0.6mm; }
+p  { margin: 0 0 1.1mm; text-align: justify; }
+.hdr { font-size: 10.5pt; text-align: right; margin: 0 0 1mm; }
+.sub { font-size: 11pt; text-align: center; margin: 0 0 2.5mm; }
+table { width: 100%; border-collapse: collapse; font-size: 9.3pt; margin: 1.1mm 0 1.5mm; }
+th, td { border: 0.5pt solid #000; padding: 0.8mm 1.6mm; text-align: center; }
+th { background: #eee; }
+td.l, th.l { text-align: left; }
+code { font-family: "DejaVu Sans Mono", monospace; font-size: 9pt; }
+img.figfull { display: block; margin: 0.8mm auto 0.3mm; width: 84%; }
+.cap { font-size: 9.5pt; text-align: center; margin: 0 0 1.5mm; }
+.refs { font-size: 9.5pt; }
+ul { margin: 0 0 1.4mm; padding-left: 5mm; }
+li { margin-bottom: 0.5mm; text-align: justify; }
+i, em { font-style: italic; }
+</style></head><body>
+
+<div class="hdr">Esteban Cárcamo — carné 23016</div>
+<h1>Laboratorio 5 — Agentes en el Arcade Learning Environment: Space Invaders</h1>
+<div class="sub">CC3092 · Deep Learning y Sistemas Inteligentes</div>
+
+<h2>1. El Arcade Learning Environment</h2>
+
+<p>El <b>Arcade Learning Environment</b> (ALE) convierte los juegos originales del Atari 2600
+en entornos de aprendizaje por refuerzo con una interfaz uniforme. El problema que resuelve es
+metodológico: antes de ALE cada investigador evaluaba su algoritmo en un dominio construido por
+él mismo, lo que introduce <i>sesgo del diseñador</i> —quien diseña el método diseña también la
+prueba— e impide comparar resultados entre artículos. ALE ofrece más de cien tareas diseñadas
+por terceros, programadores de videojuegos de los años ochenta sin ninguna intención de servir
+como <i>benchmark</i> de IA, todas con la misma interfaz: píxeles de entrada y una acción de
+joystick como salida. Eso permite plantear la pregunta de la inteligencia general de dominio, y
+es el banco de pruebas donde se validaron DQN, A3C, Rainbow y Agent57.</p>
+
+<p>ALE <b>no reimplementa los juegos</b>: se construye sobre <b>Stella</b>, un emulador libre
+del Atari 2600, y ejecuta los mismos ROMs comerciales con la misma lógica y los mismos errores
+que el cartucho de 1980. Stella emula el hardware (CPU 6507, chip gráfico TIA, 128 bytes de RAM)
+y produce la imagen de 210×160; ALE añade encima la capa que lo vuelve un entorno de RL: expone
+una API de agente, elimina la interfaz humana —el entorno corre <i>headless</i> y mucho más
+rápido que en tiempo real, lo que hace viable entrenar con millones de cuadros—, define dónde
+termina un episodio (el cartucho original nunca termina, vuelve a la pantalla de inicio) y
+define la recompensa, que el ROM no emite: lee la puntuación de una dirección conocida de la RAM
+del juego y entrega la diferencia entre dos pasos consecutivos. Desde <code>ale-py 0.9</code>
+los ROMs vienen incluidos en el paquete y ya no hace falta AutoROM.</p>
+
+<h3>1.1 Variantes del mismo juego</h3>
+
+<p>Un mismo ROM da lugar a muchos entornos. Estos son los identificadores registrados para Space
+Invaders en la instalación de este laboratorio, con sus valores por defecto:</p>
+
+<table>
+<tr><th class="l">Identificador</th><th>frameskip</th><th>repeat_action_probability</th><th>full_action_space</th></tr>
+<tr><td class="l">SpaceInvaders-v0</td><td>(2, 5)</td><td>0.25</td><td>False</td></tr>
+<tr><td class="l">SpaceInvaders-v4</td><td>(2, 5)</td><td>0.0</td><td>False</td></tr>
+<tr><td class="l">SpaceInvadersNoFrameskip-v0</td><td>1</td><td>0.25</td><td>False</td></tr>
+<tr><td class="l">SpaceInvadersNoFrameskip-v4</td><td>1</td><td>0.0</td><td>False</td></tr>
+<tr><td class="l"><b>ALE/SpaceInvaders-v5</b></td><td><b>4</b></td><td><b>0.25</b></td><td><b>False</b></td></tr>
+</table>
+
+<p>Los <code>v0</code> y <code>v4</code> son identificadores heredados de OpenAI Gym que se
+conservan por compatibilidad; el namespace <code>ALE/…-v5</code> es el actual y sus valores por
+defecto implementan las recomendaciones de Machado et al. (2018). El <b>frameskip</b> indica
+cuántos cuadros del emulador se ejecutan por cada acción; la tupla <code>(2,5)</code> de los ids
+antiguos muestreaba ese número al azar, que era como Gym introducía estocasticidad. El
+<b>repeat_action_probability</b> (<i>sticky actions</i>) hace que con probabilidad 0.25 el
+entorno ignore la acción nueva y repita la anterior: como el 2600 es determinista, sin ruido un
+agente puede «resolver» un juego memorizando una secuencia fija en lazo abierto sin mirar la
+pantalla, y Machado et al. mostraron que una búsqueda trivial superaba así a agentes de RL
+sofisticados. El <b>full_action_space</b> expone las 18 acciones legales del joystick en todos
+los juegos en vez del conjunto mínimo de cada uno, que es lo que necesita un agente multijuego
+con una sola cabeza de salida. Los antiguos sufijos <code>-ram</code> fueron <b>retirados en
+ale-py 0.12</b> y se sustituyen por el argumento <code>obs_type</code>.</p>
+
+<h3>1.2 Frame skipping</h3>
+
+<p>El 2600 corre a 60 cuadros por segundo, y decidir 60 veces por segundo es un problema por
+tres razones. Por <b>velocidad</b>: el costo dominante no es emular el juego sino la inferencia
+de la red en cada decisión, así que con <code>frameskip=4</code> el agente hace una cuarta parte
+de las pasadas hacia adelante y la simulación se acelera de forma casi lineal en <i>k</i>. Por
+<b>asignación de crédito</b>: un episodio de 1 800 cuadros pasa a 450 pasos, con menos descuento
+acumulado y menos pasos por los que propagar la recompensa hacia atrás. Y por <b>escala
+temporal</b>: un humano reacciona en torno a 200 ms, y <i>k</i> = 4 da 15 decisiones por segundo,
+además de producir movimientos más sostenidos. También tiene costos: con <i>k</i> grande el
+agente pierde control fino y puede no reaccionar a eventos rápidos, y cambiar <i>k</i> cambia el
+horizonte efectivo que representa un mismo γ, de modo que dos configuraciones no son
+directamente comparables.</p>
+
+<p>Ligado a esto: el TIA dibuja varios sprites en <b>cuadros alternos</b>, y Space Invaders es un
+caso de manual. <b>Medición propia:</b> ejecutando 1 200 cuadros con la acción NOOP, con
+<code>frameskip=1</code> los proyectiles aparecen en 346 observaciones, mientras que con el
+<code>frameskip=4</code> por defecto de la v5 <b>no aparecen en ninguna</b>: se dibujan justo en
+los cuadros que el salto descarta. Esa es la razón de que el preprocesamiento estándar tome el
+<b>máximo píxel a píxel de los dos últimos cuadros</b> en lugar del último, y tiene una
+consecuencia práctica directa, descrita en la sección 3.</p>
+
+<h3>1.3 Space Invaders: mecánica y recompensa</h3>
+
+<p>Arcade de Taito (1978) adaptado por Atari al 2600 en 1980. El jugador controla un cañón láser
+que solo puede moverse horizontalmente y disparar hacia arriba, frente a una formación de
+invasores que se desplaza lateralmente y desciende cada vez que toca un borde mientras deja caer
+proyectiles. El objetivo es destruir la formación antes de que llegue abajo. La dificultad la
+definen tres elementos: la formación <b>acelera conforme quedan menos invasores</b>, hay
+<b>búnkeres destructibles</b> que se erosionan también con los disparos propios, y una <b>nave
+nodriza</b> cruza por arriba otorgando una bonificación mayor. En ALE el jugador tiene 3 vidas y
+el episodio termina al agotarlas.</p>
+
+<p>El juego solo incrementa un marcador en pantalla; ALE lo lee de la RAM y define la recompensa
+como <b>la diferencia de puntuación entre dos pasos consecutivos</b>. De ahí tres consecuencias
+de diseño. La recompensa es <b>no negativa</b>: perder una vida no penaliza, su costo es solo la
+recompensa futura que se deja de obtener, y por eso al entrenar suele añadirse
+<code>terminal_on_life_loss</code>. Es <b>escalonada y dispersa</b>: casi todos los pasos dan
+cero, y los invasores de las filas superiores valen más. Y su <b>escala es arbitraria y distinta
+en cada juego</b>, lo que motiva recortar la recompensa a su signo en el protocolo de DQN. El
+retorno del episodio coincide exactamente con la puntuación final de la partida.</p>
+
+<h2>2. Espacios de observación y acción</h2>
+
+<p>La observación por defecto de <code>ALE/SpaceInvaders-v5</code> es
+<code>Box(0, 255, (210,160,3), uint8)</code>: la imagen RGB de la pantalla, <b>100 800 valores</b>.
+<code>CartPole-v1</code>, del laboratorio anterior, entrega <code>Box((4,), float32)</code> con
+posición, velocidad, ángulo y velocidad angular: <b>4 valores</b>. La diferencia de 25 200× en
+dimensionalidad no es lo más importante. Lo verdaderamente distinto es que en CartPole el estado
+<b>ya viene interpretado</b> —alguien decidió cuáles son las variables relevantes y las entrega
+medidas—, mientras que en Atari el agente recibe lo mismo que un humano y debe descubrir por sí
+mismo que ciertos grupos de píxeles son un cañón y otros el marcador irrelevante.</p>
+
+<p>Las implicaciones son cinco. <b>Hay que aprender la representación</b>: con cuatro números
+basta una política lineal, y de hecho en el laboratorio anterior una regla escrita a mano
+resolvía CartPole; con 100 800 píxeles hace falta un extractor de características, y por eso
+aquí aparecen las redes convolucionales. <b>Un solo cuadro no es un estado</b>: una imagen fija
+no dice hacia dónde se mueve la formación ni si un proyectil sube o baja, de modo que la
+observación es parcialmente observable y viola la propiedad de Markov, que el vector de CartPole
+sí cumple. <b>Sobra información</b>: color, marcador, vidas y fondo no aportan a la decisión.
+<b>Cambia la escala de memoria</b>: un cuadro RGB ocupa unos 100 KB y un búfer de repetición de
+un millón de transiciones sin preprocesar pediría unos 100 GB. Y <b>la eficiencia de muestras se
+desploma</b>: miles de pasos en CPU frente a decenas de millones de cuadros y GPU.</p>
+
+<p>Con <code>obs_type="ram"</code> la observación pasa a ser <code>Box(0,255,(128,),uint8)</code>:
+los 128 bytes completos de memoria de la consola, donde viven las posiciones de los sprites, la
+puntuación y las vidas. Es literalmente el estado del juego. <b>Conviene</b> con recursos
+limitados, porque 128 valores admiten un MLP que entrena en CPU; cuando lo que se estudia no es
+la percepción sino la exploración o el control, porque la visión solo añade ruido y costo; y
+porque el estado es completo y sin parpadeo, casi markoviano sin apilar cuadros, lo que además
+lo hace útil para depurar. <b>No conviene</b> porque la codificación es específica de cada juego
+y opaca —campos de bits y valores BCD—, así que no transfiere a otro juego, que es justo lo que
+ALE existe para medir; porque es información privilegiada que un humano no ve, lo que invalida
+la comparación con puntajes humanos; y porque no es comparable con la literatura, que reporta
+resultados sobre píxeles.</p>
+
+<p>El espacio de acción de Space Invaders es <code>Discrete(6)</code>, el conjunto mínimo del
+juego: <code>NOOP</code> (ni se mueve ni dispara, sirve para esperar o mantener posición),
+<code>FIRE</code> (dispara sin moverse), <code>RIGHT</code> y <code>LEFT</code> (se desplaza sin
+disparar) y <code>RIGHTFIRE</code> y <code>LEFTFIRE</code> (se desplaza <b>y</b> dispara en el
+mismo paso). <code>UP</code> y <code>DOWN</code> existen en el joystick pero no hacen nada aquí.
+Las acciones combinadas importan mucho, porque reflejan que en el 2600 el botón y la palanca son
+independientes: un agente restringido a moverse <i>o</i> disparar jugaría claramente peor. Con
+<code>full_action_space=True</code> el espacio pasa a <code>Discrete(18)</code>.</p>
+
+<p><code>AtariPreprocessing</code> empaqueta el preprocesamiento estándar de DQN (Nature, 2015):
+<code>noop_max=30</code> ejecuta entre 1 y 30 NOOP al reiniciar para aleatorizar el estado
+inicial; <code>frame_skip=4</code> repite la acción cuatro cuadros y devuelve el máximo píxel a
+píxel de los dos últimos, corrigiendo el parpadeo medido en 1.2 —exige <code>frameskip=1</code>
+en el entorno base, o el salto efectivo sería de 16—; <code>screen_size=84</code> redimensiona a
+84×84; <code>grayscale_obs=True</code> elimina el color, que en Atari casi nunca es informativo;
+y <code>scale_obs=False</code> mantiene <code>uint8</code> en vez de <code>float32</code>, lo que
+supone cuatro veces menos memoria en el búfer de repetición. Conviene precisar que el <b>recorte
+de recompensa</b>, aunque forma parte del pipeline clásico de DQN, <b>no está dentro de
+<code>AtariPreprocessing</code></b> en Gymnasium: vive en <code>ClipReward</code>. Separarlos
+tiene sentido, porque el recorte altera el objetivo que se optimiza mientras que las demás
+transformaciones solo cambian la representación.</p>
+
+<p><code>FrameStackObservation</code> (llamado <code>FrameStack</code> antes de Gymnasium 1.0)
+apila las últimas N observaciones en un nuevo eje. Su razón de ser es la ya señalada: un cuadro
+no basta para determinar el estado, y con cuatro consecutivos la velocidad y la dirección quedan
+implícitas en la diferencia entre ellos. Por eso ambos wrappers se usan siempre juntos: uno hace
+cada cuadro barato y limpio, el otro le devuelve la dimensión temporal. El pipeline completo
+lleva la observación de <b>100 800 a 7 056 y finalmente a 28 224 valores</b>: es 3.6 veces más
+pequeña que la imagen original y aun así contiene más información útil, porque incorpora cuatro
+instantes en lugar de uno.</p>
+
+<img class="figfull" src="../results/figures/observacion_preprocesada.png">
+<div class="cap">Figura 1. Observación cruda frente a los cuatro cuadros apilados que recibiría
+la red. Los trazos verticales visibles en los cuadros procesados son los proyectiles que el
+<i>max-pooling</i> recupera y que la observación por defecto pierde.</div>
+
+<h2>3. Módulo de funciones desarrollado</h2>
+
+<p>El módulo <code>src/ale_utils.py</code> concentra la infraestructura y se demuestra en el
+notebook. <code>crear_entorno</code> crea el entorno y, si recibe <code>video_folder</code>, lo
+envuelve en <code>gymnasium.wrappers.RecordVideo</code> con el <code>episode_trigger</code>
+indicado; reenvía <code>**kwargs</code> a <code>gym.make</code>, así que sirve igual para Space
+Invaders que para CartPole-v1 o para pedir <code>obs_type="ram"</code>.
+<code>agente_aleatorio</code> devuelve <code>env.action_space.sample()</code> como línea base.
+<code>ejecutar_episodio</code> corre hasta que <code>terminated</code> o <code>truncated</code>
+sean verdaderos, o hasta <code>max_steps</code>, y devuelve los pasos y el retorno acumulado.
+<code>generar_video_agente</code> combina las anteriores: crea el entorno con grabación, juega
+<code>n_episodios</code>, cierra el entorno y devuelve las rutas de los videos con las métricas
+de cada episodio.</p>
+
+<p>Tres decisiones de implementación merecen mención. El <code>env.close()</code> va dentro de un
+<code>finally</code>, porque sin esa llamada el <code>.mp4</code> se queda a medias y no llega a
+escribirse a disco. La ruta de cada video se <b>deriva del índice de episodio</b> en vez de
+listar la carpeta, de modo que las métricas no se desalinean cuando <code>episode_trigger</code>
+graba solo algunos episodios ni se recogen videos de ejecuciones anteriores. Y
+<code>ejecutar_episodio</code> siembra también <code>env.action_space</code>: <code>reset(seed=…)</code>
+siembra el generador del entorno pero <b>no</b> el del espacio de acción, así que sin esa segunda
+siembra el agente aleatorio jugaba una partida distinta en cada ejecución con la misma semilla.</p>
+
+<p>Se añadió además <code>agente_regla_simple</code>, una política fija sin aprendizaje que
+localiza el cañón y los invasores <b>por su color</b> en la imagen, <b>descarta los invasores
+cuya columna está tapada por un búnker</b> —disparar ahí destruye la propia cobertura en lugar de
+sumar puntos— y se desplaza hacia el invasor alcanzable más cercano disparando a la vez con
+<code>RIGHTFIRE</code> o <code>LEFTFIRE</code>. La tolerancia de apuntado es de 4 px, media
+anchura de un invasor (se midieron 8 px exactos). No esquiva los proyectiles enemigos, y no por
+simplificar: como se midió en 1.2, con el <code>frameskip=4</code> por defecto <b>son invisibles
+en la observación</b>.</p>
+
+<h2>4. Resultados</h2>
+
+<p>Se generaron dos videos de episodios completos en <code>ALE/SpaceInvaders-v5</code>, y se
+comparó a los dos agentes sobre diez episodios con las mismas semillas:</p>
+
+<table>
+<tr><th class="l">Agente</th><th>Video: pasos</th><th>Video: recompensa</th><th>Retorno medio (10 ep.)</th><th>Desv. típica</th><th>Pasos medios</th></tr>
+<tr><td class="l">agente_aleatorio</td><td>298</td><td>35</td><td>123.5</td><td>73.3</td><td>461.0</td></tr>
+<tr><td class="l">agente_regla_simple</td><td>552</td><td>260</td><td>246.0</td><td>34.8</td><td>522.1</td></tr>
+</table>
+
+<p>El agente de regla simple <b>duplica el retorno del aleatorio</b> con menos de la mitad de
+desviación típica y gana en las diez semillas, sin haber aprendido nada: solo mirando colores.
+Pero conviene decir lo incómodo: una política degenerada que <b>se queda quieta disparando</b>
+obtiene <b>285.0</b> de retorno medio, por encima de las dos. Buena parte del mérito no está en
+apuntar sino en no dejar de disparar nunca, porque la formación acaba pasando por encima del
+cañón de todos modos; y moverse tiene un costo real, porque con <i>sticky actions</i> el
+movimiento es impreciso y, sobre todo, <b>es a ciegas</b>. Ese último punto conecta las dos
+mitades del laboratorio: la medición de la sección 1.2 no es un detalle teórico, es exactamente
+lo que le impide a este agente esquivar. El preprocesamiento estándar de Atari no es burocracia:
+resuelve un problema que aquí se puede tocar con la mano.</p>
+
+<p>Para un agente que sí aprenda, la infraestructura no cambia: basta apilar
+<code>AtariPreprocessing</code> y <code>FrameStackObservation</code> sobre
+<code>crear_entorno</code>, añadir el recorte de recompensa y sustituir la función de agente por
+una red que estime Q(s,a).</p>
+
+<h2>Referencias</h2>
+<p class="refs">
+Bellemare, M. G., Naddaf, Y., Veness, J. y Bowling, M. (2013). <i>The Arcade Learning
+Environment: An Evaluation Platform for General Agents</i>. JAIR, 47, 253–279. &nbsp;•&nbsp;
+Machado, M. C., Bellemare, M. G., Talvitie, E., Veness, J., Hausknecht, M. y Bowling, M. (2018).
+<i>Revisiting the Arcade Learning Environment</i>. JAIR, 61, 523–562. &nbsp;•&nbsp;
+Mnih, V. et al. (2015). <i>Human-level control through deep reinforcement learning</i>. Nature,
+518, 529–533. &nbsp;•&nbsp; Documentación de Gymnasium (gymnasium.farama.org), de ale-py
+(ale.farama.org) y del emulador Stella (stella-emu.github.io).
+</p>
+
+</body></html>
