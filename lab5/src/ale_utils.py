@@ -220,11 +220,17 @@ def ejecutar_episodio(
         env: entorno ya creado (posiblemente con grabación activada).
         funcion_agente: función ``(observation, env) -> action``.
         max_steps: tope de pasos del episodio.
-        seed: semilla opcional para ``env.reset``, para poder reproducir la partida.
+        seed: semilla opcional para poder reproducir la partida.
 
     Returns:
         ``(pasos, recompensa_total)``: número de pasos ejecutados y retorno acumulado.
     """
+    if seed is not None:
+        # env.reset(seed=...) siembra el generador del entorno, pero NO el del espacio
+        # de acción. Sin esta segunda siembra, agente_aleatorio da una partida distinta
+        # en cada ejecución aunque se pase la misma semilla.
+        env.action_space.seed(seed)
+
     observation, _ = env.reset(seed=seed)
 
     pasos = 0
