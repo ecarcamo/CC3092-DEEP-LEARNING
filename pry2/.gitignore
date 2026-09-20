@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+.venv-qrdqn/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Training artifacts and experiment outputs
+checkpoints/
+logs/
+models/
+results/
+runs/
+tensorboard/
+wandb/
+mlruns/
+
+# Model and serialized experiment files
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.h5
+*.keras
+*.pkl
+*.joblib
+*.npz
+
+# Local environment and editor files
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
