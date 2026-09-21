@@ -1,0 +1,11 @@
+{
+  "modelo": "/home/escu/Documentos/Universidad/Semestres/8voSemestre/DEEP_LEARNING/pry2/models/competencia/SpaceInvaders_Rainbow_FINAL.pt",
+  "timesteps_modelo": 11750000,
+  "device": "cuda",
+  "seed": 2030,
+  "recompensa_total": 2190.0,
+  "recompensa_esperada": 2190.0,
+  "pasos_entorno": 2484,
+  "video": "/home/escu/Documentos/Universidad/Semestres/8voSemestre/DEEP_LEARNING/pry2/videos/SpaceInvaders_Rainbow_FINAL.mp4",
+  "captura_original": "/home/escu/Documentos/Universidad/Semestres/8voSemestre/DEEP_LEARNING/pry2/videos/capturas_finales/20260921_025555/SpaceInvaders_Rainbow_FINAL-episode-0.mp4"
+}

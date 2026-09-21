@@ -43,3 +43,5 @@ mlruns/
 # OS files
 .DS_Store
 Thumbs.db
+# Videos temporales generados por RecordVideo
+videos/capturas_finales/
