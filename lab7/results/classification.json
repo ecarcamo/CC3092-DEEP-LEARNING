@@ -1,0 +1,1944 @@
+{
+ "split_sizes": {
+  "train": 108000,
+  "val": 12000,
+  "test": 7600
+ },
+ "classifier_vocab": 43299,
+ "oov_token_rate": {
+  "SGNS": 0.030121084159088908,
+  "gensim": 0.030121084159088908,
+  "GloVe": 0.007007125890736342
+ },
+ "classifier_vocab_coverage": {
+  "SGNS": 0.7506639876209612,
+  "gensim": 0.7506639876209612,
+  "GloVe": 0.9432319453105152
+ },
+ "runs": {
+  "TF-IDF + LR": {
+   "val": {
+    "accuracy": 0.9264166666666667,
+    "precision": 0.9262347597787259,
+    "recall": 0.9264166666666667,
+    "f1": 0.926242434151312
+   },
+   "params_total": 1690276,
+   "params_trainable": 1690276,
+   "train_time_s": 41.24470205199941,
+   "features": 422568
+  },
+  "aleatorio": {
+   "history": [
+    {
+     "epoch": 1,
+     "train_loss": 0.6922372043485995,
+     "val_loss": 0.39016962178548176,
+     "accuracy": 0.8686666666666667,
+     "precision": 0.8683327924080066,
+     "recall": 0.8686666666666667,
+     "f1": 0.8683326528823219
+    },
+    {
+     "epoch": 2,
+     "train_loss": 0.3411142575740814,
+     "val_loss": 0.315153569539388,
+     "accuracy": 0.8960833333333333,
+     "precision": 0.8963953224571715,
+     "recall": 0.8960833333333333,
+     "f1": 0.8959879286843886
+    },
+    {
+     "epoch": 3,
+     "train_loss": 0.2705524149029343,
+     "val_loss": 0.2862979965209961,
+     "accuracy": 0.90525,
+     "precision": 0.9053951930224404,
+     "recall": 0.90525,
+     "f1": 0.9051457553017479
+    },
+    {
+     "epoch": 4,
+     "train_loss": 0.22931288603500083,
+     "val_loss": 0.2726009521484375,
+     "accuracy": 0.91,
+     "precision": 0.9099762233753249,
+     "recall": 0.9099999999999999,
+     "f1": 0.9099183352511623
+    },
+    {
+     "epoch": 5,
+     "train_loss": 0.1974216008760311,
+     "val_loss": 0.26882255045572917,
+     "accuracy": 0.9126666666666666,
+     "precision": 0.9128088437564743,
+     "recall": 0.9126666666666667,
+     "f1": 0.9126132933689637
+    },
+    {
+     "epoch": 6,
+     "train_loss": 0.17377933864681808,
+     "val_loss": 0.2693887888590495,
+     "accuracy": 0.91325,
+     "precision": 0.9132551216822433,
+     "recall": 0.9132500000000001,
+     "f1": 0.9131797016475983
+    },
+    {
+     "epoch": 7,
+     "train_loss": 0.15262762404812708,
+     "val_loss": 0.272994873046875,
+     "accuracy": 0.9135,
+     "precision": 0.9135354908083557,
+     "recall": 0.9135,
+     "f1": 0.913366827719018
+    },
+    {
+     "epoch": 8,
+     "train_loss": 0.13466946887528455,
+     "val_loss": 0.28085975646972655,
+     "accuracy": 0.9125,
+     "precision": 0.9126423260532132,
+     "recall": 0.9125,
+     "f1": 0.9124242551812398
+    },
+    {
+     "epoch": 9,
+     "train_loss": 0.11850748366779751,
+     "val_loss": 0.2925796407063802,
+     "accuracy": 0.9124166666666667,
+     "precision": 0.9126129787842392,
+     "recall": 0.9124166666666667,
+     "f1": 0.9124269750810252
+    }
+   ],
+   "best_epoch": 7,
+   "val": {
+    "accuracy": 0.9135,
+    "precision": 0.9135354908083557,
+    "recall": 0.9135,
+    "f1": 0.913366827719018
+   },
+   "params_total": 4343344,
+   "params_trainable": 4343344,
+   "train_time_s": 8.643746065000414,
+   "init": "random",
+   "freeze": false
+  },
+  "SGNS congelado": {
+   "history": [
+    {
+     "epoch": 1,
+     "train_loss": 0.6452519278791216,
+     "val_loss": 0.4041943613688151,
+     "accuracy": 0.86225,
+     "precision": 0.8620606168611727,
+     "recall": 0.86225,
+     "f1": 0.8616945308884046
+    },
+    {
+     "epoch": 2,
+     "train_loss": 0.39774178838729857,
+     "val_loss": 0.3716269327799479,
+     "accuracy": 0.8715,
+     "precision": 0.8720948217096258,
+     "recall": 0.8715,
+     "f1": 0.871550087521632
+    },
+    {
+     "epoch": 3,
+     "train_loss": 0.37759495102034674,
+     "val_loss": 0.3595792465209961,
+     "accuracy": 0.874,
+     "precision": 0.874009132120833,
+     "recall": 0.874,
+     "f1": 0.8738476889590646
+    },
+    {
+     "epoch": 4,
+     "train_loss": 0.3678003112651684,
+     "val_loss": 0.3529640197753906,
+     "accuracy": 0.8766666666666667,
+     "precision": 0.8767344940872828,
+     "recall": 0.8766666666666667,
+     "f1": 0.8766233909283347
+    },
+    {
+     "epoch": 5,
+     "train_loss": 0.3616848492004253,
+     "val_loss": 0.3484952901204427,
+     "accuracy": 0.87725,
+     "precision": 0.8783746222324231,
+     "recall": 0.87725,
+     "f1": 0.8774398403975863
+    },
+    {
+     "epoch": 6,
+     "train_loss": 0.35754556856332004,
+     "val_loss": 0.3468492571512858,
+     "accuracy": 0.8785833333333334,
+     "precision": 0.8797367011615458,
+     "recall": 0.8785833333333334,
+     "f1": 0.8785235321923717
+    },
+    {
+     "epoch": 7,
+     "train_loss": 0.3541403540858516,
+     "val_loss": 0.34250052388509117,
+     "accuracy": 0.87975,
+     "precision": 0.8804722406467104,
+     "recall": 0.87975,
+     "f1": 0.8795163177463531
+    },
+    {
+     "epoch": 8,
+     "train_loss": 0.3504852092972508,
+     "val_loss": 0.3391540489196777,
+     "accuracy": 0.8805833333333334,
+     "precision": 0.8814839415616433,
+     "recall": 0.8805833333333334,
+     "f1": 0.880538933537528
+    },
+    {
+     "epoch": 9,
+     "train_loss": 0.3482733792022423,
+     "val_loss": 0.3373728841145833,
+     "accuracy": 0.88175,
+     "precision": 0.8827406716228995,
+     "recall": 0.8817499999999999,
+     "f1": 0.881770350475705
+    },
+    {
+     "epoch": 10,
+     "train_loss": 0.34649762127134537,
+     "val_loss": 0.33500133005777993,
+     "accuracy": 0.8825833333333334,
+     "precision": 0.8830387936216807,
+     "recall": 0.8825833333333334,
+     "f1": 0.8826137058862014
+    }
+   ],
+   "best_epoch": 10,
+   "val": {
+    "accuracy": 0.8825833333333334,
+    "precision": 0.8830387936216807,
+    "recall": 0.8825833333333334,
+    "f1": 0.8826137058862014
+   },
+   "params_total": 4343344,
+   "params_trainable": 13444,
+   "train_time_s": 3.694524198000181,
+   "init": "SGNS",
+   "freeze": true
+  },
+  "SGNS fine-tuning": {
+   "history": [
+    {
+     "epoch": 1,
+     "train_loss": 0.4944154333759237,
+     "val_loss": 0.2639750912984212,
+     "accuracy": 0.917,
+     "precision": 0.9168647388104493,
+     "recall": 0.917,
+     "f1": 0.9167955706039577
+    },
+    {
+     "epoch": 2,
+     "train_loss": 0.2324711321150815,
+     "val_loss": 0.23832653172810872,
+     "accuracy": 0.9229166666666667,
+     "precision": 0.9230938338956884,
+     "recall": 0.9229166666666667,
+     "f1": 0.9227639502713285
+    },
+    {
+     "epoch": 3,
+     "train_loss": 0.1837123395866818,
+     "val_loss": 0.233113650004069,
+     "accuracy": 0.9244166666666667,
+     "precision": 0.9243719274817005,
+     "recall": 0.9244166666666667,
+     "f1": 0.9243165955890158
+    },
+    {
+     "epoch": 4,
+     "train_loss": 0.15100691197095095,
+     "val_loss": 0.23937330627441405,
+     "accuracy": 0.9224166666666667,
+     "precision": 0.9223063436547863,
+     "recall": 0.9224166666666667,
+     "f1": 0.9222788365665593
+    },
+    {
+     "epoch": 5,
+     "train_loss": 0.12400113349490696,
+     "val_loss": 0.2527482109069824,
+     "accuracy": 0.92075,
+     "precision": 0.9207627587965245,
+     "recall": 0.9207500000000001,
+     "f1": 0.9206673510697265
+    }
+   ],
+   "best_epoch": 3,
+   "val": {
+    "accuracy": 0.9244166666666667,
+    "precision": 0.9243719274817005,
+    "recall": 0.9244166666666667,
+    "f1": 0.9243165955890158
+   },
+   "params_total": 4343344,
+   "params_trainable": 4343344,
+   "train_time_s": 4.687313626999639,
+   "init": "SGNS",
+   "freeze": false
+  },
+  "gensim congelado": {
+   "history": [
+    {
+     "epoch": 1,
+     "train_loss": 0.612719872351046,
+     "val_loss": 0.4054142150878906,
+     "accuracy": 0.86225,
+     "precision": 0.8619852450052388,
+     "recall": 0.86225,
+     "f1": 0.8616995102099344
+    },
+    {
+     "epoch": 2,
+     "train_loss": 0.39910774760776097,
+     "val_loss": 0.3750011927286784,
+     "accuracy": 0.8715833333333334,
+     "precision": 0.8719788776841421,
+     "recall": 0.8715833333333333,
+     "f1": 0.8715218999025108
+    },
+    {
+     "epoch": 3,
+     "train_loss": 0.379386937768371,
+     "val_loss": 0.3636741689046224,
+     "accuracy": 0.8761666666666666,
+     "precision": 0.8762723723099348,
+     "recall": 0.8761666666666666,
+     "f1": 0.8761196879125628
+    },
+    {
+     "epoch": 4,
+     "train_loss": 0.36938271239951803,
+     "val_loss": 0.3570863939921061,
+     "accuracy": 0.87825,
+     "precision": 0.8778735593110775,
+     "recall": 0.87825,
+     "f1": 0.8779986320545998
+    },
+    {
+     "epoch": 5,
+     "train_loss": 0.3627455018979532,
+     "val_loss": 0.3518876317342122,
+     "accuracy": 0.87925,
+     "precision": 0.8798424229619873,
+     "recall": 0.8792500000000001,
+     "f1": 0.8792041818079341
+    },
+    {
+     "epoch": 6,
+     "train_loss": 0.3590109709103902,
+     "val_loss": 0.35028089269002277,
+     "accuracy": 0.8775833333333334,
+     "precision": 0.8788841934724265,
+     "recall": 0.8775833333333333,
+     "f1": 0.8775239993467735
+    },
+    {
+     "epoch": 7,
+     "train_loss": 0.35408478822531525,
+     "val_loss": 0.345779780069987,
+     "accuracy": 0.8791666666666667,
+     "precision": 0.8797227707561068,
+     "recall": 0.8791666666666667,
+     "f1": 0.8790597469842607
+    }
+   ],
+   "best_epoch": 5,
+   "val": {
+    "accuracy": 0.87925,
+    "precision": 0.8798424229619873,
+    "recall": 0.8792500000000001,
+    "f1": 0.8792041818079341
+   },
+   "params_total": 4343344,
+   "params_trainable": 13444,
+   "train_time_s": 2.594007460999819,
+   "init": "gensim",
+   "freeze": true
+  },
+  "gensim fine-tuning": {
+   "history": [
+    {
+     "epoch": 1,
+     "train_loss": 0.48362294895119134,
+     "val_loss": 0.2714778493245443,
+     "accuracy": 0.9153333333333333,
+     "precision": 0.9154639631160446,
+     "recall": 0.9153333333333333,
+     "f1": 0.9150888261534338
+    },
+    {
+     "epoch": 2,
+     "train_loss": 0.2399199823891675,
+     "val_loss": 0.2412315953572591,
+     "accuracy": 0.92275,
+     "precision": 0.9229301282473195,
+     "recall": 0.92275,
+     "f1": 0.9225846015573238
+    },
+    {
+     "epoch": 3,
+     "train_loss": 0.191208963504544,
+     "val_loss": 0.23351305516560872,
+     "accuracy": 0.9244166666666667,
+     "precision": 0.9243699678183862,
+     "recall": 0.9244166666666667,
+     "f1": 0.9243247857490281
+    },
+    {
+     "epoch": 4,
+     "train_loss": 0.15779120609495376,
+     "val_loss": 0.23837710189819336,
+     "accuracy": 0.9228333333333333,
+     "precision": 0.9226983637377179,
+     "recall": 0.9228333333333334,
+     "f1": 0.922659377093495
+    },
+    {
+     "epoch": 5,
+     "train_loss": 0.13090112216163566,
+     "val_loss": 0.24839632797241212,
+     "accuracy": 0.9216666666666666,
+     "precision": 0.9216457268265473,
+     "recall": 0.9216666666666666,
+     "f1": 0.9215896873644864
+    }
+   ],
+   "best_epoch": 3,
+   "val": {
+    "accuracy": 0.9244166666666667,
+    "precision": 0.9243699678183862,
+    "recall": 0.9244166666666667,
+    "f1": 0.9243247857490281
+   },
+   "params_total": 4343344,
+   "params_trainable": 4343344,
+   "train_time_s": 4.851071359000343,
+   "init": "gensim",
+   "freeze": false
+  },
+  "GloVe congelado": {
+   "history": [
+    {
+     "epoch": 1,
+     "train_loss": 0.5021623543721658,
+     "val_loss": 0.34468141428629556,
+     "accuracy": 0.88225,
+     "precision": 0.8828611253778779,
+     "recall": 0.88225,
+     "f1": 0.8817749923776014
+    },
+    {
+     "epoch": 2,
+     "train_loss": 0.343149736572195,
+     "val_loss": 0.31981827672322594,
+     "accuracy": 0.8915833333333333,
+     "precision": 0.8920473466451977,
+     "recall": 0.8915833333333334,
+     "f1": 0.8915594221786144
+    },
+    {
+     "epoch": 3,
+     "train_loss": 0.3276003100960343,
+     "val_loss": 0.31066842397054034,
+     "accuracy": 0.8946666666666667,
+     "precision": 0.8945071598487353,
+     "recall": 0.8946666666666667,
+     "f1": 0.894454527888768
+    },
+    {
+     "epoch": 4,
+     "train_loss": 0.3189522195922004,
+     "val_loss": 0.3057008628845215,
+     "accuracy": 0.8970833333333333,
+     "precision": 0.897362836826586,
+     "recall": 0.8970833333333335,
+     "f1": 0.8969887574924063
+    },
+    {
+     "epoch": 5,
+     "train_loss": 0.31259497948046083,
+     "val_loss": 0.2997089106241862,
+     "accuracy": 0.8975,
+     "precision": 0.8979268125811632,
+     "recall": 0.8975,
+     "f1": 0.8973997442909956
+    },
+    {
+     "epoch": 6,
+     "train_loss": 0.30892171046468947,
+     "val_loss": 0.29826804478963215,
+     "accuracy": 0.898,
+     "precision": 0.8984294181809765,
+     "recall": 0.898,
+     "f1": 0.8978647647742561
+    },
+    {
+     "epoch": 7,
+     "train_loss": 0.30472703192852163,
+     "val_loss": 0.29272833506266277,
+     "accuracy": 0.89875,
+     "precision": 0.89932195436413,
+     "recall": 0.8987500000000002,
+     "f1": 0.8986398450052083
+    },
+    {
+     "epoch": 8,
+     "train_loss": 0.30087694877165333,
+     "val_loss": 0.2907770767211914,
+     "accuracy": 0.8991666666666667,
+     "precision": 0.8999198511758808,
+     "recall": 0.8991666666666667,
+     "f1": 0.8990679668506807
+    },
+    {
+     "epoch": 9,
+     "train_loss": 0.29799366446777625,
+     "val_loss": 0.2876617635091146,
+     "accuracy": 0.9025833333333333,
+     "precision": 0.9028945516232358,
+     "recall": 0.9025833333333334,
+     "f1": 0.9024493165156547
+    },
+    {
+     "epoch": 10,
+     "train_loss": 0.295569254151097,
+     "val_loss": 0.28697798029581706,
+     "accuracy": 0.9029166666666667,
+     "precision": 0.9029829565672179,
+     "recall": 0.9029166666666667,
+     "f1": 0.9028635822636693
+    }
+   ],
+   "best_epoch": 10,
+   "val": {
+    "accuracy": 0.9029166666666667,
+    "precision": 0.9029829565672179,
+    "recall": 0.9029166666666667,
+    "f1": 0.9028635822636693
+   },
+   "params_total": 4343344,
+   "params_trainable": 13444,
+   "train_time_s": 3.7110100259997125,
+   "init": "GloVe",
+   "freeze": true
+  },
+  "GloVe fine-tuning": {
+   "history": [
+    {
+     "epoch": 1,
+     "train_loss": 0.4503655496570799,
+     "val_loss": 0.27726412455240884,
+     "accuracy": 0.9108333333333334,
+     "precision": 0.9110475725905784,
+     "recall": 0.9108333333333334,
+     "f1": 0.9105561925959421
+    },
+    {
+     "epoch": 2,
+     "train_loss": 0.2539065277620598,
+     "val_loss": 0.2431960474650065,
+     "accuracy": 0.9216666666666666,
+     "precision": 0.9220982871862644,
+     "recall": 0.9216666666666666,
+     "f1": 0.9215804672017185
+    },
+    {
+     "epoch": 3,
+     "train_loss": 0.21006107776694827,
+     "val_loss": 0.2304245351155599,
+     "accuracy": 0.9241666666666667,
+     "precision": 0.9240368461784294,
+     "recall": 0.9241666666666666,
+     "f1": 0.9240357728575452
+    },
+    {
+     "epoch": 4,
+     "train_loss": 0.17868549817579765,
+     "val_loss": 0.23127017084757487,
+     "accuracy": 0.9241666666666667,
+     "precision": 0.9243834726574514,
+     "recall": 0.9241666666666667,
+     "f1": 0.9239203580172249
+    },
+    {
+     "epoch": 5,
+     "train_loss": 0.1520003813681779,
+     "val_loss": 0.2311901346842448,
+     "accuracy": 0.9246666666666666,
+     "precision": 0.9247964894046402,
+     "recall": 0.9246666666666665,
+     "f1": 0.9246070329049139
+    },
+    {
+     "epoch": 6,
+     "train_loss": 0.1315838493373659,
+     "val_loss": 0.23865357208251953,
+     "accuracy": 0.9238333333333333,
+     "precision": 0.923863039130292,
+     "recall": 0.9238333333333334,
+     "f1": 0.9237841840099598
+    },
+    {
+     "epoch": 7,
+     "train_loss": 0.11174584548120145,
+     "val_loss": 0.2525911712646484,
+     "accuracy": 0.9204166666666667,
+     "precision": 0.9205999045556834,
+     "recall": 0.9204166666666667,
+     "f1": 0.9203116645280427
+    }
+   ],
+   "best_epoch": 5,
+   "val": {
+    "accuracy": 0.9246666666666666,
+    "precision": 0.9247964894046402,
+    "recall": 0.9246666666666665,
+    "f1": 0.9246070329049139
+   },
+   "params_total": 4343344,
+   "params_trainable": 4343344,
+   "train_time_s": 6.808611065999685,
+   "init": "GloVe",
+   "freeze": false
+  }
+ },
+ "best_per_init": {
+  "TF-IDF": "TF-IDF + LR",
+  "random": "aleatorio",
+  "SGNS": "SGNS fine-tuning",
+  "gensim": "gensim fine-tuning",
+  "GloVe": "GloVe fine-tuning"
+ },
+ "test": {
+  "TF-IDF + LR": {
+   "accuracy": 0.9214473684210527,
+   "precision": 0.921259947213384,
+   "recall": 0.9214473684210527,
+   "f1": 0.9212945943284215
+  },
+  "aleatorio": {
+   "accuracy": 0.9069736842105263,
+   "precision": 0.9070698830874826,
+   "recall": 0.9069736842105263,
+   "f1": 0.9068803460634637
+  },
+  "SGNS fine-tuning": {
+   "accuracy": 0.9173684210526316,
+   "precision": 0.9172090200905243,
+   "recall": 0.9173684210526316,
+   "f1": 0.9172436914919994
+  },
+  "gensim fine-tuning": {
+   "accuracy": 0.9163157894736842,
+   "precision": 0.9161375876830005,
+   "recall": 0.9163157894736842,
+   "f1": 0.9161979759431342
+  },
+  "GloVe fine-tuning": {
+   "accuracy": 0.9173684210526316,
+   "precision": 0.9174040175273219,
+   "recall": 0.9173684210526316,
+   "f1": 0.9173249368158694
+  }
+ },
+ "confusion": {
+  "TF-IDF + LR": [
+   [
+    1738,
+    50,
+    65,
+    47
+   ],
+   [
+    21,
+    1860,
+    13,
+    6
+   ],
+   [
+    66,
+    12,
+    1680,
+    142
+   ],
+   [
+    44,
+    17,
+    114,
+    1725
+   ]
+  ],
+  "aleatorio": [
+   [
+    1711,
+    52,
+    77,
+    60
+   ],
+   [
+    33,
+    1835,
+    17,
+    15
+   ],
+   [
+    69,
+    18,
+    1634,
+    179
+   ],
+   [
+    44,
+    19,
+    124,
+    1713
+   ]
+  ],
+  "SGNS fine-tuning": [
+   [
+    1724,
+    48,
+    80,
+    48
+   ],
+   [
+    28,
+    1860,
+    7,
+    5
+   ],
+   [
+    63,
+    10,
+    1673,
+    154
+   ],
+   [
+    53,
+    12,
+    120,
+    1715
+   ]
+  ],
+  "gensim fine-tuning": [
+   [
+    1729,
+    49,
+    79,
+    43
+   ],
+   [
+    25,
+    1858,
+    11,
+    6
+   ],
+   [
+    62,
+    12,
+    1670,
+    156
+   ],
+   [
+    59,
+    9,
+    125,
+    1707
+   ]
+  ],
+  "GloVe fine-tuning": [
+   [
+    1728,
+    47,
+    70,
+    55
+   ],
+   [
+    24,
+    1851,
+    17,
+    8
+   ],
+   [
+    61,
+    9,
+    1672,
+    158
+   ],
+   [
+    50,
+    10,
+    119,
+    1721
+   ]
+  ]
+ },
+ "errors": {
+  "TF-IDF + LR": [
+   {
+    "text": "Prediction Unit Helps Forecast Wildfires (AP) AP - It's barely dawn when Mike Fitzpatrick starts his shift with a blur of colorful maps, figures and endless charts, but already he knows what the day will bring. Lightning",
+    "true": "Sci/Tech",
+    "pred": "Sports"
+   },
+   {
+    "text": "IBM to hire even more new workers By the end of the year, the computing giant plans to have its biggest headcount since 1991.",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Some People Not Eligible to Get in on Google IPO Google has billed its IPO as a way for everyday people to get in on the process, denying Wall Street the usual stranglehold it's had on IPOs. Public bidding, a minimum of ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Rivals Try to Turn Tables on Charles Schwab By MICHAEL LIEDTKE     SAN FRANCISCO (AP) -- With its low prices and iconoclastic attitude, discount stock broker Charles Schwab Corp. (SCH) represented an annoying stone in Wa",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Venezuela Prepares for Chavez Recall Vote Supporters and rivals warn of possible fraud; government says Chavez's defeat could produce turmoil in world oil market.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Promoting a Shared Vision As Michael Kaleko kept running into people who were getting older and having more vision problems, he realized he could do something about it.",
+    "true": "Sci/Tech",
+    "pred": "Sports"
+   },
+   {
+    "text": "India's Tata expands regional footprint via NatSteel buyout (AFP) AFP - India's Tata Iron and Steel Company Ltd. took a strategic step to expand its Asian footprint with the announcement it will buy the Asia-Pacific stee",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Live: Olympics day four Richard Faulds and Stephen Parry are going for gold for Great Britain on day four in Athens.",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Intel to delay product aimed for high-definition TVs SAN FRANCISCO -- In the latest of a series of product delays, Intel Corp. has postponed the launch of a video display chip it had previously planned to introduce by ye",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Olympic history for India, UAE An Indian army major shot his way to his country #39;s first ever individual Olympic silver medal on Tuesday, while in the same event an member of Dubai #39;s ruling family became the first",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "Yahoo! Ups Ante for Small Businesses Web giant Yahoo! is gambling that price cuts on its domain name registration and Web hosting products will make it more competitive with discounters in the space -- which means that s",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Oil prices bubble to record high The price of oil has continued its sharp rise overnight, closing at a record high. The main contract in New York, light sweet crude for delivery next month, has closed at a record \\$US46.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Security scare as intruder dives in A CANADIAN husband #39;s love for his wife has led to a tightening of security at all Olympic venues in Athens. ",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "Google Lowers Its IPO Price Range SAN JOSE, Calif. - In a sign that Google Inc.'s initial public offering isn't as popular as expected, the company lowered its estimated price range to between \\$85 and \\$95 per share, do",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Future Doctors, Crossing Borders Students at the Mount Sinai School of Medicine learn that diet and culture shape health in East Harlem.",
+    "true": "World",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Ross Stores Profit Plummets 40 Percent (AP) AP - Discount retailer Ross Stores Inc. Wednesday said its profit fell about 40 percent in the latest quarter due to problems with a new computer system that limited the compan",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Small computers can have multiple personalities, too BOSTON The jury is still out on whether a computer can ever truly be intelligent, but there is no question that it can have multiple personalities. It #39;s just a mat",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Stock Prices Climb Ahead of Google IPO NEW YORK - Investors shrugged off rising crude futures Wednesday to capture well-priced shares, sending the Nasdaq composite index up 1.6 percent ahead of Google Inc.'s much-anticip",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Intuit Posts Wider Loss After Charge (Reuters) Reuters - Intuit Inc. (INTU.O), maker of\\the No. 1 U.S. tax presentation software TurboTax, on Wednesday\\posted a wider quarterly loss after taking a goodwill\\impairment cha",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Bill Clinton Helps Launch Search Engine Former president Bill Clinton on Monday helped launch a new Internet search company backed by the Chinese government which says its technology uses artificial intelligence to produ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Caterpillar snaps up another remanufacturer of engines PEORIA - Caterpillar Inc. said Wednesday it will acquire a South Carolina remanufacturer of engines and automatic transmissions, increasing its US employment base by",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Ciena Posts a Loss, Forecasts Flat Sales &lt;p&gt;&lt;/p&gt;&lt;p&gt; By Deborah Cohen&lt;/p&gt;&lt;p&gt; CHICAGO (Reuters) - Telecommunications equipment makerCiena Corp. &lt;CIEN.O&gt; on Thursday reported a wider loss",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Ecuadorean Lawsuit Vs Texaco Boils Down to Science (Reuters) Reuters - After a decade\\of court battles, lawyers on Wednesday took a lawsuit by\\Ecuadorean Indians accusing U.S. oil firm ChevronTexaco Corp..\\of polluting t",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Court: File-swapping software not liable for copyright violations The makers of two leading file-sharing programs are not legally liable for the songs, movies and other copyright works swapped online by their users, a fe",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Ohio Sues Best Buy, Alleging Used Sales (AP) AP - Ohio authorities sued Best Buy Co. Inc. on Thursday, alleging the electronics retailer engaged in unfair and deceptive business practices.",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Iraq Oil Exports Still Halved After Basra HQ Attack  BAGHDAD (Reuters) - Iraq continued to export oil at one  million barrels per day on Friday after an attack on the South  Oil Company headquarters took sabotage operati",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Vt. sues over importing drugs Vermont's Republican governor challenged the Bush administration's prescription drug policy in federal court yesterday, marking the first time a state has chosen a legal avenue in the expand",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "Producer sues for Rings profits Hollywood producer Saul Zaentz sues the producers of The Lord of the Rings for \\$20m in royalties.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Don #39;t expect Tiger to relinquish his top ranking without a fight They #39;re calling Ohio a  quot;battleground state, quot; one of the two or three places likely to decide November #39;s presidential election. On loc",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "Clicking on Profits The latest data from the US Department of Commerce further bolsters what we have all suspected: E-commerce sales are increasing. Not only might one suspect that consumer confidence has been bolstered ",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Amazon Snaps Up China's Largest Web Retailer (NewsFactor) NewsFactor - Amazon.com (Nasdaq: AMZN) has said it will buy Joyo.com Limited -- a British Virgin Islands company that operates the largest Internet retail Web sit",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Italian PM #39;s transplant confirmed After days of speculation sparked by the white bandanna worn by Mr Berlusconi on holiday in Sardinia, Piero Rosati said the results of the operation would show in a couple of months.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Glory Comes Amid Empty Seats and Closed Shutters HERE in Old Europe, people install shutters outside their windows to keep out the heat, the pollution, the daylight, the noise. They also lock the shutters tight when they",
+    "true": "Sports",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Salesforce.com 2Q Profit Up Sharply Software developer Salesforce.com Inc. posted a sharp rise in second-quarter profit on better-than-expected revenue during its first quarter as a public company, but investors shunned ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Unknown Nesterenko Makes World Headlines (Reuters) Reuters - Belarus' Yuliya Nesterenko won the top\\women's athletics gold medal at the Olympics on Saturday,\\triumphing over a field stripped of many big names because of\\",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Greek weightlifter awaits verdict Greek weightlifter Leonidas Sampanis will find out on Sunday if he is to be stripped of his medal.",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "A Founding Father? Give the guy some credit. Tung Chee-hwa, Hong Kong #39;s embattled Chief Executive, gets precious little of it from his people these daysand heaps of ",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Nortel Downsizes Again Aug. 23, 2004 (TheDeal.com) Problem-plagued Nortel Networks Corp. announced plans Thursday, Aug. 19, to eliminate an additional 3,500 jobs and fire seven more senior executives as the company labor",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Chavez rejects CD as opposition Venezuela #39;s President Hugo Chavez has announced that he will no longer recognize the Democratic Coordination or CD as the opposition coalition.",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "Productivity Growth Slowest in 2 Years (AP) AP - The productivity of America's workers grew at a 1.8 percent annual rate in the third quarter, the slowest pace in nearly two years, the government reported Tuesday.",
+    "true": "Business",
+    "pred": "World"
+   }
+  ],
+  "aleatorio": [
+   {
+    "text": "Prediction Unit Helps Forecast Wildfires (AP) AP - It's barely dawn when Mike Fitzpatrick starts his shift with a blur of colorful maps, figures and endless charts, but already he knows what the day will bring. Lightning",
+    "true": "Sci/Tech",
+    "pred": "Sports"
+   },
+   {
+    "text": "Card fraud unit nets 36,000 cards In its first two years, the UK's dedicated card fraud unit, has recovered 36,000 stolen cards and 171 arrests - and estimates it saved 65m.",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "IBM to hire even more new workers By the end of the year, the computing giant plans to have its biggest headcount since 1991.",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Some People Not Eligible to Get in on Google IPO Google has billed its IPO as a way for everyday people to get in on the process, denying Wall Street the usual stranglehold it's had on IPOs. Public bidding, a minimum of ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Rivals Try to Turn Tables on Charles Schwab By MICHAEL LIEDTKE     SAN FRANCISCO (AP) -- With its low prices and iconoclastic attitude, discount stock broker Charles Schwab Corp. (SCH) represented an annoying stone in Wa",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Giddy Phelps Touches Gold for First Time Michael Phelps won the gold medal in the 400 individual medley and set a world record in a time of 4 minutes 8.26 seconds.",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "India's Tata expands regional footprint via NatSteel buyout (AFP) AFP - India's Tata Iron and Steel Company Ltd. took a strategic step to expand its Asian footprint with the announcement it will buy the Asia-Pacific stee",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Live: Olympics day four Richard Faulds and Stephen Parry are going for gold for Great Britain on day four in Athens.",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Intel to delay product aimed for high-definition TVs SAN FRANCISCO -- In the latest of a series of product delays, Intel Corp. has postponed the launch of a video display chip it had previously planned to introduce by ye",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Mr Downer shoots his mouth off Just what Alexander Downer was thinking when he declared on radio last Friday that  quot;they could fire a missile from North Korea to Sydney quot; is unclear. The provocative remark, just ",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Stocks Climb on Drop in Consumer Prices NEW YORK - Stocks rose for a second straight session Tuesday as a drop in consumer prices allowed investors to put aside worries about inflation, at least for the short term.    Wi",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Yahoo! Ups Ante for Small Businesses Web giant Yahoo! is gambling that price cuts on its domain name registration and Web hosting products will make it more competitive with discounters in the space -- which means that s",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Oil prices bubble to record high The price of oil has continued its sharp rise overnight, closing at a record high. The main contract in New York, light sweet crude for delivery next month, has closed at a record \\$US46.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "SUVs: Live And Let Die NEW YORK - The newly released traffic crash fatality data have something for everyone in the debate about the safety of sport utility vehicles. ",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "Security scare as intruder dives in A CANADIAN husband #39;s love for his wife has led to a tightening of security at all Olympic venues in Athens. ",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "Fresh Fighting Shatters Short-Lived Ceasefire Deal Renewed clashes in South Ossetia, which resulted in death of two Georgian soldiers, erupted late on August 17, several hours after the South Ossetian and Georgian offici",
+    "true": "World",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Google Lowers Its IPO Price Range SAN JOSE, Calif. - In a sign that Google Inc.'s initial public offering isn't as popular as expected, the company lowered its estimated price range to between \\$85 and \\$95 per share, do",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Future Doctors, Crossing Borders Students at the Mount Sinai School of Medicine learn that diet and culture shape health in East Harlem.",
+    "true": "World",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Stock Prices Climb Ahead of Google IPO NEW YORK - Investors shrugged off rising crude futures Wednesday to capture well-priced shares, sending the Nasdaq composite index up 1.6 percent ahead of Google Inc.'s much-anticip",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Hurricane center #39;s projection on Charley not far off, data show FORT LAUDERDALE, Fla. - (KRT) - Despite criticism that it should have better anticipated Hurricane Charley #39;s rapid intensification and quick turn, t",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Selling Houston Warts and All, Especially Warts Descriptions of urban afflictions and images of giant mosquitoes and cockroaches to convey a sense of how Houston is nevertheless beloved by many residents.",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "State, drug chains reach agreement The state of Maine, Rite Aid Corp., and Community Pharmacy LP have agreed to a consent decree placing conditions on the sale of five Community Pharmacy stores to Rite Aid.",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Atlantis \"Evidence\" Found in Spain, Ireland In 360 B.C. the Greek philosopher Plato described an island he called Atlantis. Now contradicting new evidence claims the fabled city-state was based on a real place.",
+    "true": "Sci/Tech",
+    "pred": "Sports"
+   },
+   {
+    "text": "Court: File-swapping software not liable for copyright violations The makers of two leading file-sharing programs are not legally liable for the songs, movies and other copyright works swapped online by their users, a fe",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Producer sues for Rings profits Hollywood producer Saul Zaentz sues the producers of The Lord of the Rings for \\$20m in royalties.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Clicking on Profits The latest data from the US Department of Commerce further bolsters what we have all suspected: E-commerce sales are increasing. Not only might one suspect that consumer confidence has been bolstered ",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Dogs in Training to Sniff Out Cancer Experts have trained unwanted dogs into supersniffers that can detect drugs or bombs. Now they're focusing on a new threat #151;prostate cancer.",
+    "true": "Sci/Tech",
+    "pred": "World"
+   },
+   {
+    "text": "Crude Price Spike May Send Gas Higher (AP) AP - Amid soaring crude oil prices, gasoline costs have been dropping. But don't expect that to last, economists say.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Amazon Snaps Up China's Largest Web Retailer (NewsFactor) NewsFactor - Amazon.com (Nasdaq: AMZN) has said it will buy Joyo.com Limited -- a British Virgin Islands company that operates the largest Internet retail Web sit",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Glory Comes Amid Empty Seats and Closed Shutters HERE in Old Europe, people install shutters outside their windows to keep out the heat, the pollution, the daylight, the noise. They also lock the shutters tight when they",
+    "true": "Sports",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Salesforce.com 2Q Profit Up Sharply Software developer Salesforce.com Inc. posted a sharp rise in second-quarter profit on better-than-expected revenue during its first quarter as a public company, but investors shunned ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Unknown Nesterenko Makes World Headlines (Reuters) Reuters - Belarus' Yuliya Nesterenko won the top\\women's athletics gold medal at the Olympics on Saturday,\\triumphing over a field stripped of many big names because of\\",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Greek weightlifter awaits verdict Greek weightlifter Leonidas Sampanis will find out on Sunday if he is to be stripped of his medal.",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "A Founding Father? Give the guy some credit. Tung Chee-hwa, Hong Kong #39;s embattled Chief Executive, gets precious little of it from his people these daysand heaps of ",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "PRESS START FOR NOSTALGIA Like Led Zeppelin #39;s  #39; #39;Stairway to Heaven #39; #39; and Lynyrd Skynyrd #39;s  #39; #39;Freebird, #39; #39; classic video games like Frogger and Pong can bring back an entire era.",
+    "true": "Sci/Tech",
+    "pred": "World"
+   },
+   {
+    "text": "U.S. Softball Team Wins, Closes in on Gold ATHENS, Greece - Right now, the Americans aren't just a Dream Team - they're more like the Perfect Team. Lisa Fernandez pitched a three-hitter Sunday and Crystl Bustos drove in ",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Men Set for Sizzling Duel in 100 Meters ATHENS, Greece - The preliminaries in the 100 meters were perhaps just a sample of what's to come Sunday, when a talented group of qualifiers - including Americans Shawn Crawford, ",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Wiretapping on the Net: Who pays? NEW YORK At first glance, it might seem like the simple extension of a standard tool in the fight against the bad guys. But in fact, wiretapping Internet phones to monitor criminals and ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Chavez rejects CD as opposition Venezuela #39;s President Hugo Chavez has announced that he will no longer recognize the Democratic Coordination or CD as the opposition coalition.",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "Hamm should support Yang Paul Hamm needs a new marketing strategy. Either that, or he needs a clue. One harmless gesture separates him from lionization in America and canonization in South Korea, and ",
+    "true": "Sports",
+    "pred": "Sci/Tech"
+   }
+  ],
+  "SGNS fine-tuning": [
+   {
+    "text": "Card fraud unit nets 36,000 cards In its first two years, the UK's dedicated card fraud unit, has recovered 36,000 stolen cards and 171 arrests - and estimates it saved 65m.",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "IBM to hire even more new workers By the end of the year, the computing giant plans to have its biggest headcount since 1991.",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Some People Not Eligible to Get in on Google IPO Google has billed its IPO as a way for everyday people to get in on the process, denying Wall Street the usual stranglehold it's had on IPOs. Public bidding, a minimum of ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Rivals Try to Turn Tables on Charles Schwab By MICHAEL LIEDTKE     SAN FRANCISCO (AP) -- With its low prices and iconoclastic attitude, discount stock broker Charles Schwab Corp. (SCH) represented an annoying stone in Wa",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Venezuela Prepares for Chavez Recall Vote Supporters and rivals warn of possible fraud; government says Chavez's defeat could produce turmoil in world oil market.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "India's Tata expands regional footprint via NatSteel buyout (AFP) AFP - India's Tata Iron and Steel Company Ltd. took a strategic step to expand its Asian footprint with the announcement it will buy the Asia-Pacific stee",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Live: Olympics day four Richard Faulds and Stephen Parry are going for gold for Great Britain on day four in Athens.",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Intel to delay product aimed for high-definition TVs SAN FRANCISCO -- In the latest of a series of product delays, Intel Corp. has postponed the launch of a video display chip it had previously planned to introduce by ye",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Stocks Climb on Drop in Consumer Prices NEW YORK - Stocks rose for a second straight session Tuesday as a drop in consumer prices allowed investors to put aside worries about inflation, at least for the short term.    Wi",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Yahoo! Ups Ante for Small Businesses Web giant Yahoo! is gambling that price cuts on its domain name registration and Web hosting products will make it more competitive with discounters in the space -- which means that s",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Oil prices bubble to record high The price of oil has continued its sharp rise overnight, closing at a record high. The main contract in New York, light sweet crude for delivery next month, has closed at a record \\$US46.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Security scare as intruder dives in A CANADIAN husband #39;s love for his wife has led to a tightening of security at all Olympic venues in Athens. ",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "Sharon orders 1,000 homes in West Bank Israel announced plans for 1,000 houses in the West Bank yesterday, accelerating the expansion of the settlements. ",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Google Lowers Its IPO Price Range SAN JOSE, Calif. - In a sign that Google Inc.'s initial public offering isn't as popular as expected, the company lowered its estimated price range to between \\$85 and \\$95 per share, do",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Microsoft finalises three-year government deal Hot on the heels of its 10-year strategic partnership with the London Borough of Newham, Microsoft is close to signing a new broad three-year public sector agreement with th",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Stock Prices Climb Ahead of Google IPO NEW YORK - Investors shrugged off rising crude futures Wednesday to capture well-priced shares, sending the Nasdaq composite index up 1.6 percent ahead of Google Inc.'s much-anticip",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Intuit Posts Wider Loss After Charge (Reuters) Reuters - Intuit Inc. (INTU.O), maker of\\the No. 1 U.S. tax presentation software TurboTax, on Wednesday\\posted a wider quarterly loss after taking a goodwill\\impairment cha",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Hurricane center #39;s projection on Charley not far off, data show FORT LAUDERDALE, Fla. - (KRT) - Despite criticism that it should have better anticipated Hurricane Charley #39;s rapid intensification and quick turn, t",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Selling Houston Warts and All, Especially Warts Descriptions of urban afflictions and images of giant mosquitoes and cockroaches to convey a sense of how Houston is nevertheless beloved by many residents.",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Ecuadorean Lawsuit Vs Texaco Boils Down to Science (Reuters) Reuters - After a decade\\of court battles, lawyers on Wednesday took a lawsuit by\\Ecuadorean Indians accusing U.S. oil firm ChevronTexaco Corp..\\of polluting t",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Ohio Sues Best Buy, Alleging Used Sales (AP) AP - Ohio authorities sued Best Buy Co. Inc. on Thursday, alleging the electronics retailer engaged in unfair and deceptive business practices.",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Iraq Oil Exports Still Halved After Basra HQ Attack  BAGHDAD (Reuters) - Iraq continued to export oil at one  million barrels per day on Friday after an attack on the South  Oil Company headquarters took sabotage operati",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Producer sues for Rings profits Hollywood producer Saul Zaentz sues the producers of The Lord of the Rings for \\$20m in royalties.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Don #39;t expect Tiger to relinquish his top ranking without a fight They #39;re calling Ohio a  quot;battleground state, quot; one of the two or three places likely to decide November #39;s presidential election. On loc",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "Clicking on Profits The latest data from the US Department of Commerce further bolsters what we have all suspected: E-commerce sales are increasing. Not only might one suspect that consumer confidence has been bolstered ",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Crude Price Spike May Send Gas Higher (AP) AP - Amid soaring crude oil prices, gasoline costs have been dropping. But don't expect that to last, economists say.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Amazon Snaps Up China's Largest Web Retailer (NewsFactor) NewsFactor - Amazon.com (Nasdaq: AMZN) has said it will buy Joyo.com Limited -- a British Virgin Islands company that operates the largest Internet retail Web sit",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Glory Comes Amid Empty Seats and Closed Shutters HERE in Old Europe, people install shutters outside their windows to keep out the heat, the pollution, the daylight, the noise. They also lock the shutters tight when they",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "Salesforce.com 2Q Profit Up Sharply Software developer Salesforce.com Inc. posted a sharp rise in second-quarter profit on better-than-expected revenue during its first quarter as a public company, but investors shunned ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Unknown Nesterenko Makes World Headlines (Reuters) Reuters - Belarus' Yuliya Nesterenko won the top\\women's athletics gold medal at the Olympics on Saturday,\\triumphing over a field stripped of many big names because of\\",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Greek weightlifter awaits verdict Greek weightlifter Leonidas Sampanis will find out on Sunday if he is to be stripped of his medal.",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "U.S. Softball Team Wins, Closes in on Gold ATHENS, Greece - Right now, the Americans aren't just a Dream Team - they're more like the Perfect Team. Lisa Fernandez pitched a three-hitter Sunday and Crystl Bustos drove in ",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Men Set for Sizzling Duel in 100 Meters ATHENS, Greece - The preliminaries in the 100 meters were perhaps just a sample of what's to come Sunday, when a talented group of qualifiers - including Americans Shawn Crawford, ",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Nortel Downsizes Again Aug. 23, 2004 (TheDeal.com) Problem-plagued Nortel Networks Corp. announced plans Thursday, Aug. 19, to eliminate an additional 3,500 jobs and fire seven more senior executives as the company labor",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Chavez rejects CD as opposition Venezuela #39;s President Hugo Chavez has announced that he will no longer recognize the Democratic Coordination or CD as the opposition coalition.",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "Hamm should support Yang Paul Hamm needs a new marketing strategy. Either that, or he needs a clue. One harmless gesture separates him from lionization in America and canonization in South Korea, and ",
+    "true": "Sports",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Leeds students figure high on working curve Undergraduates in the city earn more than 90 a week on average, just behind Glasgow, Cambridge and Cardiff. Their hard-earned cash is likely to be spent on looking good and soc",
+    "true": "Business",
+    "pred": "Sports"
+   },
+   {
+    "text": "Northrop Grumman Gets \\$408 Million Pact Defense contractor Northrop Grumman Corp. on Monday said it received a 10-year, \\$408 million Army contract to provide simulated battle command training support to Army corps comm",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Oil Eases as Iraq Resumes Exports &lt;p&gt;\\&lt;/p&gt;&lt;p&gt; By Andrew Mitchell&lt;/p&gt;&lt;p&gt; LONDON (Reuters) - High-flying oil prices eased for a\\second session on Monday as Iraq resumed exports from both its\\n",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "Botswana miners 'face dismissal' Botswana's giant Debswana diamond mining firm says it will sack workers who carry on with an illegal stoppage.",
+    "true": "Business",
+    "pred": "World"
+   }
+  ],
+  "gensim fine-tuning": [
+   {
+    "text": "Card fraud unit nets 36,000 cards In its first two years, the UK's dedicated card fraud unit, has recovered 36,000 stolen cards and 171 arrests - and estimates it saved 65m.",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "IBM to hire even more new workers By the end of the year, the computing giant plans to have its biggest headcount since 1991.",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Some People Not Eligible to Get in on Google IPO Google has billed its IPO as a way for everyday people to get in on the process, denying Wall Street the usual stranglehold it's had on IPOs. Public bidding, a minimum of ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Rivals Try to Turn Tables on Charles Schwab By MICHAEL LIEDTKE     SAN FRANCISCO (AP) -- With its low prices and iconoclastic attitude, discount stock broker Charles Schwab Corp. (SCH) represented an annoying stone in Wa",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Venezuela Prepares for Chavez Recall Vote Supporters and rivals warn of possible fraud; government says Chavez's defeat could produce turmoil in world oil market.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "India's Tata expands regional footprint via NatSteel buyout (AFP) AFP - India's Tata Iron and Steel Company Ltd. took a strategic step to expand its Asian footprint with the announcement it will buy the Asia-Pacific stee",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Live: Olympics day four Richard Faulds and Stephen Parry are going for gold for Great Britain on day four in Athens.",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Intel to delay product aimed for high-definition TVs SAN FRANCISCO -- In the latest of a series of product delays, Intel Corp. has postponed the launch of a video display chip it had previously planned to introduce by ye",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Stocks Climb on Drop in Consumer Prices NEW YORK - Stocks rose for a second straight session Tuesday as a drop in consumer prices allowed investors to put aside worries about inflation, at least for the short term.    Wi",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Yahoo! Ups Ante for Small Businesses Web giant Yahoo! is gambling that price cuts on its domain name registration and Web hosting products will make it more competitive with discounters in the space -- which means that s",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Oil prices bubble to record high The price of oil has continued its sharp rise overnight, closing at a record high. The main contract in New York, light sweet crude for delivery next month, has closed at a record \\$US46.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Security scare as intruder dives in A CANADIAN husband #39;s love for his wife has led to a tightening of security at all Olympic venues in Athens. ",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "United Arab Emirates trap shooter secures nation #39;s first Olympic gold Sheik Ahmed bin Hashr Al-Maktoum earned the first-ever Olympic medal for the United Arab Emirates when he took home the gold medal in men #39;s do",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "Sharon orders 1,000 homes in West Bank Israel announced plans for 1,000 houses in the West Bank yesterday, accelerating the expansion of the settlements. ",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Google Lowers Its IPO Price Range SAN JOSE, Calif. - In a sign that Google Inc.'s initial public offering isn't as popular as expected, the company lowered its estimated price range to between \\$85 and \\$95 per share, do",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Microsoft finalises three-year government deal Hot on the heels of its 10-year strategic partnership with the London Borough of Newham, Microsoft is close to signing a new broad three-year public sector agreement with th",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Stock Prices Climb Ahead of Google IPO NEW YORK - Investors shrugged off rising crude futures Wednesday to capture well-priced shares, sending the Nasdaq composite index up 1.6 percent ahead of Google Inc.'s much-anticip",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Intuit Posts Wider Loss After Charge (Reuters) Reuters - Intuit Inc. (INTU.O), maker of\\the No. 1 U.S. tax presentation software TurboTax, on Wednesday\\posted a wider quarterly loss after taking a goodwill\\impairment cha",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Selling Houston Warts and All, Especially Warts Descriptions of urban afflictions and images of giant mosquitoes and cockroaches to convey a sense of how Houston is nevertheless beloved by many residents.",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Ohio Sues Best Buy, Alleging Used Sales (AP) AP - Ohio authorities sued Best Buy Co. Inc. on Thursday, alleging the electronics retailer engaged in unfair and deceptive business practices.",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Iraq Oil Exports Still Halved After Basra HQ Attack  BAGHDAD (Reuters) - Iraq continued to export oil at one  million barrels per day on Friday after an attack on the South  Oil Company headquarters took sabotage operati",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Producer sues for Rings profits Hollywood producer Saul Zaentz sues the producers of The Lord of the Rings for \\$20m in royalties.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Don #39;t expect Tiger to relinquish his top ranking without a fight They #39;re calling Ohio a  quot;battleground state, quot; one of the two or three places likely to decide November #39;s presidential election. On loc",
+    "true": "Sports",
+    "pred": "Business"
+   },
+   {
+    "text": "Clicking on Profits The latest data from the US Department of Commerce further bolsters what we have all suspected: E-commerce sales are increasing. Not only might one suspect that consumer confidence has been bolstered ",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Crude Price Spike May Send Gas Higher (AP) AP - Amid soaring crude oil prices, gasoline costs have been dropping. But don't expect that to last, economists say.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Amazon Snaps Up China's Largest Web Retailer (NewsFactor) NewsFactor - Amazon.com (Nasdaq: AMZN) has said it will buy Joyo.com Limited -- a British Virgin Islands company that operates the largest Internet retail Web sit",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Glory Comes Amid Empty Seats and Closed Shutters HERE in Old Europe, people install shutters outside their windows to keep out the heat, the pollution, the daylight, the noise. They also lock the shutters tight when they",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "Salesforce.com 2Q Profit Up Sharply Software developer Salesforce.com Inc. posted a sharp rise in second-quarter profit on better-than-expected revenue during its first quarter as a public company, but investors shunned ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Unknown Nesterenko Makes World Headlines (Reuters) Reuters - Belarus' Yuliya Nesterenko won the top\\women's athletics gold medal at the Olympics on Saturday,\\triumphing over a field stripped of many big names because of\\",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Greek weightlifter awaits verdict Greek weightlifter Leonidas Sampanis will find out on Sunday if he is to be stripped of his medal.",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "U.S. Softball Team Wins, Closes in on Gold ATHENS, Greece - Right now, the Americans aren't just a Dream Team - they're more like the Perfect Team. Lisa Fernandez pitched a three-hitter Sunday and Crystl Bustos drove in ",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Men Set for Sizzling Duel in 100 Meters ATHENS, Greece - The preliminaries in the 100 meters were perhaps just a sample of what's to come Sunday, when a talented group of qualifiers - including Americans Shawn Crawford, ",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Nortel Downsizes Again Aug. 23, 2004 (TheDeal.com) Problem-plagued Nortel Networks Corp. announced plans Thursday, Aug. 19, to eliminate an additional 3,500 jobs and fire seven more senior executives as the company labor",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Chavez rejects CD as opposition Venezuela #39;s President Hugo Chavez has announced that he will no longer recognize the Democratic Coordination or CD as the opposition coalition.",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "Hamm should support Yang Paul Hamm needs a new marketing strategy. Either that, or he needs a clue. One harmless gesture separates him from lionization in America and canonization in South Korea, and ",
+    "true": "Sports",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Leeds students figure high on working curve Undergraduates in the city earn more than 90 a week on average, just behind Glasgow, Cambridge and Cardiff. Their hard-earned cash is likely to be spent on looking good and soc",
+    "true": "Business",
+    "pred": "Sports"
+   },
+   {
+    "text": "Northrop Grumman Gets \\$408 Million Pact Defense contractor Northrop Grumman Corp. on Monday said it received a 10-year, \\$408 million Army contract to provide simulated battle command training support to Army corps comm",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Oil Eases as Iraq Resumes Exports &lt;p&gt;\\&lt;/p&gt;&lt;p&gt; By Andrew Mitchell&lt;/p&gt;&lt;p&gt; LONDON (Reuters) - High-flying oil prices eased for a\\second session on Monday as Iraq resumed exports from both its\\n",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "Botswana miners 'face dismissal' Botswana's giant Debswana diamond mining firm says it will sack workers who carry on with an illegal stoppage.",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "U.S. Men's Hoops Team Finally Gets a Rout ATHENS, Greece - The Americans got a taste of what it was like in the good ol' days. They finally played an opponent they were able to beat easily, routing Angola 89-53 Monday in",
+    "true": "World",
+    "pred": "Sports"
+   }
+  ],
+  "GloVe fine-tuning": [
+   {
+    "text": "Card fraud unit nets 36,000 cards In its first two years, the UK's dedicated card fraud unit, has recovered 36,000 stolen cards and 171 arrests - and estimates it saved 65m.",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "IBM to hire even more new workers By the end of the year, the computing giant plans to have its biggest headcount since 1991.",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Some People Not Eligible to Get in on Google IPO Google has billed its IPO as a way for everyday people to get in on the process, denying Wall Street the usual stranglehold it's had on IPOs. Public bidding, a minimum of ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Rivals Try to Turn Tables on Charles Schwab By MICHAEL LIEDTKE     SAN FRANCISCO (AP) -- With its low prices and iconoclastic attitude, discount stock broker Charles Schwab Corp. (SCH) represented an annoying stone in Wa",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Venezuela Prepares for Chavez Recall Vote Supporters and rivals warn of possible fraud; government says Chavez's defeat could produce turmoil in world oil market.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "India's Tata expands regional footprint via NatSteel buyout (AFP) AFP - India's Tata Iron and Steel Company Ltd. took a strategic step to expand its Asian footprint with the announcement it will buy the Asia-Pacific stee",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Live: Olympics day four Richard Faulds and Stephen Parry are going for gold for Great Britain on day four in Athens.",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Intel to delay product aimed for high-definition TVs SAN FRANCISCO -- In the latest of a series of product delays, Intel Corp. has postponed the launch of a video display chip it had previously planned to introduce by ye",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Stocks Climb on Drop in Consumer Prices NEW YORK - Stocks rose for a second straight session Tuesday as a drop in consumer prices allowed investors to put aside worries about inflation, at least for the short term.    Wi",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Yahoo! Ups Ante for Small Businesses Web giant Yahoo! is gambling that price cuts on its domain name registration and Web hosting products will make it more competitive with discounters in the space -- which means that s",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Oil prices bubble to record high The price of oil has continued its sharp rise overnight, closing at a record high. The main contract in New York, light sweet crude for delivery next month, has closed at a record \\$US46.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "SUVs: Live And Let Die NEW YORK - The newly released traffic crash fatality data have something for everyone in the debate about the safety of sport utility vehicles. ",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Security scare as intruder dives in A CANADIAN husband #39;s love for his wife has led to a tightening of security at all Olympic venues in Athens. ",
+    "true": "Sports",
+    "pred": "World"
+   },
+   {
+    "text": "Google Lowers Its IPO Price Range SAN JOSE, Calif. - In a sign that Google Inc.'s initial public offering isn't as popular as expected, the company lowered its estimated price range to between \\$85 and \\$95 per share, do",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Microsoft finalises three-year government deal Hot on the heels of its 10-year strategic partnership with the London Borough of Newham, Microsoft is close to signing a new broad three-year public sector agreement with th",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Stock Prices Climb Ahead of Google IPO NEW YORK - Investors shrugged off rising crude futures Wednesday to capture well-priced shares, sending the Nasdaq composite index up 1.6 percent ahead of Google Inc.'s much-anticip",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Intuit Posts Wider Loss After Charge (Reuters) Reuters - Intuit Inc. (INTU.O), maker of\\the No. 1 U.S. tax presentation software TurboTax, on Wednesday\\posted a wider quarterly loss after taking a goodwill\\impairment cha",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Selling Houston Warts and All, Especially Warts Descriptions of urban afflictions and images of giant mosquitoes and cockroaches to convey a sense of how Houston is nevertheless beloved by many residents.",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Ecuadorean Lawsuit Vs Texaco Boils Down to Science (Reuters) Reuters - After a decade\\of court battles, lawyers on Wednesday took a lawsuit by\\Ecuadorean Indians accusing U.S. oil firm ChevronTexaco Corp..\\of polluting t",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Court: File-swapping software not liable for copyright violations The makers of two leading file-sharing programs are not legally liable for the songs, movies and other copyright works swapped online by their users, a fe",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Ohio Sues Best Buy, Alleging Used Sales (AP) AP - Ohio authorities sued Best Buy Co. Inc. on Thursday, alleging the electronics retailer engaged in unfair and deceptive business practices.",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Iraq Oil Exports Still Halved After Basra HQ Attack  BAGHDAD (Reuters) - Iraq continued to export oil at one  million barrels per day on Friday after an attack on the South  Oil Company headquarters took sabotage operati",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Producer sues for Rings profits Hollywood producer Saul Zaentz sues the producers of The Lord of the Rings for \\$20m in royalties.",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "Don #39;t expect Tiger to relinquish his top ranking without a fight They #39;re calling Ohio a  quot;battleground state, quot; one of the two or three places likely to decide November #39;s presidential election. On loc",
+    "true": "Sports",
+    "pred": "Business"
+   },
+   {
+    "text": "Clicking on Profits The latest data from the US Department of Commerce further bolsters what we have all suspected: E-commerce sales are increasing. Not only might one suspect that consumer confidence has been bolstered ",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Amazon Snaps Up China's Largest Web Retailer (NewsFactor) NewsFactor - Amazon.com (Nasdaq: AMZN) has said it will buy Joyo.com Limited -- a British Virgin Islands company that operates the largest Internet retail Web sit",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Glory Comes Amid Empty Seats and Closed Shutters HERE in Old Europe, people install shutters outside their windows to keep out the heat, the pollution, the daylight, the noise. They also lock the shutters tight when they",
+    "true": "Sports",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Salesforce.com 2Q Profit Up Sharply Software developer Salesforce.com Inc. posted a sharp rise in second-quarter profit on better-than-expected revenue during its first quarter as a public company, but investors shunned ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Unknown Nesterenko Makes World Headlines (Reuters) Reuters - Belarus' Yuliya Nesterenko won the top\\women's athletics gold medal at the Olympics on Saturday,\\triumphing over a field stripped of many big names because of\\",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Greek weightlifter awaits verdict Greek weightlifter Leonidas Sampanis will find out on Sunday if he is to be stripped of his medal.",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "A Founding Father? Give the guy some credit. Tung Chee-hwa, Hong Kong #39;s embattled Chief Executive, gets precious little of it from his people these daysand heaps of ",
+    "true": "World",
+    "pred": "Business"
+   },
+   {
+    "text": "U.S. Softball Team Wins, Closes in on Gold ATHENS, Greece - Right now, the Americans aren't just a Dream Team - they're more like the Perfect Team. Lisa Fernandez pitched a three-hitter Sunday and Crystl Bustos drove in ",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Men Set for Sizzling Duel in 100 Meters ATHENS, Greece - The preliminaries in the 100 meters were perhaps just a sample of what's to come Sunday, when a talented group of qualifiers - including Americans Shawn Crawford, ",
+    "true": "World",
+    "pred": "Sports"
+   },
+   {
+    "text": "Wiretapping on the Net: Who pays? NEW YORK At first glance, it might seem like the simple extension of a standard tool in the fight against the bad guys. But in fact, wiretapping Internet phones to monitor criminals and ",
+    "true": "Sci/Tech",
+    "pred": "Business"
+   },
+   {
+    "text": "Nortel Downsizes Again Aug. 23, 2004 (TheDeal.com) Problem-plagued Nortel Networks Corp. announced plans Thursday, Aug. 19, to eliminate an additional 3,500 jobs and fire seven more senior executives as the company labor",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Chavez rejects CD as opposition Venezuela #39;s President Hugo Chavez has announced that he will no longer recognize the Democratic Coordination or CD as the opposition coalition.",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "Leeds students figure high on working curve Undergraduates in the city earn more than 90 a week on average, just behind Glasgow, Cambridge and Cardiff. Their hard-earned cash is likely to be spent on looking good and soc",
+    "true": "Business",
+    "pred": "Sports"
+   },
+   {
+    "text": "Northrop Grumman Gets \\$408 Million Pact Defense contractor Northrop Grumman Corp. on Monday said it received a 10-year, \\$408 million Army contract to provide simulated battle command training support to Army corps comm",
+    "true": "Business",
+    "pred": "Sci/Tech"
+   },
+   {
+    "text": "Oil Eases as Iraq Resumes Exports &lt;p&gt;\\&lt;/p&gt;&lt;p&gt; By Andrew Mitchell&lt;/p&gt;&lt;p&gt; LONDON (Reuters) - High-flying oil prices eased for a\\second session on Monday as Iraq resumed exports from both its\\n",
+    "true": "Business",
+    "pred": "World"
+   },
+   {
+    "text": "Botswana miners 'face dismissal' Botswana's giant Debswana diamond mining firm says it will sack workers who carry on with an illegal stoppage.",
+    "true": "Business",
+    "pred": "World"
+   }
+  ]
+ },
+ "fractions": {
+  "TF-IDF + LR": {
+   "0.01": [
+    0.816980083620297,
+    0.8166203614389255,
+    0.8297554761070665
+   ],
+   "0.05": [
+    0.8739606440982689,
+    0.8741469647138841,
+    0.876323434405679
+   ],
+   "0.1": [
+    0.8876868666945241,
+    0.8903622047343718,
+    0.8897839954519717
+   ],
+   "0.25": [
+    0.9030717472870091
+   ],
+   "1.0": [
+    0.9212945943284215
+   ]
+  },
+  "aleatorio": {
+   "0.01": [
+    0.7288022084423018,
+    0.7220661496850518,
+    0.7321800372386341
+   ],
+   "0.05": [
+    0.8170623390264365,
+    0.8185035169295105,
+    0.8287596567312698
+   ],
+   "0.1": [
+    0.8382692565503909,
+    0.846226693564966,
+    0.845339385236204
+   ],
+   "0.25": [
+    0.8720849723965792
+   ],
+   "1.0": [
+    0.905491468940151
+   ]
+  },
+  "SGNS congelado": {
+   "0.01": [
+    0.8394975895125187,
+    0.8359260705234619,
+    0.8338510786141781
+   ],
+   "0.05": [
+    0.8680147065335074,
+    0.8628898385268818,
+    0.869857127813931
+   ],
+   "0.1": [
+    0.8749902463238015,
+    0.8732838053113303,
+    0.8770124052286545
+   ],
+   "0.25": [
+    0.8706527585188316
+   ],
+   "1.0": [
+    0.8820132558826101
+   ]
+  },
+  "SGNS fine-tuning": {
+   "0.01": [
+    0.8595224455569284,
+    0.8600505365393468,
+    0.8659887292461824
+   ],
+   "0.05": [
+    0.8875782660710461,
+    0.8868191900290392,
+    0.8814398927561024
+   ],
+   "0.1": [
+    0.8987800557322501,
+    0.8942152441061699,
+    0.8952159523090276
+   ],
+   "0.25": [
+    0.9066928088037776
+   ],
+   "1.0": [
+    0.9172436914919994
+   ]
+  },
+  "GloVe congelado": {
+   "0.01": [
+    0.8633476136276879,
+    0.8593232643482435,
+    0.8548382212548798
+   ],
+   "0.05": [
+    0.8797106607319385,
+    0.8760808105295996,
+    0.8788405510778823
+   ],
+   "0.1": [
+    0.8828159297593013,
+    0.885917743491339,
+    0.8843145459949874
+   ],
+   "0.25": [
+    0.8826598521799353
+   ],
+   "1.0": [
+    0.8946815041943349
+   ]
+  },
+  "GloVe fine-tuning": {
+   "0.01": [
+    0.8714566672580015,
+    0.8631734054353091,
+    0.870356329724554
+   ],
+   "0.05": [
+    0.8909993915756143,
+    0.8898050770855883,
+    0.8878103896804445
+   ],
+   "0.1": [
+    0.8964763720349078,
+    0.8987161624324167,
+    0.8959465098608355
+   ],
+   "0.25": [
+    0.904091417502888
+   ],
+   "1.0": [
+    0.9173249368158694
+   ]
+  }
+ }
+}
