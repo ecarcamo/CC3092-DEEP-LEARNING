@@ -1,0 +1,6841 @@
+{
+ "shared_vocab_size": 30000,
+ "total_questions": 19544,
+ "models": {
+  "SGNS": {
+   "vocab_size": 90566,
+   "dim": 100,
+   "analogy_add": {
+    "semantic": {
+     "accuracy": 0.4722617354196302,
+     "correct": 1660,
+     "evaluated": 3515,
+     "total": 8869,
+     "coverage": 0.39632427556658023
+    },
+    "syntactic": {
+     "accuracy": 0.4641279694401337,
+     "correct": 3888,
+     "evaluated": 8377,
+     "total": 10675,
+     "coverage": 0.7847306791569086
+    },
+    "total": {
+     "accuracy": 0.4665321224352506,
+     "correct": 5548,
+     "evaluated": 11892,
+     "total": 19544,
+     "coverage": 0.6084731887024151
+    },
+    "per_category": {
+     "capital-common-countries": {
+      "correct": 288,
+      "evaluated": 420,
+      "total": 506,
+      "accuracy": 0.6857142857142857
+     },
+     "capital-world": {
+      "correct": 641,
+      "evaluated": 1091,
+      "total": 4524,
+      "accuracy": 0.5875343721356554
+     },
+     "currency": {
+      "correct": 0,
+      "evaluated": 88,
+      "total": 866,
+      "accuracy": 0.0
+     },
+     "city-in-state": {
+      "correct": 568,
+      "evaluated": 1574,
+      "total": 2467,
+      "accuracy": 0.36086404066073696
+     },
+     "family": {
+      "correct": 163,
+      "evaluated": 342,
+      "total": 506,
+      "accuracy": 0.4766081871345029
+     },
+     "gram1-adjective-to-adverb": {
+      "correct": 114,
+      "evaluated": 812,
+      "total": 992,
+      "accuracy": 0.14039408866995073
+     },
+     "gram2-opposite": {
+      "correct": 26,
+      "evaluated": 272,
+      "total": 812,
+      "accuracy": 0.09558823529411764
+     },
+     "gram3-comparative": {
+      "correct": 599,
+      "evaluated": 1332,
+      "total": 1332,
+      "accuracy": 0.4496996996996997
+     },
+     "gram4-superlative": {
+      "correct": 173,
+      "evaluated": 702,
+      "total": 1122,
+      "accuracy": 0.24643874643874644
+     },
+     "gram5-present-participle": {
+      "correct": 341,
+      "evaluated": 870,
+      "total": 1056,
+      "accuracy": 0.39195402298850573
+     },
+     "gram6-nationality-adjective": {
+      "correct": 1090,
+      "evaluated": 1299,
+      "total": 1599,
+      "accuracy": 0.8391070053887606
+     },
+     "gram7-past-tense": {
+      "correct": 812,
+      "evaluated": 1332,
+      "total": 1560,
+      "accuracy": 0.6096096096096096
+     },
+     "gram8-plural": {
+      "correct": 536,
+      "evaluated": 1056,
+      "total": 1332,
+      "accuracy": 0.5075757575757576
+     },
+     "gram9-plural-verbs": {
+      "correct": 197,
+      "evaluated": 702,
+      "total": 870,
+      "accuracy": 0.28062678062678065
+     }
+    }
+   },
+   "analogy_mul": {
+    "semantic": {
+     "accuracy": 0.43897581792318635,
+     "correct": 1543,
+     "evaluated": 3515,
+     "total": 8869,
+     "coverage": 0.39632427556658023
+    },
+    "syntactic": {
+     "accuracy": 0.4255700131311925,
+     "correct": 3565,
+     "evaluated": 8377,
+     "total": 10675,
+     "coverage": 0.7847306791569086
+    },
+    "total": {
+     "accuracy": 0.42953245879582913,
+     "correct": 5108,
+     "evaluated": 11892,
+     "total": 19544,
+     "coverage": 0.6084731887024151
+    },
+    "per_category": {
+     "capital-common-countries": {
+      "correct": 275,
+      "evaluated": 420,
+      "total": 506,
+      "accuracy": 0.6547619047619048
+     },
+     "capital-world": {
+      "correct": 591,
+      "evaluated": 1091,
+      "total": 4524,
+      "accuracy": 0.541704857928506
+     },
+     "currency": {
+      "correct": 0,
+      "evaluated": 88,
+      "total": 866,
+      "accuracy": 0.0
+     },
+     "city-in-state": {
+      "correct": 516,
+      "evaluated": 1574,
+      "total": 2467,
+      "accuracy": 0.3278271918678526
+     },
+     "family": {
+      "correct": 161,
+      "evaluated": 342,
+      "total": 506,
+      "accuracy": 0.47076023391812866
+     },
+     "gram1-adjective-to-adverb": {
+      "correct": 97,
+      "evaluated": 812,
+      "total": 992,
+      "accuracy": 0.11945812807881774
+     },
+     "gram2-opposite": {
+      "correct": 24,
+      "evaluated": 272,
+      "total": 812,
+      "accuracy": 0.08823529411764706
+     },
+     "gram3-comparative": {
+      "correct": 560,
+      "evaluated": 1332,
+      "total": 1332,
+      "accuracy": 0.42042042042042044
+     },
+     "gram4-superlative": {
+      "correct": 165,
+      "evaluated": 702,
+      "total": 1122,
+      "accuracy": 0.23504273504273504
+     },
+     "gram5-present-participle": {
+      "correct": 282,
+      "evaluated": 870,
+      "total": 1056,
+      "accuracy": 0.32413793103448274
+     },
+     "gram6-nationality-adjective": {
+      "correct": 1056,
+      "evaluated": 1299,
+      "total": 1599,
+      "accuracy": 0.812933025404157
+     },
+     "gram7-past-tense": {
+      "correct": 741,
+      "evaluated": 1332,
+      "total": 1560,
+      "accuracy": 0.5563063063063063
+     },
+     "gram8-plural": {
+      "correct": 442,
+      "evaluated": 1056,
+      "total": 1332,
+      "accuracy": 0.4185606060606061
+     },
+     "gram9-plural-verbs": {
+      "correct": 198,
+      "evaluated": 702,
+      "total": 870,
+      "accuracy": 0.28205128205128205
+     }
+    }
+   },
+   "wordsim": {
+    "spearman": 0.6651154815603658,
+    "pvalue": 2.5975105703417046e-46,
+    "oov_ratio": 0.28328611898017
+   },
+   "simlex": {
+    "spearman": 0.27911666230317195,
+    "pvalue": 2.9067526302478777e-19,
+    "oov_ratio": 0.40040040040040037
+   },
+   "parallelism": {
+    "capital-common-countries": {
+     "mean_cosine": 0.3029998540878296,
+     "pairs": 21
+    },
+    "capital-world": {
+     "mean_cosine": 0.22726035118103027,
+     "pairs": 57
+    },
+    "currency": {
+     "mean_cosine": 0.20948360860347748,
+     "pairs": 10
+    },
+    "city-in-state": {
+     "mean_cosine": 0.16527009010314941,
+     "pairs": 54
+    },
+    "family": {
+     "mean_cosine": 0.22790750861167908,
+     "pairs": 19
+    },
+    "gram1-adjective-to-adverb": {
+     "mean_cosine": 0.08656758069992065,
+     "pairs": 29
+    },
+    "gram2-opposite": {
+     "mean_cosine": 0.10973098129034042,
+     "pairs": 17
+    },
+    "gram3-comparative": {
+     "mean_cosine": 0.2546054422855377,
+     "pairs": 37
+    },
+    "gram4-superlative": {
+     "mean_cosine": 0.23804005980491638,
+     "pairs": 27
+    },
+    "gram5-present-participle": {
+     "mean_cosine": 0.0979912132024765,
+     "pairs": 30
+    },
+    "gram6-nationality-adjective": {
+     "mean_cosine": 0.4148986041545868,
+     "pairs": 37
+    },
+    "gram7-past-tense": {
+     "mean_cosine": 0.16632162034511566,
+     "pairs": 37
+    },
+    "gram8-plural": {
+     "mean_cosine": 0.14830398559570312,
+     "pairs": 33
+    },
+    "gram9-plural-verbs": {
+     "mean_cosine": 0.19989630579948425,
+     "pairs": 27
+    }
+   },
+   "parallelism_mean": 0.20351980041180337,
+   "individual": [
+    {
+     "type": "género",
+     "query": [
+      "man",
+      "woman",
+      "king"
+     ],
+     "expected": "queen",
+     "top5": [
+      [
+       "queen",
+       0.7147
+      ],
+      [
+       "consort",
+       0.7095
+      ],
+      [
+       "throne",
+       0.6585
+      ],
+      [
+       "childless",
+       0.6495
+      ],
+      [
+       "eorcenberht",
+       0.6471
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7147,
+     "top5_no_exclusion": [
+      [
+       "king",
+       0.757
+      ],
+      [
+       "queen",
+       0.7147
+      ],
+      [
+       "consort",
+       0.7095
+      ],
+      [
+       "throne",
+       0.6585
+      ],
+      [
+       "childless",
+       0.6495
+      ]
+     ],
+     "first_no_exclusion": "king",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "género",
+     "query": [
+      "brother",
+      "sister",
+      "father"
+     ],
+     "expected": "mother",
+     "top5": [
+      [
+       "mother",
+       0.7534
+      ],
+      [
+       "sisters",
+       0.7458
+      ],
+      [
+       "daughter",
+       0.7341
+      ],
+      [
+       "husband",
+       0.6952
+      ],
+      [
+       "her",
+       0.6853
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7534,
+     "top5_no_exclusion": [
+      [
+       "sister",
+       0.8837
+      ],
+      [
+       "mother",
+       0.7534
+      ],
+      [
+       "sisters",
+       0.7458
+      ],
+      [
+       "daughter",
+       0.7341
+      ],
+      [
+       "father",
+       0.7337
+      ]
+     ],
+     "first_no_exclusion": "sister",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "género",
+     "query": [
+      "actor",
+      "actress",
+      "prince"
+     ],
+     "expected": "princess",
+     "top5": [
+      [
+       "princess",
+       0.7638
+      ],
+      [
+       "queen",
+       0.7419
+      ],
+      [
+       "duchess",
+       0.6993
+      ],
+      [
+       "caroline",
+       0.6799
+      ],
+      [
+       "anne",
+       0.6653
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7638,
+     "top5_no_exclusion": [
+      [
+       "prince",
+       0.8908
+      ],
+      [
+       "princess",
+       0.7638
+      ],
+      [
+       "queen",
+       0.7419
+      ],
+      [
+       "duchess",
+       0.6993
+      ],
+      [
+       "caroline",
+       0.6799
+      ]
+     ],
+     "first_no_exclusion": "prince",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–capital",
+     "query": [
+      "france",
+      "paris",
+      "italy"
+     ],
+     "expected": "rome",
+     "top5": [
+      [
+       "vienna",
+       0.6692
+      ],
+      [
+       "venice",
+       0.6682
+      ],
+      [
+       "milan",
+       0.6618
+      ],
+      [
+       "rome",
+       0.6453
+      ],
+      [
+       "istanbul",
+       0.6359
+      ]
+     ],
+     "correct": false,
+     "rank": 4,
+     "cosine_expected": 0.6453,
+     "top5_no_exclusion": [
+      [
+       "paris",
+       0.8006
+      ],
+      [
+       "italy",
+       0.756
+      ],
+      [
+       "vienna",
+       0.6692
+      ],
+      [
+       "venice",
+       0.6682
+      ],
+      [
+       "milan",
+       0.6618
+      ]
+     ],
+     "first_no_exclusion": "paris",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–capital",
+     "query": [
+      "japan",
+      "tokyo",
+      "germany"
+     ],
+     "expected": "berlin",
+     "top5": [
+      [
+       "berlin",
+       0.8271
+      ],
+      [
+       "munich",
+       0.7548
+      ],
+      [
+       "frankfurt",
+       0.7097
+      ],
+      [
+       "cologne",
+       0.6829
+      ],
+      [
+       "sseldorf",
+       0.6704
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8271,
+     "top5_no_exclusion": [
+      [
+       "berlin",
+       0.8271
+      ],
+      [
+       "germany",
+       0.779
+      ],
+      [
+       "munich",
+       0.7548
+      ],
+      [
+       "frankfurt",
+       0.7097
+      ],
+      [
+       "cologne",
+       0.6829
+      ]
+     ],
+     "first_no_exclusion": "berlin",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–capital",
+     "query": [
+      "spain",
+      "madrid",
+      "russia"
+     ],
+     "expected": "moscow",
+     "top5": [
+      [
+       "spartak",
+       0.6908
+      ],
+      [
+       "russian",
+       0.6544
+      ],
+      [
+       "moscow",
+       0.6485
+      ],
+      [
+       "ukraine",
+       0.6355
+      ],
+      [
+       "ukrainian",
+       0.6304
+      ]
+     ],
+     "correct": false,
+     "rank": 3,
+     "cosine_expected": 0.6485,
+     "top5_no_exclusion": [
+      [
+       "russia",
+       0.7075
+      ],
+      [
+       "spartak",
+       0.6908
+      ],
+      [
+       "russian",
+       0.6544
+      ],
+      [
+       "moscow",
+       0.6485
+      ],
+      [
+       "ukraine",
+       0.6355
+      ]
+     ],
+     "first_no_exclusion": "russia",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–gentilicio",
+     "query": [
+      "france",
+      "french",
+      "germany"
+     ],
+     "expected": "german",
+     "top5": [
+      [
+       "german",
+       0.8678
+      ],
+      [
+       "austrian",
+       0.7387
+      ],
+      [
+       "germans",
+       0.7002
+      ],
+      [
+       "russian",
+       0.6699
+      ],
+      [
+       "finnish",
+       0.6682
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8678,
+     "top5_no_exclusion": [
+      [
+       "german",
+       0.8678
+      ],
+      [
+       "germany",
+       0.7436
+      ],
+      [
+       "austrian",
+       0.7387
+      ],
+      [
+       "french",
+       0.736
+      ],
+      [
+       "germans",
+       0.7002
+      ]
+     ],
+     "first_no_exclusion": "german",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–gentilicio",
+     "query": [
+      "china",
+      "chinese",
+      "japan"
+     ],
+     "expected": "japanese",
+     "top5": [
+      [
+       "japanese",
+       0.8341
+      ],
+      [
+       "taiwanese",
+       0.6394
+      ],
+      [
+       "nihon",
+       0.6377
+      ],
+      [
+       "tokyo",
+       0.6371
+      ],
+      [
+       "minoru",
+       0.6267
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8341,
+     "top5_no_exclusion": [
+      [
+       "japanese",
+       0.8341
+      ],
+      [
+       "japan",
+       0.7789
+      ],
+      [
+       "chinese",
+       0.7184
+      ],
+      [
+       "taiwanese",
+       0.6394
+      ],
+      [
+       "nihon",
+       0.6377
+      ]
+     ],
+     "first_no_exclusion": "japanese",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–gentilicio",
+     "query": [
+      "italy",
+      "italian",
+      "mexico"
+     ],
+     "expected": "mexican",
+     "top5": [
+      [
+       "mexican",
+       0.7369
+      ],
+      [
+       "tamaulipas",
+       0.6663
+      ],
+      [
+       "veracruz",
+       0.6632
+      ],
+      [
+       "tampico",
+       0.6584
+      ],
+      [
+       "campeche",
+       0.6508
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7369,
+     "top5_no_exclusion": [
+      [
+       "mexico",
+       0.7496
+      ],
+      [
+       "mexican",
+       0.7369
+      ],
+      [
+       "tamaulipas",
+       0.6663
+      ],
+      [
+       "veracruz",
+       0.6632
+      ],
+      [
+       "tampico",
+       0.6584
+      ]
+     ],
+     "first_no_exclusion": "mexico",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "comparativo/superlativo",
+     "query": [
+      "good",
+      "better",
+      "bad"
+     ],
+     "expected": "worse",
+     "top5": [
+      [
+       "worse",
+       0.6679
+      ],
+      [
+       "bigger",
+       0.6393
+      ],
+      [
+       "n't",
+       0.5893
+      ],
+      [
+       "updated",
+       0.5726
+      ],
+      [
+       "stupid",
+       0.5656
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.6679,
+     "top5_no_exclusion": [
+      [
+       "better",
+       0.7846
+      ],
+      [
+       "bad",
+       0.7229
+      ],
+      [
+       "worse",
+       0.6679
+      ],
+      [
+       "bigger",
+       0.6393
+      ],
+      [
+       "n't",
+       0.5893
+      ]
+     ],
+     "first_no_exclusion": "better",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "comparativo/superlativo",
+     "query": [
+      "big",
+      "bigger",
+      "small"
+     ],
+     "expected": "smaller",
+     "top5": [
+      [
+       "smaller",
+       0.6077
+      ],
+      [
+       "larger",
+       0.6048
+      ],
+      [
+       "large",
+       0.6028
+      ],
+      [
+       "wood",
+       0.5298
+      ],
+      [
+       "better",
+       0.4815
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.6077,
+     "top5_no_exclusion": [
+      [
+       "small",
+       0.6754
+      ],
+      [
+       "bigger",
+       0.6161
+      ],
+      [
+       "smaller",
+       0.6077
+      ],
+      [
+       "larger",
+       0.6048
+      ],
+      [
+       "large",
+       0.6028
+      ]
+     ],
+     "first_no_exclusion": "small",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "comparativo/superlativo",
+     "query": [
+      "fast",
+      "fastest",
+      "strong"
+     ],
+     "expected": "strongest",
+     "top5": [
+      [
+       "surpassed",
+       0.5516
+      ],
+      [
+       "strongest",
+       0.5475
+      ],
+      [
+       "6.42",
+       0.5288
+      ],
+      [
+       "24.07",
+       0.5243
+      ],
+      [
+       "hondo",
+       0.5198
+      ]
+     ],
+     "correct": false,
+     "rank": 2,
+     "cosine_expected": 0.5475,
+     "top5_no_exclusion": [
+      [
+       "strong",
+       0.6034
+      ],
+      [
+       "fastest",
+       0.5895
+      ],
+      [
+       "surpassed",
+       0.5516
+      ],
+      [
+       "strongest",
+       0.5475
+      ],
+      [
+       "6.42",
+       0.5288
+      ]
+     ],
+     "first_no_exclusion": "strong",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "tiempo verbal",
+     "query": [
+      "walk",
+      "walked",
+      "run"
+     ],
+     "expected": "ran",
+     "top5": [
+      [
+       "ran",
+       0.6853
+      ],
+      [
+       "running",
+       0.5695
+      ],
+      [
+       "ended",
+       0.5652
+      ],
+      [
+       "responded",
+       0.5625
+      ],
+      [
+       "retaliated",
+       0.5621
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.6853,
+     "top5_no_exclusion": [
+      [
+       "run",
+       0.7027
+      ],
+      [
+       "ran",
+       0.6853
+      ],
+      [
+       "walked",
+       0.6734
+      ],
+      [
+       "running",
+       0.5695
+      ],
+      [
+       "ended",
+       0.5652
+      ]
+     ],
+     "first_no_exclusion": "run",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "tiempo verbal",
+     "query": [
+      "go",
+      "went",
+      "see"
+     ],
+     "expected": "saw",
+     "top5": [
+      [
+       "came",
+       0.6937
+      ],
+      [
+       "saw",
+       0.6837
+      ],
+      [
+       "recalled",
+       0.625
+      ],
+      [
+       "looked",
+       0.6246
+      ],
+      [
+       "took",
+       0.5984
+      ]
+     ],
+     "correct": false,
+     "rank": 2,
+     "cosine_expected": 0.6837,
+     "top5_no_exclusion": [
+      [
+       "went",
+       0.7456
+      ],
+      [
+       "came",
+       0.6937
+      ],
+      [
+       "saw",
+       0.6837
+      ],
+      [
+       "see",
+       0.6688
+      ],
+      [
+       "recalled",
+       0.625
+      ]
+     ],
+     "first_no_exclusion": "went",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "tiempo verbal",
+     "query": [
+      "eat",
+      "ate",
+      "take"
+     ],
+     "expected": "took",
+     "top5": [
+      [
+       "took",
+       0.7203
+      ],
+      [
+       "taking",
+       0.6991
+      ],
+      [
+       "place",
+       0.6521
+      ],
+      [
+       "put",
+       0.6357
+      ],
+      [
+       "arrived",
+       0.5967
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7203,
+     "top5_no_exclusion": [
+      [
+       "take",
+       0.7562
+      ],
+      [
+       "took",
+       0.7203
+      ],
+      [
+       "taking",
+       0.6991
+      ],
+      [
+       "place",
+       0.6521
+      ],
+      [
+       "put",
+       0.6357
+      ]
+     ],
+     "first_no_exclusion": "take",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "plural",
+     "query": [
+      "car",
+      "cars",
+      "child"
+     ],
+     "expected": "children",
+     "top5": [
+      [
+       "children",
+       0.721
+      ],
+      [
+       "siblings",
+       0.6457
+      ],
+      [
+       "infancy",
+       0.6337
+      ],
+      [
+       "mothers",
+       0.6054
+      ],
+      [
+       "daughters",
+       0.5954
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.721,
+     "top5_no_exclusion": [
+      [
+       "child",
+       0.8169
+      ],
+      [
+       "children",
+       0.721
+      ],
+      [
+       "siblings",
+       0.6457
+      ],
+      [
+       "infancy",
+       0.6337
+      ],
+      [
+       "mothers",
+       0.6054
+      ]
+     ],
+     "first_no_exclusion": "child",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "plural",
+     "query": [
+      "dog",
+      "dogs",
+      "city"
+     ],
+     "expected": "cities",
+     "top5": [
+      [
+       "cities",
+       0.7417
+      ],
+      [
+       "towns",
+       0.6957
+      ],
+      [
+       "residents",
+       0.6843
+      ],
+      [
+       "area",
+       0.678
+      ],
+      [
+       "suburbs",
+       0.6663
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7417,
+     "top5_no_exclusion": [
+      [
+       "city",
+       0.8513
+      ],
+      [
+       "cities",
+       0.7417
+      ],
+      [
+       "towns",
+       0.6957
+      ],
+      [
+       "residents",
+       0.6843
+      ],
+      [
+       "area",
+       0.678
+      ]
+     ],
+     "first_no_exclusion": "city",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "plural",
+     "query": [
+      "man",
+      "men",
+      "woman"
+     ],
+     "expected": "women",
+     "top5": [
+      [
+       "women",
+       0.7767
+      ],
+      [
+       "wollstonecraft",
+       0.5724
+      ],
+      [
+       "suffragists",
+       0.5639
+      ],
+      [
+       "prostitutes",
+       0.5585
+      ],
+      [
+       "suffragist",
+       0.558
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7767,
+     "top5_no_exclusion": [
+      [
+       "women",
+       0.7767
+      ],
+      [
+       "men",
+       0.772
+      ],
+      [
+       "woman",
+       0.6454
+      ],
+      [
+       "wollstonecraft",
+       0.5724
+      ],
+      [
+       "suffragists",
+       0.5639
+      ]
+     ],
+     "first_no_exclusion": "women",
+     "first_is_query": false,
+     "matches_gensim": true
+    }
+   ],
+   "individual_accuracy": 0.7777777777777778,
+   "matches_gensim_all": true
+  },
+  "gensim": {
+   "vocab_size": 90566,
+   "dim": 100,
+   "analogy_add": {
+    "semantic": {
+     "accuracy": 0.45291607396870553,
+     "correct": 1592,
+     "evaluated": 3515,
+     "total": 8869,
+     "coverage": 0.39632427556658023
+    },
+    "syntactic": {
+     "accuracy": 0.435239345827862,
+     "correct": 3646,
+     "evaluated": 8377,
+     "total": 10675,
+     "coverage": 0.7847306791569086
+    },
+    "total": {
+     "accuracy": 0.44046417759838546,
+     "correct": 5238,
+     "evaluated": 11892,
+     "total": 19544,
+     "coverage": 0.6084731887024151
+    },
+    "per_category": {
+     "capital-common-countries": {
+      "correct": 285,
+      "evaluated": 420,
+      "total": 506,
+      "accuracy": 0.6785714285714286
+     },
+     "capital-world": {
+      "correct": 630,
+      "evaluated": 1091,
+      "total": 4524,
+      "accuracy": 0.5774518790100825
+     },
+     "currency": {
+      "correct": 0,
+      "evaluated": 88,
+      "total": 866,
+      "accuracy": 0.0
+     },
+     "city-in-state": {
+      "correct": 523,
+      "evaluated": 1574,
+      "total": 2467,
+      "accuracy": 0.33227445997458704
+     },
+     "family": {
+      "correct": 154,
+      "evaluated": 342,
+      "total": 506,
+      "accuracy": 0.4502923976608187
+     },
+     "gram1-adjective-to-adverb": {
+      "correct": 91,
+      "evaluated": 812,
+      "total": 992,
+      "accuracy": 0.11206896551724138
+     },
+     "gram2-opposite": {
+      "correct": 30,
+      "evaluated": 272,
+      "total": 812,
+      "accuracy": 0.11029411764705882
+     },
+     "gram3-comparative": {
+      "correct": 560,
+      "evaluated": 1332,
+      "total": 1332,
+      "accuracy": 0.42042042042042044
+     },
+     "gram4-superlative": {
+      "correct": 145,
+      "evaluated": 702,
+      "total": 1122,
+      "accuracy": 0.20655270655270655
+     },
+     "gram5-present-participle": {
+      "correct": 313,
+      "evaluated": 870,
+      "total": 1056,
+      "accuracy": 0.35977011494252875
+     },
+     "gram6-nationality-adjective": {
+      "correct": 1107,
+      "evaluated": 1299,
+      "total": 1599,
+      "accuracy": 0.8521939953810623
+     },
+     "gram7-past-tense": {
+      "correct": 717,
+      "evaluated": 1332,
+      "total": 1560,
+      "accuracy": 0.5382882882882883
+     },
+     "gram8-plural": {
+      "correct": 482,
+      "evaluated": 1056,
+      "total": 1332,
+      "accuracy": 0.4564393939393939
+     },
+     "gram9-plural-verbs": {
+      "correct": 201,
+      "evaluated": 702,
+      "total": 870,
+      "accuracy": 0.2863247863247863
+     }
+    }
+   },
+   "analogy_mul": {
+    "semantic": {
+     "accuracy": 0.41536273115220484,
+     "correct": 1460,
+     "evaluated": 3515,
+     "total": 8869,
+     "coverage": 0.39632427556658023
+    },
+    "syntactic": {
+     "accuracy": 0.3983526322072341,
+     "correct": 3337,
+     "evaluated": 8377,
+     "total": 10675,
+     "coverage": 0.7847306791569086
+    },
+    "total": {
+     "accuracy": 0.403380423814329,
+     "correct": 4797,
+     "evaluated": 11892,
+     "total": 19544,
+     "coverage": 0.6084731887024151
+    },
+    "per_category": {
+     "capital-common-countries": {
+      "correct": 268,
+      "evaluated": 420,
+      "total": 506,
+      "accuracy": 0.638095238095238
+     },
+     "capital-world": {
+      "correct": 568,
+      "evaluated": 1091,
+      "total": 4524,
+      "accuracy": 0.5206232813932172
+     },
+     "currency": {
+      "correct": 1,
+      "evaluated": 88,
+      "total": 866,
+      "accuracy": 0.011363636363636364
+     },
+     "city-in-state": {
+      "correct": 471,
+      "evaluated": 1574,
+      "total": 2467,
+      "accuracy": 0.29923761118170267
+     },
+     "family": {
+      "correct": 152,
+      "evaluated": 342,
+      "total": 506,
+      "accuracy": 0.4444444444444444
+     },
+     "gram1-adjective-to-adverb": {
+      "correct": 69,
+      "evaluated": 812,
+      "total": 992,
+      "accuracy": 0.08497536945812807
+     },
+     "gram2-opposite": {
+      "correct": 21,
+      "evaluated": 272,
+      "total": 812,
+      "accuracy": 0.07720588235294118
+     },
+     "gram3-comparative": {
+      "correct": 518,
+      "evaluated": 1332,
+      "total": 1332,
+      "accuracy": 0.3888888888888889
+     },
+     "gram4-superlative": {
+      "correct": 154,
+      "evaluated": 702,
+      "total": 1122,
+      "accuracy": 0.21937321937321938
+     },
+     "gram5-present-participle": {
+      "correct": 258,
+      "evaluated": 870,
+      "total": 1056,
+      "accuracy": 0.296551724137931
+     },
+     "gram6-nationality-adjective": {
+      "correct": 1070,
+      "evaluated": 1299,
+      "total": 1599,
+      "accuracy": 0.8237105465742879
+     },
+     "gram7-past-tense": {
+      "correct": 661,
+      "evaluated": 1332,
+      "total": 1560,
+      "accuracy": 0.49624624624624625
+     },
+     "gram8-plural": {
+      "correct": 394,
+      "evaluated": 1056,
+      "total": 1332,
+      "accuracy": 0.3731060606060606
+     },
+     "gram9-plural-verbs": {
+      "correct": 192,
+      "evaluated": 702,
+      "total": 870,
+      "accuracy": 0.27350427350427353
+     }
+    }
+   },
+   "wordsim": {
+    "spearman": 0.659615437226565,
+    "pvalue": 2.5395032863223888e-45,
+    "oov_ratio": 0.28328611898017
+   },
+   "simlex": {
+    "spearman": 0.28947205722994873,
+    "pvalue": 1.1659344186625917e-20,
+    "oov_ratio": 0.40040040040040037
+   },
+   "parallelism": {
+    "capital-common-countries": {
+     "mean_cosine": 0.3014211058616638,
+     "pairs": 21
+    },
+    "capital-world": {
+     "mean_cosine": 0.22334162890911102,
+     "pairs": 57
+    },
+    "currency": {
+     "mean_cosine": 0.19907201826572418,
+     "pairs": 10
+    },
+    "city-in-state": {
+     "mean_cosine": 0.19024163484573364,
+     "pairs": 54
+    },
+    "family": {
+     "mean_cosine": 0.21345174312591553,
+     "pairs": 19
+    },
+    "gram1-adjective-to-adverb": {
+     "mean_cosine": 0.08112352341413498,
+     "pairs": 29
+    },
+    "gram2-opposite": {
+     "mean_cosine": 0.09248684346675873,
+     "pairs": 17
+    },
+    "gram3-comparative": {
+     "mean_cosine": 0.24779483675956726,
+     "pairs": 37
+    },
+    "gram4-superlative": {
+     "mean_cosine": 0.22875559329986572,
+     "pairs": 27
+    },
+    "gram5-present-participle": {
+     "mean_cosine": 0.10850731283426285,
+     "pairs": 30
+    },
+    "gram6-nationality-adjective": {
+     "mean_cosine": 0.42031246423721313,
+     "pairs": 37
+    },
+    "gram7-past-tense": {
+     "mean_cosine": 0.14301563799381256,
+     "pairs": 37
+    },
+    "gram8-plural": {
+     "mean_cosine": 0.126413494348526,
+     "pairs": 33
+    },
+    "gram9-plural-verbs": {
+     "mean_cosine": 0.19801893830299377,
+     "pairs": 27
+    }
+   },
+   "parallelism_mean": 0.19813976969037736,
+   "individual": [
+    {
+     "type": "género",
+     "query": [
+      "man",
+      "woman",
+      "king"
+     ],
+     "expected": "queen",
+     "top5": [
+      [
+       "arensberg",
+       0.6812
+      ],
+      [
+       "regnant",
+       0.6631
+      ],
+      [
+       "jagiellon",
+       0.6564
+      ],
+      [
+       "anglicise",
+       0.6537
+      ],
+      [
+       "electress",
+       0.6509
+      ]
+     ],
+     "correct": false,
+     "rank": 8,
+     "cosine_expected": 0.6345,
+     "top5_no_exclusion": [
+      [
+       "king",
+       0.7584
+      ],
+      [
+       "arensberg",
+       0.6812
+      ],
+      [
+       "regnant",
+       0.6631
+      ],
+      [
+       "jagiellon",
+       0.6564
+      ],
+      [
+       "anglicise",
+       0.6537
+      ]
+     ],
+     "first_no_exclusion": "king",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "género",
+     "query": [
+      "brother",
+      "sister",
+      "father"
+     ],
+     "expected": "mother",
+     "top5": [
+      [
+       "sisters",
+       0.7241
+      ],
+      [
+       "mother",
+       0.7052
+      ],
+      [
+       "daughter",
+       0.6907
+      ],
+      [
+       "family",
+       0.6675
+      ],
+      [
+       "stratigeas",
+       0.6638
+      ]
+     ],
+     "correct": false,
+     "rank": 2,
+     "cosine_expected": 0.7052,
+     "top5_no_exclusion": [
+      [
+       "sister",
+       0.8499
+      ],
+      [
+       "sisters",
+       0.7241
+      ],
+      [
+       "mother",
+       0.7052
+      ],
+      [
+       "daughter",
+       0.6907
+      ],
+      [
+       "father",
+       0.6891
+      ]
+     ],
+     "first_no_exclusion": "sister",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "género",
+     "query": [
+      "actor",
+      "actress",
+      "prince"
+     ],
+     "expected": "princess",
+     "top5": [
+      [
+       "princess",
+       0.7233
+      ],
+      [
+       "queen",
+       0.7162
+      ],
+      [
+       "duchess",
+       0.6995
+      ],
+      [
+       "mecklenburg",
+       0.6923
+      ],
+      [
+       "electress",
+       0.6868
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7233,
+     "top5_no_exclusion": [
+      [
+       "prince",
+       0.8898
+      ],
+      [
+       "princess",
+       0.7233
+      ],
+      [
+       "queen",
+       0.7162
+      ],
+      [
+       "duchess",
+       0.6995
+      ],
+      [
+       "mecklenburg",
+       0.6923
+      ]
+     ],
+     "first_no_exclusion": "prince",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–capital",
+     "query": [
+      "france",
+      "paris",
+      "italy"
+     ],
+     "expected": "rome",
+     "top5": [
+      [
+       "vienna",
+       0.7069
+      ],
+      [
+       "milan",
+       0.6512
+      ],
+      [
+       "munich",
+       0.6458
+      ],
+      [
+       "venice",
+       0.6447
+      ],
+      [
+       "florence",
+       0.6437
+      ]
+     ],
+     "correct": false,
+     "rank": 6,
+     "cosine_expected": 0.6394,
+     "top5_no_exclusion": [
+      [
+       "paris",
+       0.795
+      ],
+      [
+       "italy",
+       0.7795
+      ],
+      [
+       "vienna",
+       0.7069
+      ],
+      [
+       "milan",
+       0.6512
+      ],
+      [
+       "munich",
+       0.6458
+      ]
+     ],
+     "first_no_exclusion": "paris",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–capital",
+     "query": [
+      "japan",
+      "tokyo",
+      "germany"
+     ],
+     "expected": "berlin",
+     "top5": [
+      [
+       "berlin",
+       0.8252
+      ],
+      [
+       "munich",
+       0.7481
+      ],
+      [
+       "frankfurt",
+       0.7239
+      ],
+      [
+       "sseldorf",
+       0.7026
+      ],
+      [
+       "rotterdam",
+       0.7024
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8252,
+     "top5_no_exclusion": [
+      [
+       "berlin",
+       0.8252
+      ],
+      [
+       "germany",
+       0.7481
+      ],
+      [
+       "munich",
+       0.7481
+      ],
+      [
+       "frankfurt",
+       0.7239
+      ],
+      [
+       "sseldorf",
+       0.7026
+      ]
+     ],
+     "first_no_exclusion": "berlin",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–capital",
+     "query": [
+      "spain",
+      "madrid",
+      "russia"
+     ],
+     "expected": "moscow",
+     "top5": [
+      [
+       "moscow",
+       0.7076
+      ],
+      [
+       "spartak",
+       0.685
+      ],
+      [
+       "ukraine",
+       0.6786
+      ],
+      [
+       "russian",
+       0.6775
+      ],
+      [
+       "baku",
+       0.6535
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7076,
+     "top5_no_exclusion": [
+      [
+       "russia",
+       0.7179
+      ],
+      [
+       "moscow",
+       0.7076
+      ],
+      [
+       "spartak",
+       0.685
+      ],
+      [
+       "ukraine",
+       0.6786
+      ],
+      [
+       "russian",
+       0.6775
+      ]
+     ],
+     "first_no_exclusion": "russia",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–gentilicio",
+     "query": [
+      "france",
+      "french",
+      "germany"
+     ],
+     "expected": "german",
+     "top5": [
+      [
+       "german",
+       0.8004
+      ],
+      [
+       "british",
+       0.7223
+      ],
+      [
+       "austrian",
+       0.7076
+      ],
+      [
+       "swedish",
+       0.688
+      ],
+      [
+       "tabakgegner",
+       0.6792
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8004,
+     "top5_no_exclusion": [
+      [
+       "german",
+       0.8004
+      ],
+      [
+       "germany",
+       0.7752
+      ],
+      [
+       "french",
+       0.7312
+      ],
+      [
+       "british",
+       0.7223
+      ],
+      [
+       "austrian",
+       0.7076
+      ]
+     ],
+     "first_no_exclusion": "german",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–gentilicio",
+     "query": [
+      "china",
+      "chinese",
+      "japan"
+     ],
+     "expected": "japanese",
+     "top5": [
+      [
+       "japanese",
+       0.8408
+      ],
+      [
+       "minoru",
+       0.6667
+      ],
+      [
+       "daigo",
+       0.6425
+      ],
+      [
+       "eternia",
+       0.6384
+      ],
+      [
+       "zeruda",
+       0.6365
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8408,
+     "top5_no_exclusion": [
+      [
+       "japanese",
+       0.8408
+      ],
+      [
+       "japan",
+       0.8036
+      ],
+      [
+       "chinese",
+       0.6974
+      ],
+      [
+       "minoru",
+       0.6667
+      ],
+      [
+       "daigo",
+       0.6425
+      ]
+     ],
+     "first_no_exclusion": "japanese",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–gentilicio",
+     "query": [
+      "italy",
+      "italian",
+      "mexico"
+     ],
+     "expected": "mexican",
+     "top5": [
+      [
+       "mexican",
+       0.7238
+      ],
+      [
+       "tamaulipas",
+       0.7052
+      ],
+      [
+       "veracruz",
+       0.6801
+      ],
+      [
+       "chiapas",
+       0.6618
+      ],
+      [
+       "pesca",
+       0.6589
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7238,
+     "top5_no_exclusion": [
+      [
+       "mexico",
+       0.7618
+      ],
+      [
+       "mexican",
+       0.7238
+      ],
+      [
+       "tamaulipas",
+       0.7052
+      ],
+      [
+       "veracruz",
+       0.6801
+      ],
+      [
+       "chiapas",
+       0.6618
+      ]
+     ],
+     "first_no_exclusion": "mexico",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "comparativo/superlativo",
+     "query": [
+      "good",
+      "better",
+      "bad"
+     ],
+     "expected": "worse",
+     "top5": [
+      [
+       "worse",
+       0.6621
+      ],
+      [
+       "bigger",
+       0.6402
+      ],
+      [
+       "significantly",
+       0.5886
+      ],
+      [
+       "bolder",
+       0.5833
+      ],
+      [
+       "too",
+       0.582
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.6621,
+     "top5_no_exclusion": [
+      [
+       "better",
+       0.7723
+      ],
+      [
+       "bad",
+       0.6708
+      ],
+      [
+       "worse",
+       0.6621
+      ],
+      [
+       "bigger",
+       0.6402
+      ],
+      [
+       "significantly",
+       0.5886
+      ]
+     ],
+     "first_no_exclusion": "better",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "comparativo/superlativo",
+     "query": [
+      "big",
+      "bigger",
+      "small"
+     ],
+     "expected": "smaller",
+     "top5": [
+      [
+       "larger",
+       0.6196
+      ],
+      [
+       "smaller",
+       0.5884
+      ],
+      [
+       "better",
+       0.577
+      ],
+      [
+       "greater",
+       0.5724
+      ],
+      [
+       "significantly",
+       0.5639
+      ]
+     ],
+     "correct": false,
+     "rank": 2,
+     "cosine_expected": 0.5884,
+     "top5_no_exclusion": [
+      [
+       "small",
+       0.6221
+      ],
+      [
+       "larger",
+       0.6196
+      ],
+      [
+       "smaller",
+       0.5884
+      ],
+      [
+       "bigger",
+       0.5816
+      ],
+      [
+       "better",
+       0.577
+      ]
+     ],
+     "first_no_exclusion": "small",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "comparativo/superlativo",
+     "query": [
+      "fast",
+      "fastest",
+      "strong"
+     ],
+     "expected": "strongest",
+     "top5": [
+      [
+       "9.99",
+       0.5827
+      ],
+      [
+       "hundredths",
+       0.5732
+      ],
+      [
+       "hondo",
+       0.567
+      ],
+      [
+       "6.42",
+       0.5649
+      ],
+      [
+       "sabine",
+       0.5533
+      ]
+     ],
+     "correct": false,
+     "rank": 7,
+     "cosine_expected": 0.5453,
+     "top5_no_exclusion": [
+      [
+       "strong",
+       0.6336
+      ],
+      [
+       "9.99",
+       0.5827
+      ],
+      [
+       "hundredths",
+       0.5732
+      ],
+      [
+       "fastest",
+       0.5719
+      ],
+      [
+       "hondo",
+       0.567
+      ]
+     ],
+     "first_no_exclusion": "strong",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "tiempo verbal",
+     "query": [
+      "walk",
+      "walked",
+      "run"
+     ],
+     "expected": "ran",
+     "top5": [
+      [
+       "ran",
+       0.6302
+      ],
+      [
+       "stengel",
+       0.6177
+      ],
+      [
+       "went",
+       0.6054
+      ],
+      [
+       "came",
+       0.6019
+      ],
+      [
+       "swope",
+       0.5832
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.6302,
+     "top5_no_exclusion": [
+      [
+       "run",
+       0.7365
+      ],
+      [
+       "walked",
+       0.6801
+      ],
+      [
+       "ran",
+       0.6302
+      ],
+      [
+       "stengel",
+       0.6177
+      ],
+      [
+       "went",
+       0.6054
+      ]
+     ],
+     "first_no_exclusion": "run",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "tiempo verbal",
+     "query": [
+      "go",
+      "went",
+      "see"
+     ],
+     "expected": "saw",
+     "top5": [
+      [
+       "saw",
+       0.6909
+      ],
+      [
+       "came",
+       0.6397
+      ],
+      [
+       "then",
+       0.6058
+      ],
+      [
+       "time",
+       0.6016
+      ],
+      [
+       "again",
+       0.6012
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.6909,
+     "top5_no_exclusion": [
+      [
+       "went",
+       0.7494
+      ],
+      [
+       "see",
+       0.7402
+      ],
+      [
+       "saw",
+       0.6909
+      ],
+      [
+       "came",
+       0.6397
+      ],
+      [
+       "then",
+       0.6058
+      ]
+     ],
+     "first_no_exclusion": "went",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "tiempo verbal",
+     "query": [
+      "eat",
+      "ate",
+      "take"
+     ],
+     "expected": "took",
+     "top5": [
+      [
+       "took",
+       0.6939
+      ],
+      [
+       "taking",
+       0.6761
+      ],
+      [
+       "bring",
+       0.6297
+      ],
+      [
+       "taken",
+       0.6289
+      ],
+      [
+       "redknap",
+       0.6189
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.6939,
+     "top5_no_exclusion": [
+      [
+       "take",
+       0.7764
+      ],
+      [
+       "took",
+       0.6939
+      ],
+      [
+       "taking",
+       0.6761
+      ],
+      [
+       "bring",
+       0.6297
+      ],
+      [
+       "taken",
+       0.6289
+      ]
+     ],
+     "first_no_exclusion": "take",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "plural",
+     "query": [
+      "car",
+      "cars",
+      "child"
+     ],
+     "expected": "children",
+     "top5": [
+      [
+       "children",
+       0.7324
+      ],
+      [
+       "daughters",
+       0.6796
+      ],
+      [
+       "parents",
+       0.6691
+      ],
+      [
+       "birth",
+       0.651
+      ],
+      [
+       "adulthood",
+       0.6494
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7324,
+     "top5_no_exclusion": [
+      [
+       "child",
+       0.8501
+      ],
+      [
+       "children",
+       0.7324
+      ],
+      [
+       "daughters",
+       0.6796
+      ],
+      [
+       "parents",
+       0.6691
+      ],
+      [
+       "birth",
+       0.651
+      ]
+     ],
+     "first_no_exclusion": "child",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "plural",
+     "query": [
+      "dog",
+      "dogs",
+      "city"
+     ],
+     "expected": "cities",
+     "top5": [
+      [
+       "cities",
+       0.6633
+      ],
+      [
+       "adilabad",
+       0.6319
+      ],
+      [
+       "motagua",
+       0.6294
+      ],
+      [
+       "area",
+       0.6267
+      ],
+      [
+       "towns",
+       0.6212
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.6633,
+     "top5_no_exclusion": [
+      [
+       "city",
+       0.8173
+      ],
+      [
+       "cities",
+       0.6633
+      ],
+      [
+       "adilabad",
+       0.6319
+      ],
+      [
+       "motagua",
+       0.6294
+      ],
+      [
+       "area",
+       0.6267
+      ]
+     ],
+     "first_no_exclusion": "city",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "plural",
+     "query": [
+      "man",
+      "men",
+      "woman"
+     ],
+     "expected": "women",
+     "top5": [
+      [
+       "women",
+       0.741
+      ],
+      [
+       "prostitutes",
+       0.6036
+      ],
+      [
+       "nurses",
+       0.6014
+      ],
+      [
+       "wrongs",
+       0.595
+      ],
+      [
+       "bisexuals",
+       0.5877
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.741,
+     "top5_no_exclusion": [
+      [
+       "men",
+       0.7588
+      ],
+      [
+       "women",
+       0.741
+      ],
+      [
+       "woman",
+       0.6911
+      ],
+      [
+       "prostitutes",
+       0.6036
+      ],
+      [
+       "nurses",
+       0.6014
+      ]
+     ],
+     "first_no_exclusion": "men",
+     "first_is_query": true,
+     "matches_gensim": true
+    }
+   ],
+   "individual_accuracy": 0.7222222222222222,
+   "matches_gensim_all": true
+  },
+  "GloVe": {
+   "vocab_size": 400000,
+   "dim": 100,
+   "analogy_add": {
+    "semantic": {
+     "accuracy": 0.6122332859174965,
+     "correct": 2152,
+     "evaluated": 3515,
+     "total": 8869,
+     "coverage": 0.39632427556658023
+    },
+    "syntactic": {
+     "accuracy": 0.683060761609168,
+     "correct": 5722,
+     "evaluated": 8377,
+     "total": 10675,
+     "coverage": 0.7847306791569086
+    },
+    "total": {
+     "accuracy": 0.662125798856374,
+     "correct": 7874,
+     "evaluated": 11892,
+     "total": 19544,
+     "coverage": 0.6084731887024151
+    },
+    "per_category": {
+     "capital-common-countries": {
+      "correct": 393,
+      "evaluated": 420,
+      "total": 506,
+      "accuracy": 0.9357142857142857
+     },
+     "capital-world": {
+      "correct": 968,
+      "evaluated": 1091,
+      "total": 4524,
+      "accuracy": 0.8872593950504125
+     },
+     "currency": {
+      "correct": 4,
+      "evaluated": 88,
+      "total": 866,
+      "accuracy": 0.045454545454545456
+     },
+     "city-in-state": {
+      "correct": 485,
+      "evaluated": 1574,
+      "total": 2467,
+      "accuracy": 0.30813214739517153
+     },
+     "family": {
+      "correct": 302,
+      "evaluated": 342,
+      "total": 506,
+      "accuracy": 0.8830409356725146
+     },
+     "gram1-adjective-to-adverb": {
+      "correct": 227,
+      "evaluated": 812,
+      "total": 992,
+      "accuracy": 0.27955665024630544
+     },
+     "gram2-opposite": {
+      "correct": 74,
+      "evaluated": 272,
+      "total": 812,
+      "accuracy": 0.27205882352941174
+     },
+     "gram3-comparative": {
+      "correct": 1070,
+      "evaluated": 1332,
+      "total": 1332,
+      "accuracy": 0.8033033033033034
+     },
+     "gram4-superlative": {
+      "correct": 431,
+      "evaluated": 702,
+      "total": 1122,
+      "accuracy": 0.613960113960114
+     },
+     "gram5-present-participle": {
+      "correct": 628,
+      "evaluated": 870,
+      "total": 1056,
+      "accuracy": 0.7218390804597701
+     },
+     "gram6-nationality-adjective": {
+      "correct": 1265,
+      "evaluated": 1299,
+      "total": 1599,
+      "accuracy": 0.9738260200153964
+     },
+     "gram7-past-tense": {
+      "correct": 783,
+      "evaluated": 1332,
+      "total": 1560,
+      "accuracy": 0.5878378378378378
+     },
+     "gram8-plural": {
+      "correct": 838,
+      "evaluated": 1056,
+      "total": 1332,
+      "accuracy": 0.7935606060606061
+     },
+     "gram9-plural-verbs": {
+      "correct": 406,
+      "evaluated": 702,
+      "total": 870,
+      "accuracy": 0.5783475783475783
+     }
+    }
+   },
+   "analogy_mul": {
+    "semantic": {
+     "accuracy": 0.5871977240398293,
+     "correct": 2064,
+     "evaluated": 3515,
+     "total": 8869,
+     "coverage": 0.39632427556658023
+    },
+    "syntactic": {
+     "accuracy": 0.6692133221917154,
+     "correct": 5606,
+     "evaluated": 8377,
+     "total": 10675,
+     "coverage": 0.7847306791569086
+    },
+    "total": {
+     "accuracy": 0.6449714093508241,
+     "correct": 7670,
+     "evaluated": 11892,
+     "total": 19544,
+     "coverage": 0.6084731887024151
+    },
+    "per_category": {
+     "capital-common-countries": {
+      "correct": 384,
+      "evaluated": 420,
+      "total": 506,
+      "accuracy": 0.9142857142857143
+     },
+     "capital-world": {
+      "correct": 941,
+      "evaluated": 1091,
+      "total": 4524,
+      "accuracy": 0.8625114573785518
+     },
+     "currency": {
+      "correct": 4,
+      "evaluated": 88,
+      "total": 866,
+      "accuracy": 0.045454545454545456
+     },
+     "city-in-state": {
+      "correct": 436,
+      "evaluated": 1574,
+      "total": 2467,
+      "accuracy": 0.2770012706480305
+     },
+     "family": {
+      "correct": 299,
+      "evaluated": 342,
+      "total": 506,
+      "accuracy": 0.8742690058479532
+     },
+     "gram1-adjective-to-adverb": {
+      "correct": 226,
+      "evaluated": 812,
+      "total": 992,
+      "accuracy": 0.27832512315270935
+     },
+     "gram2-opposite": {
+      "correct": 65,
+      "evaluated": 272,
+      "total": 812,
+      "accuracy": 0.23897058823529413
+     },
+     "gram3-comparative": {
+      "correct": 1040,
+      "evaluated": 1332,
+      "total": 1332,
+      "accuracy": 0.7807807807807807
+     },
+     "gram4-superlative": {
+      "correct": 436,
+      "evaluated": 702,
+      "total": 1122,
+      "accuracy": 0.6210826210826211
+     },
+     "gram5-present-participle": {
+      "correct": 624,
+      "evaluated": 870,
+      "total": 1056,
+      "accuracy": 0.7172413793103448
+     },
+     "gram6-nationality-adjective": {
+      "correct": 1245,
+      "evaluated": 1299,
+      "total": 1599,
+      "accuracy": 0.9584295612009238
+     },
+     "gram7-past-tense": {
+      "correct": 749,
+      "evaluated": 1332,
+      "total": 1560,
+      "accuracy": 0.5623123123123123
+     },
+     "gram8-plural": {
+      "correct": 800,
+      "evaluated": 1056,
+      "total": 1332,
+      "accuracy": 0.7575757575757576
+     },
+     "gram9-plural-verbs": {
+      "correct": 421,
+      "evaluated": 702,
+      "total": 870,
+      "accuracy": 0.5997150997150997
+     }
+    }
+   },
+   "wordsim": {
+    "spearman": 0.5327354323238274,
+    "pvalue": 2.8654146580559013e-27,
+    "oov_ratio": 0.0
+   },
+   "simlex": {
+    "spearman": 0.29754985300614595,
+    "pvalue": 7.15696492612068e-22,
+    "oov_ratio": 0.0
+   },
+   "parallelism": {
+    "capital-common-countries": {
+     "mean_cosine": 0.58050936460495,
+     "pairs": 21
+    },
+    "capital-world": {
+     "mean_cosine": 0.5671843886375427,
+     "pairs": 57
+    },
+    "currency": {
+     "mean_cosine": 0.2680690288543701,
+     "pairs": 10
+    },
+    "city-in-state": {
+     "mean_cosine": 0.34121519327163696,
+     "pairs": 54
+    },
+    "family": {
+     "mean_cosine": 0.5066269636154175,
+     "pairs": 19
+    },
+    "gram1-adjective-to-adverb": {
+     "mean_cosine": 0.270798921585083,
+     "pairs": 29
+    },
+    "gram2-opposite": {
+     "mean_cosine": 0.23107434809207916,
+     "pairs": 17
+    },
+    "gram3-comparative": {
+     "mean_cosine": 0.4243483543395996,
+     "pairs": 37
+    },
+    "gram4-superlative": {
+     "mean_cosine": 0.4653587341308594,
+     "pairs": 27
+    },
+    "gram5-present-participle": {
+     "mean_cosine": 0.3185265064239502,
+     "pairs": 30
+    },
+    "gram6-nationality-adjective": {
+     "mean_cosine": 0.7491238117218018,
+     "pairs": 37
+    },
+    "gram7-past-tense": {
+     "mean_cosine": 0.28884872794151306,
+     "pairs": 37
+    },
+    "gram8-plural": {
+     "mean_cosine": 0.31632527709007263,
+     "pairs": 33
+    },
+    "gram9-plural-verbs": {
+     "mean_cosine": 0.35658520460128784,
+     "pairs": 27
+    }
+   },
+   "parallelism_mean": 0.4060424874935831,
+   "individual": [
+    {
+     "type": "género",
+     "query": [
+      "man",
+      "woman",
+      "king"
+     ],
+     "expected": "queen",
+     "top5": [
+      [
+       "queen",
+       0.7699
+      ],
+      [
+       "monarch",
+       0.6843
+      ],
+      [
+       "throne",
+       0.6756
+      ],
+      [
+       "daughter",
+       0.6595
+      ],
+      [
+       "princess",
+       0.6521
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7699,
+     "top5_no_exclusion": [
+      [
+       "king",
+       0.8361
+      ],
+      [
+       "queen",
+       0.7699
+      ],
+      [
+       "monarch",
+       0.6843
+      ],
+      [
+       "throne",
+       0.6756
+      ],
+      [
+       "daughter",
+       0.6595
+      ]
+     ],
+     "first_no_exclusion": "king",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "género",
+     "query": [
+      "brother",
+      "sister",
+      "father"
+     ],
+     "expected": "mother",
+     "top5": [
+      [
+       "mother",
+       0.8978
+      ],
+      [
+       "daughter",
+       0.8286
+      ],
+      [
+       "wife",
+       0.8046
+      ],
+      [
+       "grandmother",
+       0.7934
+      ],
+      [
+       "her",
+       0.7555
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8978,
+     "top5_no_exclusion": [
+      [
+       "sister",
+       0.9319
+      ],
+      [
+       "mother",
+       0.8978
+      ],
+      [
+       "daughter",
+       0.8286
+      ],
+      [
+       "wife",
+       0.8046
+      ],
+      [
+       "grandmother",
+       0.7934
+      ]
+     ],
+     "first_no_exclusion": "sister",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "género",
+     "query": [
+      "actor",
+      "actress",
+      "prince"
+     ],
+     "expected": "princess",
+     "top5": [
+      [
+       "princess",
+       0.8238
+      ],
+      [
+       "queen",
+       0.7242
+      ],
+      [
+       "duchess",
+       0.6766
+      ],
+      [
+       "daughter",
+       0.6737
+      ],
+      [
+       "niece",
+       0.6271
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8238,
+     "top5_no_exclusion": [
+      [
+       "prince",
+       0.8708
+      ],
+      [
+       "princess",
+       0.8238
+      ],
+      [
+       "queen",
+       0.7242
+      ],
+      [
+       "duchess",
+       0.6766
+      ],
+      [
+       "daughter",
+       0.6737
+      ]
+     ],
+     "first_no_exclusion": "prince",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–capital",
+     "query": [
+      "france",
+      "paris",
+      "italy"
+     ],
+     "expected": "rome",
+     "top5": [
+      [
+       "rome",
+       0.819
+      ],
+      [
+       "milan",
+       0.7376
+      ],
+      [
+       "naples",
+       0.7118
+      ],
+      [
+       "venice",
+       0.7015
+      ],
+      [
+       "turin",
+       0.6995
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.819,
+     "top5_no_exclusion": [
+      [
+       "rome",
+       0.819
+      ],
+      [
+       "italy",
+       0.7528
+      ],
+      [
+       "milan",
+       0.7376
+      ],
+      [
+       "paris",
+       0.7216
+      ],
+      [
+       "naples",
+       0.7118
+      ]
+     ],
+     "first_no_exclusion": "rome",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–capital",
+     "query": [
+      "japan",
+      "tokyo",
+      "germany"
+     ],
+     "expected": "berlin",
+     "top5": [
+      [
+       "frankfurt",
+       0.8426
+      ],
+      [
+       "berlin",
+       0.8191
+      ],
+      [
+       "munich",
+       0.7302
+      ],
+      [
+       "paris",
+       0.7113
+      ],
+      [
+       "vienna",
+       0.6937
+      ]
+     ],
+     "correct": false,
+     "rank": 2,
+     "cosine_expected": 0.8191,
+     "top5_no_exclusion": [
+      [
+       "frankfurt",
+       0.8426
+      ],
+      [
+       "berlin",
+       0.8191
+      ],
+      [
+       "germany",
+       0.7606
+      ],
+      [
+       "munich",
+       0.7302
+      ],
+      [
+       "paris",
+       0.7113
+      ]
+     ],
+     "first_no_exclusion": "frankfurt",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–capital",
+     "query": [
+      "spain",
+      "madrid",
+      "russia"
+     ],
+     "expected": "moscow",
+     "top5": [
+      [
+       "moscow",
+       0.8552
+      ],
+      [
+       "kiev",
+       0.7357
+      ],
+      [
+       "kremlin",
+       0.6723
+      ],
+      [
+       "tehran",
+       0.6625
+      ],
+      [
+       "russian",
+       0.6578
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8552,
+     "top5_no_exclusion": [
+      [
+       "moscow",
+       0.8552
+      ],
+      [
+       "kiev",
+       0.7357
+      ],
+      [
+       "russia",
+       0.7188
+      ],
+      [
+       "kremlin",
+       0.6723
+      ],
+      [
+       "tehran",
+       0.6625
+      ]
+     ],
+     "first_no_exclusion": "moscow",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–gentilicio",
+     "query": [
+      "france",
+      "french",
+      "germany"
+     ],
+     "expected": "german",
+     "top5": [
+      [
+       "german",
+       0.9597
+      ],
+      [
+       "austrian",
+       0.7773
+      ],
+      [
+       "swiss",
+       0.7663
+      ],
+      [
+       "swedish",
+       0.7342
+      ],
+      [
+       "polish",
+       0.726
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.9597,
+     "top5_no_exclusion": [
+      [
+       "german",
+       0.9597
+      ],
+      [
+       "germany",
+       0.7963
+      ],
+      [
+       "austrian",
+       0.7773
+      ],
+      [
+       "swiss",
+       0.7663
+      ],
+      [
+       "swedish",
+       0.7342
+      ]
+     ],
+     "first_no_exclusion": "german",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–gentilicio",
+     "query": [
+      "china",
+      "chinese",
+      "japan"
+     ],
+     "expected": "japanese",
+     "top5": [
+      [
+       "japanese",
+       0.9523
+      ],
+      [
+       "korean",
+       0.7509
+      ],
+      [
+       "taiwanese",
+       0.6893
+      ],
+      [
+       "tokyo",
+       0.6622
+      ],
+      [
+       "asian",
+       0.6343
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.9523,
+     "top5_no_exclusion": [
+      [
+       "japanese",
+       0.9523
+      ],
+      [
+       "japan",
+       0.8365
+      ],
+      [
+       "korean",
+       0.7509
+      ],
+      [
+       "chinese",
+       0.74
+      ],
+      [
+       "taiwanese",
+       0.6893
+      ]
+     ],
+     "first_no_exclusion": "japanese",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "país–gentilicio",
+     "query": [
+      "italy",
+      "italian",
+      "mexico"
+     ],
+     "expected": "mexican",
+     "top5": [
+      [
+       "mexican",
+       0.9212
+      ],
+      [
+       "venezuelan",
+       0.7438
+      ],
+      [
+       "spanish",
+       0.7392
+      ],
+      [
+       "brazilian",
+       0.7314
+      ],
+      [
+       "peruvian",
+       0.7258
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.9212,
+     "top5_no_exclusion": [
+      [
+       "mexican",
+       0.9212
+      ],
+      [
+       "mexico",
+       0.772
+      ],
+      [
+       "venezuelan",
+       0.7438
+      ],
+      [
+       "spanish",
+       0.7392
+      ],
+      [
+       "brazilian",
+       0.7314
+      ]
+     ],
+     "first_no_exclusion": "mexican",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "comparativo/superlativo",
+     "query": [
+      "good",
+      "better",
+      "bad"
+     ],
+     "expected": "worse",
+     "top5": [
+      [
+       "worse",
+       0.8443
+      ],
+      [
+       "too",
+       0.7491
+      ],
+      [
+       "even",
+       0.7306
+      ],
+      [
+       "getting",
+       0.7304
+      ],
+      [
+       "because",
+       0.7299
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8443,
+     "top5_no_exclusion": [
+      [
+       "bad",
+       0.8963
+      ],
+      [
+       "worse",
+       0.8443
+      ],
+      [
+       "better",
+       0.7766
+      ],
+      [
+       "too",
+       0.7491
+      ],
+      [
+       "even",
+       0.7306
+      ]
+     ],
+     "first_no_exclusion": "bad",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "comparativo/superlativo",
+     "query": [
+      "big",
+      "bigger",
+      "small"
+     ],
+     "expected": "smaller",
+     "top5": [
+      [
+       "larger",
+       0.8925
+      ],
+      [
+       "smaller",
+       0.8694
+      ],
+      [
+       "large",
+       0.7933
+      ],
+      [
+       "tiny",
+       0.7139
+      ],
+      [
+       "size",
+       0.6559
+      ]
+     ],
+     "correct": false,
+     "rank": 2,
+     "cosine_expected": 0.8694,
+     "top5_no_exclusion": [
+      [
+       "larger",
+       0.8925
+      ],
+      [
+       "smaller",
+       0.8694
+      ],
+      [
+       "small",
+       0.825
+      ],
+      [
+       "large",
+       0.7933
+      ],
+      [
+       "bigger",
+       0.7481
+      ]
+     ],
+     "first_no_exclusion": "larger",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "comparativo/superlativo",
+     "query": [
+      "fast",
+      "fastest",
+      "strong"
+     ],
+     "expected": "strongest",
+     "top5": [
+      [
+       "strongest",
+       0.7035
+      ],
+      [
+       "overall",
+       0.621
+      ],
+      [
+       "fourth",
+       0.6108
+      ],
+      [
+       "third",
+       0.5891
+      ],
+      [
+       "fifth",
+       0.5738
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.7035,
+     "top5_no_exclusion": [
+      [
+       "strongest",
+       0.7035
+      ],
+      [
+       "fastest",
+       0.6716
+      ],
+      [
+       "strong",
+       0.6671
+      ],
+      [
+       "overall",
+       0.621
+      ],
+      [
+       "fourth",
+       0.6108
+      ]
+     ],
+     "first_no_exclusion": "strongest",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "tiempo verbal",
+     "query": [
+      "walk",
+      "walked",
+      "run"
+     ],
+     "expected": "ran",
+     "top5": [
+      [
+       "went",
+       0.7142
+      ],
+      [
+       "drove",
+       0.7109
+      ],
+      [
+       "ran",
+       0.7099
+      ],
+      [
+       "came",
+       0.6869
+      ],
+      [
+       "last",
+       0.6609
+      ]
+     ],
+     "correct": false,
+     "rank": 3,
+     "cosine_expected": 0.7099,
+     "top5_no_exclusion": [
+      [
+       "run",
+       0.7748
+      ],
+      [
+       "went",
+       0.7142
+      ],
+      [
+       "drove",
+       0.7109
+      ],
+      [
+       "ran",
+       0.7099
+      ],
+      [
+       "walked",
+       0.7067
+      ]
+     ],
+     "first_no_exclusion": "run",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "tiempo verbal",
+     "query": [
+      "go",
+      "went",
+      "see"
+     ],
+     "expected": "saw",
+     "top5": [
+      [
+       "saw",
+       0.8556
+      ],
+      [
+       "came",
+       0.8108
+      ],
+      [
+       "when",
+       0.7881
+      ],
+      [
+       "later",
+       0.785
+      ],
+      [
+       "turned",
+       0.7804
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8556,
+     "top5_no_exclusion": [
+      [
+       "saw",
+       0.8556
+      ],
+      [
+       "came",
+       0.8108
+      ],
+      [
+       "went",
+       0.8056
+      ],
+      [
+       "when",
+       0.7881
+      ],
+      [
+       "later",
+       0.785
+      ]
+     ],
+     "first_no_exclusion": "saw",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "tiempo verbal",
+     "query": [
+      "eat",
+      "ate",
+      "take"
+     ],
+     "expected": "took",
+     "top5": [
+      [
+       "took",
+       0.8572
+      ],
+      [
+       "came",
+       0.7918
+      ],
+      [
+       "had",
+       0.7901
+      ],
+      [
+       "taken",
+       0.7795
+      ],
+      [
+       "taking",
+       0.7749
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8572,
+     "top5_no_exclusion": [
+      [
+       "took",
+       0.8572
+      ],
+      [
+       "came",
+       0.7918
+      ],
+      [
+       "had",
+       0.7901
+      ],
+      [
+       "taken",
+       0.7795
+      ],
+      [
+       "taking",
+       0.7749
+      ]
+     ],
+     "first_no_exclusion": "took",
+     "first_is_query": false,
+     "matches_gensim": true
+    },
+    {
+     "type": "plural",
+     "query": [
+      "car",
+      "cars",
+      "child"
+     ],
+     "expected": "children",
+     "top5": [
+      [
+       "children",
+       0.8238
+      ],
+      [
+       "mothers",
+       0.718
+      ],
+      [
+       "parents",
+       0.6872
+      ],
+      [
+       "babies",
+       0.6844
+      ],
+      [
+       "sex",
+       0.6714
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8238,
+     "top5_no_exclusion": [
+      [
+       "child",
+       0.8421
+      ],
+      [
+       "children",
+       0.8238
+      ],
+      [
+       "mothers",
+       0.718
+      ],
+      [
+       "parents",
+       0.6872
+      ],
+      [
+       "babies",
+       0.6844
+      ]
+     ],
+     "first_no_exclusion": "child",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "plural",
+     "query": [
+      "dog",
+      "dogs",
+      "city"
+     ],
+     "expected": "cities",
+     "top5": [
+      [
+       "cities",
+       0.806
+      ],
+      [
+       "residents",
+       0.744
+      ],
+      [
+       "area",
+       0.6913
+      ],
+      [
+       "neighborhoods",
+       0.6905
+      ],
+      [
+       "town",
+       0.6876
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.806,
+     "top5_no_exclusion": [
+      [
+       "city",
+       0.877
+      ],
+      [
+       "cities",
+       0.806
+      ],
+      [
+       "residents",
+       0.744
+      ],
+      [
+       "area",
+       0.6913
+      ],
+      [
+       "neighborhoods",
+       0.6905
+      ]
+     ],
+     "first_no_exclusion": "city",
+     "first_is_query": true,
+     "matches_gensim": true
+    },
+    {
+     "type": "plural",
+     "query": [
+      "man",
+      "men",
+      "woman"
+     ],
+     "expected": "women",
+     "top5": [
+      [
+       "women",
+       0.8989
+      ],
+      [
+       "girls",
+       0.7196
+      ],
+      [
+       "female",
+       0.6917
+      ],
+      [
+       "children",
+       0.6593
+      ],
+      [
+       "male",
+       0.6572
+      ]
+     ],
+     "correct": true,
+     "rank": 1,
+     "cosine_expected": 0.8989,
+     "top5_no_exclusion": [
+      [
+       "women",
+       0.8989
+      ],
+      [
+       "men",
+       0.8594
+      ],
+      [
+       "girls",
+       0.7196
+      ],
+      [
+       "woman",
+       0.7176
+      ],
+      [
+       "female",
+       0.6917
+      ]
+     ],
+     "first_no_exclusion": "women",
+     "first_is_query": false,
+     "matches_gensim": true
+    }
+   ],
+   "individual_accuracy": 0.8333333333333334,
+   "matches_gensim_all": true
+  }
+ },
+ "tsne": {
+  "words": [
+   "france",
+   "germany",
+   "italy",
+   "spain",
+   "russia",
+   "china",
+   "japan",
+   "india",
+   "brazil",
+   "mexico",
+   "canada",
+   "australia",
+   "egypt",
+   "turkey",
+   "greece",
+   "poland",
+   "sweden",
+   "norway",
+   "denmark",
+   "finland",
+   "ireland",
+   "portugal",
+   "belgium",
+   "netherlands",
+   "austria",
+   "switzerland",
+   "hungary",
+   "romania",
+   "ukraine",
+   "iran",
+   "iraq",
+   "israel",
+   "pakistan",
+   "afghanistan",
+   "indonesia",
+   "vietnam",
+   "thailand",
+   "korea",
+   "argentina",
+   "chile",
+   "peru",
+   "colombia",
+   "venezuela",
+   "cuba",
+   "nigeria",
+   "kenya",
+   "ethiopia",
+   "morocco",
+   "algeria",
+   "libya",
+   "sudan",
+   "syria",
+   "lebanon",
+   "jordan",
+   "serbia",
+   "croatia",
+   "bulgaria",
+   "albania",
+   "scotland",
+   "wales",
+   "england",
+   "one",
+   "two",
+   "three",
+   "four",
+   "five",
+   "six",
+   "seven",
+   "eight",
+   "nine",
+   "ten",
+   "eleven",
+   "twelve",
+   "thirteen",
+   "fourteen",
+   "fifteen",
+   "sixteen",
+   "seventeen",
+   "eighteen",
+   "nineteen",
+   "twenty",
+   "thirty",
+   "forty",
+   "fifty",
+   "sixty",
+   "seventy",
+   "eighty",
+   "ninety",
+   "hundred",
+   "thousand",
+   "million",
+   "billion",
+   "dozen",
+   "first",
+   "second",
+   "third",
+   "fourth",
+   "fifth",
+   "sixth",
+   "seventh",
+   "eighth",
+   "ninth",
+   "tenth",
+   "half",
+   "quarter",
+   "double",
+   "triple",
+   "single",
+   "several",
+   "few",
+   "many",
+   "numerous",
+   "zero",
+   "hundreds",
+   "thousands",
+   "millions",
+   "twice",
+   "thrice",
+   "once",
+   "dog",
+   "cat",
+   "horse",
+   "cow",
+   "pig",
+   "sheep",
+   "goat",
+   "chicken",
+   "duck",
+   "goose",
+   "rabbit",
+   "mouse",
+   "rat",
+   "wolf",
+   "fox",
+   "bear",
+   "lion",
+   "tiger",
+   "leopard",
+   "elephant",
+   "giraffe",
+   "zebra",
+   "monkey",
+   "ape",
+   "gorilla",
+   "deer",
+   "elk",
+   "moose",
+   "camel",
+   "donkey",
+   "mule",
+   "snake",
+   "lizard",
+   "frog",
+   "toad",
+   "turtle",
+   "crocodile",
+   "shark",
+   "whale",
+   "dolphin",
+   "seal",
+   "otter",
+   "beaver",
+   "squirrel",
+   "bat",
+   "owl",
+   "eagle",
+   "hawk",
+   "falcon",
+   "parrot",
+   "pigeon",
+   "crow",
+   "swan",
+   "penguin",
+   "salmon",
+   "trout",
+   "bee",
+   "ant",
+   "spider",
+   "butterfly",
+   "walk",
+   "run",
+   "jump",
+   "swim",
+   "climb",
+   "throw",
+   "catch",
+   "push",
+   "pull",
+   "carry",
+   "lift",
+   "drop",
+   "eat",
+   "drink",
+   "sleep",
+   "sing",
+   "dance",
+   "write",
+   "read",
+   "speak",
+   "listen",
+   "watch",
+   "build",
+   "destroy",
+   "create",
+   "break",
+   "open",
+   "close",
+   "buy",
+   "sell",
+   "pay",
+   "borrow",
+   "lend",
+   "give",
+   "take",
+   "send",
+   "receive",
+   "bring",
+   "teach",
+   "learn",
+   "study",
+   "think",
+   "believe",
+   "know",
+   "understand",
+   "remember",
+   "forget",
+   "explain",
+   "describe",
+   "discuss",
+   "argue",
+   "decide",
+   "choose",
+   "january",
+   "february",
+   "march",
+   "april",
+   "may",
+   "june",
+   "july",
+   "august",
+   "september",
+   "october",
+   "november",
+   "december",
+   "monday",
+   "tuesday",
+   "wednesday",
+   "thursday",
+   "friday",
+   "saturday",
+   "sunday",
+   "morning",
+   "afternoon",
+   "evening",
+   "night",
+   "midnight",
+   "noon",
+   "week",
+   "month",
+   "year",
+   "decade",
+   "century",
+   "spring",
+   "summer",
+   "autumn",
+   "winter",
+   "yesterday",
+   "today",
+   "tomorrow",
+   "weekend",
+   "dawn",
+   "dusk",
+   "season",
+   "annual",
+   "weekly",
+   "daily",
+   "hourly",
+   "red",
+   "blue",
+   "green",
+   "yellow",
+   "black",
+   "white",
+   "orange",
+   "purple",
+   "pink",
+   "brown",
+   "grey",
+   "gray",
+   "violet",
+   "scarlet",
+   "crimson",
+   "maroon",
+   "turquoise",
+   "beige",
+   "ivory",
+   "golden",
+   "silver",
+   "bronze",
+   "cyan",
+   "magenta",
+   "navy",
+   "olive",
+   "teal",
+   "indigo",
+   "emerald",
+   "amber",
+   "lavender",
+   "doctor",
+   "nurse",
+   "teacher",
+   "lawyer",
+   "engineer",
+   "farmer",
+   "soldier",
+   "pilot",
+   "sailor",
+   "priest",
+   "bishop",
+   "judge",
+   "architect",
+   "scientist",
+   "professor",
+   "student",
+   "actor",
+   "singer",
+   "writer",
+   "poet",
+   "painter",
+   "sculptor",
+   "composer",
+   "musician",
+   "journalist",
+   "editor",
+   "photographer",
+   "chef",
+   "baker",
+   "butcher",
+   "carpenter",
+   "plumber",
+   "mechanic",
+   "electrician",
+   "merchant",
+   "banker",
+   "accountant",
+   "economist",
+   "politician",
+   "diplomat",
+   "ambassador",
+   "senator",
+   "governor",
+   "mayor",
+   "president",
+   "minister",
+   "officer",
+   "sergeant",
+   "captain",
+   "detective",
+   "surgeon",
+   "dentist",
+   "pharmacist",
+   "librarian",
+   "bread",
+   "cheese",
+   "butter",
+   "milk",
+   "egg",
+   "eggs",
+   "meat",
+   "beef",
+   "pork",
+   "fish",
+   "rice",
+   "wheat",
+   "corn",
+   "potato",
+   "potatoes",
+   "tomato",
+   "tomatoes",
+   "onion",
+   "garlic",
+   "apple",
+   "apples",
+   "banana",
+   "grape",
+   "grapes",
+   "lemon",
+   "sugar",
+   "salt",
+   "pepper",
+   "honey",
+   "wine",
+   "beer",
+   "coffee",
+   "tea",
+   "chocolate",
+   "cake",
+   "soup",
+   "salad",
+   "sauce",
+   "pasta",
+   "pizza",
+   "sandwich",
+   "fruit",
+   "vegetables",
+   "bean",
+   "beans",
+   "nuts",
+   "oil",
+   "vinegar",
+   "flour",
+   "cream",
+   "yogurt",
+   "football",
+   "soccer",
+   "baseball",
+   "basketball",
+   "hockey",
+   "tennis",
+   "golf",
+   "cricket",
+   "rugby",
+   "boxing",
+   "wrestling",
+   "swimming",
+   "cycling",
+   "skiing",
+   "skating",
+   "volleyball",
+   "handball",
+   "badminton",
+   "fencing",
+   "rowing",
+   "sailing",
+   "surfing",
+   "athletics",
+   "marathon",
+   "sprint",
+   "polo",
+   "karate",
+   "judo",
+   "archery",
+   "gymnastics",
+   "softball",
+   "lacrosse",
+   "snooker",
+   "darts",
+   "bowling",
+   "triathlon",
+   "decathlon",
+   "motorsport",
+   "racing",
+   "squash",
+   "netball",
+   "curling",
+   "biathlon",
+   "taekwondo"
+  ],
+  "labels": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8
+  ],
+  "groups": [
+   "países",
+   "números",
+   "animales",
+   "verbos",
+   "tiempo",
+   "colores",
+   "profesiones",
+   "comida",
+   "deportes"
+  ],
+  "coords": [
+   [
+    -24.860000610351562,
+    -0.33500000834465027
+   ],
+   [
+    -25.52400016784668,
+    0.8690000176429749
+   ],
+   [
+    -25.882999420166016,
+    -0.19499999284744263
+   ],
+   [
+    -25.405000686645508,
+    -1.222000002861023
+   ],
+   [
+    -26.340999603271484,
+    2.1579999923706055
+   ],
+   [
+    -21.895999908447266,
+    -2.1440000534057617
+   ],
+   [
+    -21.749000549316406,
+    -1.4199999570846558
+   ],
+   [
+    -22.2810001373291,
+    -3.3940000534057617
+   ],
+   [
+    -25.410999298095703,
+    -2.48799991607666
+   ],
+   [
+    -27.069000244140625,
+    -3.0940001010894775
+   ],
+   [
+    -23.759000778198242,
+    2.7809998989105225
+   ],
+   [
+    -21.391000747680664,
+    0.503000020980835
+   ],
+   [
+    -23.059999465942383,
+    -6.38700008392334
+   ],
+   [
+    -26.799999237060547,
+    -0.6899999976158142
+   ],
+   [
+    -27.259000778198242,
+    -0.25099998712539673
+   ],
+   [
+    -26.95199966430664,
+    1.996000051498413
+   ],
+   [
+    -24.966999053955078,
+    1.9579999446868896
+   ],
+   [
+    -24.391000747680664,
+    1.9620000123977661
+   ],
+   [
+    -24.236000061035156,
+    1.4630000591278076
+   ],
+   [
+    -25.305999755859375,
+    2.240999937057495
+   ],
+   [
+    -22.847000122070312,
+    1.4670000076293945
+   ],
+   [
+    -25.084999084472656,
+    -1.246999979019165
+   ],
+   [
+    -24.812999725341797,
+    0.46700000762939453
+   ],
+   [
+    -24.327999114990234,
+    0.36399999260902405
+   ],
+   [
+    -26.25,
+    0.7929999828338623
+   ],
+   [
+    -25.22599983215332,
+    1.00600004196167
+   ],
+   [
+    -26.948999404907227,
+    0.9929999709129333
+   ],
+   [
+    -27.492000579833984,
+    1.3960000276565552
+   ],
+   [
+    -27.16900062561035,
+    2.385999917984009
+   ],
+   [
+    -22.268999099731445,
+    -5.104000091552734
+   ],
+   [
+    -21.575000762939453,
+    -5.327000141143799
+   ],
+   [
+    -21.76300048828125,
+    -6.340000152587891
+   ],
+   [
+    -21.72800064086914,
+    -4.067999839782715
+   ],
+   [
+    -21.415000915527344,
+    -4.861999988555908
+   ],
+   [
+    -22.450000762939453,
+    -2.5209999084472656
+   ],
+   [
+    -20.77400016784668,
+    -2.947999954223633
+   ],
+   [
+    -21.670000076293945,
+    -2.822999954223633
+   ],
+   [
+    -21.371000289916992,
+    -2.0859999656677246
+   ],
+   [
+    -26.079999923706055,
+    -2.6710000038146973
+   ],
+   [
+    -25.777000427246094,
+    -2.864000082015991
+   ],
+   [
+    -25.6560001373291,
+    -3.374000072479248
+   ],
+   [
+    -26.36400032043457,
+    -3.571000099182129
+   ],
+   [
+    -26.315000534057617,
+    -3.615999937057495
+   ],
+   [
+    -27.371999740600586,
+    -3.3380000591278076
+   ],
+   [
+    -25.097999572753906,
+    -5.432000160217285
+   ],
+   [
+    -25.136999130249023,
+    -5.9670000076293945
+   ],
+   [
+    -25.0,
+    -5.9730000495910645
+   ],
+   [
+    -24.437000274658203,
+    -4.665999889373779
+   ],
+   [
+    -24.202999114990234,
+    -4.932000160217285
+   ],
+   [
+    -23.09600067138672,
+    -5.572000026702881
+   ],
+   [
+    -23.8799991607666,
+    -5.929999828338623
+   ],
+   [
+    -22.726999282836914,
+    -6.197000026702881
+   ],
+   [
+    -22.106000900268555,
+    -6.6529998779296875
+   ],
+   [
+    -20.509000778198242,
+    -7.616000175476074
+   ],
+   [
+    -28.48699951171875,
+    1.0859999656677246
+   ],
+   [
+    -28.90399932861328,
+    1.0750000476837158
+   ],
+   [
+    -27.67300033569336,
+    0.875
+   ],
+   [
+    -28.28499984741211,
+    0.3100000023841858
+   ],
+   [
+    -22.243000030517578,
+    1.6430000066757202
+   ],
+   [
+    -21.402000427246094,
+    1.2630000114440918
+   ],
+   [
+    -21.493000030517578,
+    1.468000054359436
+   ],
+   [
+    -8.303000450134277,
+    21.17300033569336
+   ],
+   [
+    -7.468999862670898,
+    21.945999145507812
+   ],
+   [
+    -8.057999610900879,
+    22.17799949645996
+   ],
+   [
+    -7.298999786376953,
+    22.57699966430664
+   ],
+   [
+    -8.66100025177002,
+    22.43000030517578
+   ],
+   [
+    -7.517000198364258,
+    23.082000732421875
+   ],
+   [
+    -8.329000473022461,
+    22.920000076293945
+   ],
+   [
+    -7.739999771118164,
+    23.429000854492188
+   ],
+   [
+    -8.593999862670898,
+    23.452999114990234
+   ],
+   [
+    -9.144000053405762,
+    22.856000900268555
+   ],
+   [
+    -8.354000091552734,
+    23.753000259399414
+   ],
+   [
+    -7.145999908447266,
+    23.93400001525879
+   ],
+   [
+    -8.208000183105469,
+    24.28499984741211
+   ],
+   [
+    -7.64900016784668,
+    24.448999404907227
+   ],
+   [
+    -9.515000343322754,
+    23.69700050354004
+   ],
+   [
+    -6.89300012588501,
+    24.344999313354492
+   ],
+   [
+    -8.437999725341797,
+    25.031999588012695
+   ],
+   [
+    -7.2820000648498535,
+    25.15399932861328
+   ],
+   [
+    -8.256999969482422,
+    25.604000091552734
+   ],
+   [
+    -9.145000457763672,
+    24.382999420166016
+   ],
+   [
+    -9.680999755859375,
+    24.384000778198242
+   ],
+   [
+    -9.47599983215332,
+    25.170000076293945
+   ],
+   [
+    -10.378999710083008,
+    24.295000076293945
+   ],
+   [
+    -10.024999618530273,
+    25.009000778198242
+   ],
+   [
+    -10.548999786376953,
+    25.106000900268555
+   ],
+   [
+    -10.413000106811523,
+    25.88599967956543
+   ],
+   [
+    -9.777000427246094,
+    26.02899932861328
+   ],
+   [
+    -11.857999801635742,
+    23.496999740600586
+   ],
+   [
+    -12.446000099182129,
+    23.163000106811523
+   ],
+   [
+    -15.272000312805176,
+    19.615999221801758
+   ],
+   [
+    -15.312999725341797,
+    19.642000198364258
+   ],
+   [
+    -11.366999626159668,
+    22.71299934387207
+   ],
+   [
+    -6.89300012588501,
+    17.718000411987305
+   ],
+   [
+    -7.290999889373779,
+    17.81599998474121
+   ],
+   [
+    -7.747000217437744,
+    18.06399917602539
+   ],
+   [
+    -7.703999996185303,
+    17.371000289916992
+   ],
+   [
+    -8.244999885559082,
+    17.704999923706055
+   ],
+   [
+    -8.49899959564209,
+    17.35099983215332
+   ],
+   [
+    -8.470999717712402,
+    16.974000930786133
+   ],
+   [
+    -8.920999526977539,
+    17.665000915527344
+   ],
+   [
+    -9.029000282287598,
+    16.954999923706055
+   ],
+   [
+    -9.276000022888184,
+    17.34600067138672
+   ],
+   [
+    -6.747000217437744,
+    19.959999084472656
+   ],
+   [
+    -6.418000221252441,
+    19.511999130249023
+   ],
+   [
+    -4.5289998054504395,
+    21.92300033569336
+   ],
+   [
+    -4.3470001220703125,
+    22.07200050354004
+   ],
+   [
+    -5.456999778747559,
+    21.496000289916992
+   ],
+   [
+    -11.579000473022461,
+    21.197999954223633
+   ],
+   [
+    -10.927000045776367,
+    21.447999954223633
+   ],
+   [
+    -12.005000114440918,
+    20.726999282836914
+   ],
+   [
+    -11.940999984741211,
+    20.976999282836914
+   ],
+   [
+    7.9039998054504395,
+    2.9609999656677246
+   ],
+   [
+    -12.925999641418457,
+    22.055999755859375
+   ],
+   [
+    -13.199000358581543,
+    22.136999130249023
+   ],
+   [
+    -13.899999618530273,
+    21.632999420166016
+   ],
+   [
+    -5.461999893188477,
+    16.62700080871582
+   ],
+   [
+    -10.451000213623047,
+    9.85099983215332
+   ],
+   [
+    -4.831999778747559,
+    16.28700065612793
+   ],
+   [
+    16.48200035095215,
+    -6.803999900817871
+   ],
+   [
+    16.729999542236328,
+    -7.50600004196167
+   ],
+   [
+    12.984000205993652,
+    -10.380999565124512
+   ],
+   [
+    20.483999252319336,
+    -7.531000137329102
+   ],
+   [
+    18.07699966430664,
+    -6.748000144958496
+   ],
+   [
+    15.57699966430664,
+    -5.914000034332275
+   ],
+   [
+    18.698999404907227,
+    -8.300999641418457
+   ],
+   [
+    25.15999984741211,
+    -5.564000129699707
+   ],
+   [
+    16.322999954223633,
+    -10.232000350952148
+   ],
+   [
+    16.219999313354492,
+    -4.781000137329102
+   ],
+   [
+    16.96500015258789,
+    -6.684999942779541
+   ],
+   [
+    17.143999099731445,
+    -8.07800006866455
+   ],
+   [
+    17.69300079345703,
+    -7.836999893188477
+   ],
+   [
+    14.239999771118164,
+    -6.144999980926514
+   ],
+   [
+    -5.894999980926514,
+    8.432000160217285
+   ],
+   [
+    10.887999534606934,
+    -7.925000190734863
+   ],
+   [
+    12.465999603271484,
+    -7.289999961853027
+   ],
+   [
+    12.491000175476074,
+    -1.6009999513626099
+   ],
+   [
+    13.508000373840332,
+    -7.823999881744385
+   ],
+   [
+    11.982000350952148,
+    -7.360000133514404
+   ],
+   [
+    14.732999801635742,
+    -7.886000156402588
+   ],
+   [
+    13.934000015258789,
+    -8.022000312805176
+   ],
+   [
+    11.107000350952148,
+    -3.6549999713897705
+   ],
+   [
+    10.881999969482422,
+    -3.2639999389648438
+   ],
+   [
+    11.491000175476074,
+    -4.583000183105469
+   ],
+   [
+    15.147000312805176,
+    -5.359000205993652
+   ],
+   [
+    14.640999794006348,
+    -4.959000110626221
+   ],
+   [
+    14.15999984741211,
+    -5.394000053405762
+   ],
+   [
+    12.920999526977539,
+    -10.621999740600586
+   ],
+   [
+    11.944999694824219,
+    -5.750999927520752
+   ],
+   [
+    14.847999572753906,
+    -5.988999843597412
+   ],
+   [
+    13.293000221252441,
+    -3.4260001182556152
+   ],
+   [
+    17.5049991607666,
+    -3.378999948501587
+   ],
+   [
+    16.57200050354004,
+    -2.703000068664551
+   ],
+   [
+    16.73699951171875,
+    -2.611999988555908
+   ],
+   [
+    15.47599983215332,
+    -2.565999984741211
+   ],
+   [
+    12.895000457763672,
+    -1.4470000267028809
+   ],
+   [
+    14.329000473022461,
+    -1.1619999408721924
+   ],
+   [
+    14.196999549865723,
+    -1.25600004196167
+   ],
+   [
+    14.227999687194824,
+    -1.190999984741211
+   ],
+   [
+    10.479999542236328,
+    -8.380000114440918
+   ],
+   [
+    13.173999786376953,
+    -5.005000114440918
+   ],
+   [
+    13.831999778747559,
+    -4.2170000076293945
+   ],
+   [
+    16.520999908447266,
+    -8.569999694824219
+   ],
+   [
+    16.17799949645996,
+    -10.72700023651123
+   ],
+   [
+    18.270000457763672,
+    -3.4760000705718994
+   ],
+   [
+    10.010000228881836,
+    -7.488999843597412
+   ],
+   [
+    17.332000732421875,
+    1.1260000467300415
+   ],
+   [
+    9.29800033569336,
+    -5.502999782562256
+   ],
+   [
+    18.7450008392334,
+    -3.0260000228881836
+   ],
+   [
+    18.722000122070312,
+    -3.2200000286102295
+   ],
+   [
+    17.538999557495117,
+    1.503999948501587
+   ],
+   [
+    10.42300033569336,
+    -6.243000030517578
+   ],
+   [
+    9.54699993133545,
+    -4.294000148773193
+   ],
+   [
+    14.494000434875488,
+    -3.4489998817443848
+   ],
+   [
+    14.694000244140625,
+    -3.4539999961853027
+   ],
+   [
+    19.2189998626709,
+    -4.732999801635742
+   ],
+   [
+    20.996999740600586,
+    -5.4710001945495605
+   ],
+   [
+    10.609999656677246,
+    -3.8320000171661377
+   ],
+   [
+    8.972999572753906,
+    -11.670000076293945
+   ],
+   [
+    5.908999919891357,
+    6.216000080108643
+   ],
+   [
+    -5.091000080108643,
+    18.18899917602539
+   ],
+   [
+    7.186999797821045,
+    5.065999984741211
+   ],
+   [
+    -2.7100000381469727,
+    -15.699999809265137
+   ],
+   [
+    6.513999938964844,
+    3.7760000228881836
+   ],
+   [
+    7.7170000076293945,
+    6.2829999923706055
+   ],
+   [
+    7.47599983215332,
+    6.830999851226807
+   ],
+   [
+    6.681000232696533,
+    8.225000381469727
+   ],
+   [
+    6.906000137329102,
+    7.701000213623047
+   ],
+   [
+    6.50600004196167,
+    10.01200008392334
+   ],
+   [
+    7.163000106811523,
+    4.535999774932861
+   ],
+   [
+    7.309999942779541,
+    4.230000019073486
+   ],
+   [
+    22.530000686645508,
+    -6.4079999923706055
+   ],
+   [
+    28.878999710083008,
+    -5.585000038146973
+   ],
+   [
+    2.6440000534057617,
+    6.388999938964844
+   ],
+   [
+    -0.4339999854564667,
+    7.040999889373779
+   ],
+   [
+    -0.9309999942779541,
+    6.192999839782715
+   ],
+   [
+    1.2619999647140503,
+    7.580999851226807
+   ],
+   [
+    1.2489999532699585,
+    7.613999843597412
+   ],
+   [
+    1.0859999656677246,
+    8.708000183105469
+   ],
+   [
+    -0.1850000023841858,
+    7.993000030517578
+   ],
+   [
+    -2.4779999256134033,
+    10.829000473022461
+   ],
+   [
+    7.048999786376953,
+    11.178999900817871
+   ],
+   [
+    4.992000102996826,
+    9.234000205993652
+   ],
+   [
+    6.849999904632568,
+    10.944999694824219
+   ],
+   [
+    6.247000217437744,
+    8.180000305175781
+   ],
+   [
+    4.72599983215332,
+    6.060999870300293
+   ],
+   [
+    -2.5230000019073486,
+    16.381999969482422
+   ],
+   [
+    6.145999908447266,
+    12.951000213623047
+   ],
+   [
+    6.285999774932861,
+    13.027999877929688
+   ],
+   [
+    5.302000045776367,
+    13.199000358581543
+   ],
+   [
+    5.638000011444092,
+    13.720000267028809
+   ],
+   [
+    7.083000183105469,
+    12.065999984741211
+   ],
+   [
+    5.533999919891357,
+    10.232999801635742
+   ],
+   [
+    5.301000118255615,
+    10.09000015258789
+   ],
+   [
+    4.7170000076293945,
+    11.017000198364258
+   ],
+   [
+    4.664000034332275,
+    12.487000465393066
+   ],
+   [
+    5.520999908447266,
+    10.5649995803833
+   ],
+   [
+    2.489000082015991,
+    8.67199993133545
+   ],
+   [
+    2.559000015258789,
+    9.168000221252441
+   ],
+   [
+    -4.795000076293945,
+    3.061000108718872
+   ],
+   [
+    0.4320000112056732,
+    9.630000114440918
+   ],
+   [
+    0.8529999852180481,
+    10.345000267028809
+   ],
+   [
+    0.5509999990463257,
+    9.418000221252441
+   ],
+   [
+    1.3980000019073486,
+    9.907999992370605
+   ],
+   [
+    0.11500000208616257,
+    8.927000045776367
+   ],
+   [
+    -0.3490000069141388,
+    8.916000366210938
+   ],
+   [
+    1.805999994277954,
+    11.180999755859375
+   ],
+   [
+    1.1059999465942383,
+    11.503999710083008
+   ],
+   [
+    3.0940001010894775,
+    10.718000411987305
+   ],
+   [
+    1.7669999599456787,
+    11.246000289916992
+   ],
+   [
+    3.8380000591278076,
+    10.458999633789062
+   ],
+   [
+    3.7799999713897705,
+    10.104000091552734
+   ],
+   [
+    -11.902999877929688,
+    11.454000473022461
+   ],
+   [
+    -12.239999771118164,
+    12.383000373840332
+   ],
+   [
+    -12.27299976348877,
+    11.265999794006348
+   ],
+   [
+    -11.956999778747559,
+    12.105999946594238
+   ],
+   [
+    -13.902999877929688,
+    11.097999572753906
+   ],
+   [
+    -12.984000205993652,
+    11.604000091552734
+   ],
+   [
+    -12.668999671936035,
+    11.902999877929688
+   ],
+   [
+    -13.180999755859375,
+    12.083000183105469
+   ],
+   [
+    -13.045000076293945,
+    12.486000061035156
+   ],
+   [
+    -12.645000457763672,
+    11.309000015258789
+   ],
+   [
+    -12.501999855041504,
+    12.557000160217285
+   ],
+   [
+    -11.781000137329102,
+    11.847000122070312
+   ],
+   [
+    -8.17199993133545,
+    10.244000434875488
+   ],
+   [
+    -8.161999702453613,
+    10.812999725341797
+   ],
+   [
+    -8.626999855041504,
+    10.15999984741211
+   ],
+   [
+    -8.239999771118164,
+    10.57699966430664
+   ],
+   [
+    -7.61899995803833,
+    10.003000259399414
+   ],
+   [
+    -7.401000022888184,
+    9.845000267028809
+   ],
+   [
+    -8.206000328063965,
+    9.366999626159668
+   ],
+   [
+    -6.322000026702881,
+    11.187999725341797
+   ],
+   [
+    -6.578999996185303,
+    11.295999526977539
+   ],
+   [
+    -6.574999809265137,
+    10.947999954223633
+   ],
+   [
+    -6.168000221252441,
+    10.550999641418457
+   ],
+   [
+    -6.959000110626221,
+    11.883999824523926
+   ],
+   [
+    -6.396999835968018,
+    12.170000076293945
+   ],
+   [
+    -10.135000228881836,
+    13.425000190734863
+   ],
+   [
+    -11.229000091552734,
+    13.086000442504883
+   ],
+   [
+    -11.031999588012695,
+    14.130999565124512
+   ],
+   [
+    -11.442999839782715,
+    15.723999977111816
+   ],
+   [
+    -12.230999946594238,
+    17.89699935913086
+   ],
+   [
+    -14.217000007629395,
+    8.701000213623047
+   ],
+   [
+    -14.152000427246094,
+    8.35099983215332
+   ],
+   [
+    -14.263999938964844,
+    8.602999687194824
+   ],
+   [
+    -14.269000053405762,
+    8.180000305175781
+   ],
+   [
+    -1.9420000314712524,
+    8.687999725341797
+   ],
+   [
+    -12.369999885559082,
+    18.64299964904785
+   ],
+   [
+    -2.4700000286102295,
+    8.751999855041504
+   ],
+   [
+    -8.722999572753906,
+    12.180000305175781
+   ],
+   [
+    -5.445000171661377,
+    11.720999717712402
+   ],
+   [
+    -5.085999965667725,
+    11.621999740600586
+   ],
+   [
+    -8.192000389099121,
+    15.770999908447266
+   ],
+   [
+    -10.932999610900879,
+    8.312000274658203
+   ],
+   [
+    -8.239999771118164,
+    7.511000156402588
+   ],
+   [
+    -8.836000442504883,
+    7.49399995803833
+   ],
+   [
+    -9.387999534606934,
+    7.283999919891357
+   ],
+   [
+    19.523000717163086,
+    2.1489999294281006
+   ],
+   [
+    20.024999618530273,
+    2.01200008392334
+   ],
+   [
+    20.184999465942383,
+    1.7389999628067017
+   ],
+   [
+    20.672000885009766,
+    1.6579999923706055
+   ],
+   [
+    18.760000228881836,
+    1.5130000114440918
+   ],
+   [
+    19.358999252319336,
+    1.4420000314712524
+   ],
+   [
+    21.049999237060547,
+    1.2079999446868896
+   ],
+   [
+    20.966999053955078,
+    2.177000045776367
+   ],
+   [
+    20.77899932861328,
+    2.8459999561309814
+   ],
+   [
+    20.016000747680664,
+    0.7239999771118164
+   ],
+   [
+    20.107999801635742,
+    0.5619999766349792
+   ],
+   [
+    19.351999282836914,
+    0.44600000977516174
+   ],
+   [
+    22.003000259399414,
+    1.7170000076293945
+   ],
+   [
+    22.73699951171875,
+    2.436000108718872
+   ],
+   [
+    18.406999588012695,
+    4.2230000495910645
+   ],
+   [
+    20.174999237060547,
+    3.5199999809265137
+   ],
+   [
+    20.291000366210938,
+    -1.0800000429153442
+   ],
+   [
+    21.503000259399414,
+    3.1559998989105225
+   ],
+   [
+    7.116000175476074,
+    -9.01099967956543
+   ],
+   [
+    8.619999885559082,
+    -7.557000160217285
+   ],
+   [
+    7.684999942779541,
+    -9.059000015258789
+   ],
+   [
+    7.5370001792907715,
+    -9.060999870300293
+   ],
+   [
+    14.324000358581543,
+    4.9730000495910645
+   ],
+   [
+    22.389999389648438,
+    2.8540000915527344
+   ],
+   [
+    -0.28700000047683716,
+    -6.510000228881836
+   ],
+   [
+    21.569000244140625,
+    -0.796999990940094
+   ],
+   [
+    17.52899932861328,
+    -0.23999999463558197
+   ],
+   [
+    23.569000244140625,
+    -0.6460000276565552
+   ],
+   [
+    11.265000343322754,
+    -0.4830000102519989
+   ],
+   [
+    6.992000102996826,
+    -11.13599967956543
+   ],
+   [
+    22.06800079345703,
+    0.3140000104904175
+   ],
+   [
+    -1.3370000123977661,
+    -1.1670000553131104
+   ],
+   [
+    -0.6140000224113464,
+    -2.121999979019165
+   ],
+   [
+    -2.996999979019165,
+    0.9860000014305115
+   ],
+   [
+    -5.49399995803833,
+    -0.6650000214576721
+   ],
+   [
+    -1.4170000553131104,
+    -4.197000026702881
+   ],
+   [
+    4.795000076293945,
+    -1.2619999647140503
+   ],
+   [
+    0.7329999804496765,
+    -4.064000129699707
+   ],
+   [
+    1.7990000247955322,
+    -3.4660000801086426
+   ],
+   [
+    0.7910000085830688,
+    -5.72599983215332
+   ],
+   [
+    -4.229000091552734,
+    -2.572000026702881
+   ],
+   [
+    -4.320000171661377,
+    -2.5769999027252197
+   ],
+   [
+    -5.796999931335449,
+    -1.2079999446868896
+   ],
+   [
+    -0.7620000243186951,
+    1.2890000343322754
+   ],
+   [
+    -2.4839999675750732,
+    -0.09700000286102295
+   ],
+   [
+    -2.819999933242798,
+    0.13300000131130219
+   ],
+   [
+    -3.1740000247955322,
+    0.9779999852180481
+   ],
+   [
+    -0.515999972820282,
+    4.073999881744385
+   ],
+   [
+    -0.8019999861717224,
+    5.172999858856201
+   ],
+   [
+    -2.447000026702881,
+    3.2679998874664307
+   ],
+   [
+    -1.6030000448226929,
+    2.671999931335449
+   ],
+   [
+    -0.7770000100135803,
+    1.9880000352859497
+   ],
+   [
+    -0.5509999990463257,
+    1.6469999551773071
+   ],
+   [
+    -1.4559999704360962,
+    4.135000228881836
+   ],
+   [
+    -0.9860000014305115,
+    4.658999919891357
+   ],
+   [
+    -2.9030001163482666,
+    3.065000057220459
+   ],
+   [
+    -2.9049999713897705,
+    3.234999895095825
+   ],
+   [
+    -0.03200000151991844,
+    2.9539999961853027
+   ],
+   [
+    27.635000228881836,
+    -3.9110000133514404
+   ],
+   [
+    2.065999984741211,
+    0.3070000112056732
+   ],
+   [
+    4.636000156402588,
+    -1.1950000524520874
+   ],
+   [
+    2.257999897003174,
+    0.0560000017285347
+   ],
+   [
+    0.5929999947547913,
+    0.39399999380111694
+   ],
+   [
+    2.369999885559082,
+    -2.6059999465942383
+   ],
+   [
+    -1.4240000247955322,
+    -3.315000057220459
+   ],
+   [
+    -0.11400000005960464,
+    -7.063000202178955
+   ],
+   [
+    -4.684000015258789,
+    0.5339999794960022
+   ],
+   [
+    -4.4770002365112305,
+    -0.39399999380111694
+   ],
+   [
+    -4.675000190734863,
+    1.6660000085830688
+   ],
+   [
+    -6.081999778747559,
+    -0.008999999612569809
+   ],
+   [
+    -6.052999973297119,
+    0.6359999775886536
+   ],
+   [
+    -7.046999931335449,
+    0.5569999814033508
+   ],
+   [
+    -7.188000202178955,
+    -1.1200000047683716
+   ],
+   [
+    -7.439000129699707,
+    -1.0579999685287476
+   ],
+   [
+    -7.827000141143799,
+    -0.9049999713897705
+   ],
+   [
+    -7.414000034332275,
+    -0.33000001311302185
+   ],
+   [
+    -6.980000019073486,
+    0.15700000524520874
+   ],
+   [
+    0.23000000417232513,
+    -4.010000228881836
+   ],
+   [
+    0.492000013589859,
+    -3.9089999198913574
+   ],
+   [
+    0.39800000190734863,
+    -4.892000198364258
+   ],
+   [
+    0.9390000104904175,
+    -2.125999927520752
+   ],
+   [
+    -0.824999988079071,
+    -1.9989999532699585
+   ],
+   [
+    -0.6819999814033508,
+    -0.9139999747276306
+   ],
+   [
+    -1.0210000276565552,
+    -3.1589999198913574
+   ],
+   [
+    -3.453000068664551,
+    -0.7860000133514404
+   ],
+   [
+    25.209999084472656,
+    -7.0970001220703125
+   ],
+   [
+    25.57699966430664,
+    -6.058000087738037
+   ],
+   [
+    25.291000366210938,
+    -6.4019999504089355
+   ],
+   [
+    24.277999877929688,
+    -5.822999954223633
+   ],
+   [
+    21.503000259399414,
+    -4.0980000495910645
+   ],
+   [
+    21.399999618530273,
+    -4.126999855041504
+   ],
+   [
+    23.645000457763672,
+    -6.857999801635742
+   ],
+   [
+    24.586999893188477,
+    -6.940999984741211
+   ],
+   [
+    24.076000213623047,
+    -6.583000183105469
+   ],
+   [
+    14.758000373840332,
+    -3.305999994277954
+   ],
+   [
+    24.30299949645996,
+    -10.295999526977539
+   ],
+   [
+    25.101999282836914,
+    -9.232999801635742
+   ],
+   [
+    24.788000106811523,
+    -9.680000305175781
+   ],
+   [
+    25.893999099731445,
+    -8.835000038146973
+   ],
+   [
+    24.913999557495117,
+    -8.336999893188477
+   ],
+   [
+    26.40399932861328,
+    -8.190999984741211
+   ],
+   [
+    27.589000701904297,
+    -11.161999702453613
+   ],
+   [
+    26.517000198364258,
+    -7.22599983215332
+   ],
+   [
+    26.51799964904785,
+    -6.889999866485596
+   ],
+   [
+    29.400999069213867,
+    -10.437999725341797
+   ],
+   [
+    23.993000030517578,
+    -8.081999778747559
+   ],
+   [
+    25.420000076293945,
+    -11.543999671936035
+   ],
+   [
+    29.3439998626709,
+    -7.270999908447266
+   ],
+   [
+    28.665000915527344,
+    -7.26200008392334
+   ],
+   [
+    21.35099983215332,
+    -10.765999794006348
+   ],
+   [
+    25.700000762939453,
+    -10.784000396728516
+   ],
+   [
+    22.795000076293945,
+    -9.246000289916992
+   ],
+   [
+    28.631000518798828,
+    -9.925000190734863
+   ],
+   [
+    22.749000549316406,
+    -7.519000053405762
+   ],
+   [
+    28.20599937438965,
+    -6.61899995803833
+   ],
+   [
+    28.643999099731445,
+    -5.873000144958496
+   ],
+   [
+    27.700000762939453,
+    -9.09000015258789
+   ],
+   [
+    28.259000778198242,
+    -8.781000137329102
+   ],
+   [
+    24.979000091552734,
+    -4.38100004196167
+   ],
+   [
+    25.618000030517578,
+    -4.261000156402588
+   ],
+   [
+    26.80699920654297,
+    -5.34499979019165
+   ],
+   [
+    26.142000198364258,
+    -7.316999912261963
+   ],
+   [
+    26.05299949645996,
+    -6.379000186920166
+   ],
+   [
+    26.69300079345703,
+    -5.9029998779296875
+   ],
+   [
+    26.77400016784668,
+    -4.184000015258789
+   ],
+   [
+    26.21299934387207,
+    -3.250999927520752
+   ],
+   [
+    22.91900062561035,
+    -4.296999931335449
+   ],
+   [
+    24.910999298095703,
+    -7.689000129699707
+   ],
+   [
+    25.493000030517578,
+    -11.329000473022461
+   ],
+   [
+    25.649999618530273,
+    -8.574999809265137
+   ],
+   [
+    26.517000198364258,
+    -9.720999717712402
+   ],
+   [
+    22.566999435424805,
+    -12.413999557495117
+   ],
+   [
+    27.360000610351562,
+    -7.7769999504089355
+   ],
+   [
+    24.236000061035156,
+    -9.097999572753906
+   ],
+   [
+    24.541000366210938,
+    -3.990999937057495
+   ],
+   [
+    27.180999755859375,
+    -6.672999858856201
+   ],
+   [
+    -7.74399995803833,
+    -13.979000091552734
+   ],
+   [
+    -6.415999889373779,
+    -13.91100025177002
+   ],
+   [
+    -7.590000152587891,
+    -13.300999641418457
+   ],
+   [
+    -7.064000129699707,
+    -13.21399974822998
+   ],
+   [
+    -6.2220001220703125,
+    -12.795999526977539
+   ],
+   [
+    -5.796000003814697,
+    -15.567000389099121
+   ],
+   [
+    -5.448999881744385,
+    -15.973999977111816
+   ],
+   [
+    -9.192999839782715,
+    -14.501999855041504
+   ],
+   [
+    -8.04800033569336,
+    -14.715999603271484
+   ],
+   [
+    -6.306000232696533,
+    -16.940000534057617
+   ],
+   [
+    -7.545000076293945,
+    -11.850000381469727
+   ],
+   [
+    -3.5390000343322754,
+    -15.032999992370605
+   ],
+   [
+    -1.5800000429153442,
+    -13.434000015258789
+   ],
+   [
+    -4.065000057220459,
+    -12.272000312805176
+   ],
+   [
+    -4.951000213623047,
+    -12.197999954223633
+   ],
+   [
+    -5.578999996185303,
+    -14.454999923706055
+   ],
+   [
+    -5.539999961853027,
+    -14.633000373840332
+   ],
+   [
+    -5.36899995803833,
+    -15.300000190734863
+   ],
+   [
+    -4.244999885559082,
+    -15.267999649047852
+   ],
+   [
+    -8.53499984741211,
+    -15.961999893188477
+   ],
+   [
+    -0.17100000381469727,
+    -7.204999923706055
+   ],
+   [
+    -2.5850000381469727,
+    -14.848999977111816
+   ],
+   [
+    -7.084000110626221,
+    -13.92300033569336
+   ],
+   [
+    -2.4760000705718994,
+    -11.446000099182129
+   ],
+   [
+    -1.0529999732971191,
+    -12.930999755859375
+   ],
+   [
+    -4.659999847412109,
+    -16.26300048828125
+   ],
+   [
+    -6.833000183105469,
+    -17.843000411987305
+   ],
+   [
+    -6.216000080108643,
+    -18.01300048828125
+   ],
+   [
+    -5.15500020980835,
+    -17.409000396728516
+   ],
+   [
+    -4.506999969482422,
+    -14.409000396728516
+   ],
+   [
+    -6.065000057220459,
+    -13.784000396728516
+   ],
+   [
+    -6.697999954223633,
+    -12.819999694824219
+   ],
+   [
+    -7.340000152587891,
+    -15.994000434875488
+   ],
+   [
+    9.288000106811523,
+    5.478000164031982
+   ],
+   [
+    -9.680999755859375,
+    -14.348999977111816
+   ],
+   [
+    -3.494999885559082,
+    -14.074000358581543
+   ],
+   [
+    -3.3980000019073486,
+    -13.428000450134277
+   ],
+   [
+    -0.5049999952316284,
+    -13.331999778747559
+   ],
+   [
+    -0.9620000123977661,
+    -13.322999954223633
+   ],
+   [
+    -6.144999980926514,
+    -15.652999877929688
+   ],
+   [
+    -7.118000030517578,
+    -14.993000030517578
+   ],
+   [
+    -4.946000099182129,
+    -13.067000389099121
+   ],
+   [
+    -3.9649999141693115,
+    -12.17199993133545
+   ],
+   [
+    -6.245999813079834,
+    -18.27899932861328
+   ]
+  ],
+  "silhouette_original": 0.1904124915599823,
+  "silhouette_2d": 0.49239659309387207,
+  "n_words": 457
+ }
+}
