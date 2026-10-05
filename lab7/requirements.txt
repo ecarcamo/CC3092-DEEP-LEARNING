@@ -1,0 +1,12 @@
+# Laboratorio 7 - NLP end-to-end y Embeddings
+# Instalado sobre el venv compartido del curso (DEEP_LEARNING/venv)
+torch>=2.5
+datasets>=3.0
+gensim>=4.4
+nltk>=3.9
+scikit-learn>=1.5
+numpy>=1.26
+pandas>=2.2
+matplotlib>=3.9
+jupyter
+nbconvert
