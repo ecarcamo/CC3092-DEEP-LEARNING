@@ -2990,5 +2990,1185 @@
    "wordsim_spearman": 0.6614497642692692
   },
   "corpus_fraction": null
+ },
+ "G100": {
+  "params": {
+   "dim": 100,
+   "window": 10,
+   "negatives": 15,
+   "sample": 0.0001,
+   "min_count": 5,
+   "epochs": 8
+  },
+  "corpus_tokens": 25000786,
+  "vocab_size": 90566,
+  "history": [
+   {
+    "epoch": 1,
+    "loss": 21467074.0,
+    "epoch_time_s": 75.51676393499929,
+    "analogy_semantic": 0.10270270270270271,
+    "analogy_syntactic": 0.11495762206040348,
+    "analogy_total": 0.11133535149680457,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.5742466433451164,
+    "neighbors": {
+     "king": [
+      [
+       "calixtus",
+       0.777
+      ],
+      [
+       "prelates",
+       0.776
+      ],
+      [
+       "1413",
+       0.776
+      ],
+      [
+       "fitzempress",
+       0.774
+      ],
+      [
+       "1371",
+       0.772
+      ]
+     ],
+     "france": [
+      [
+       "walloon",
+       0.695
+      ],
+      [
+       "ardennes",
+       0.692
+      ],
+      [
+       "spain",
+       0.69
+      ],
+      [
+       "gaulle",
+       0.689
+      ],
+      [
+       "casablanca",
+       0.684
+      ]
+     ],
+     "computer": [
+      [
+       "uplink",
+       0.729
+      ],
+      [
+       "2600",
+       0.723
+      ],
+      [
+       "desktop",
+       0.72
+      ],
+      [
+       "software",
+       0.718
+      ],
+      [
+       "volition",
+       0.718
+      ]
+     ],
+     "good": [
+      [
+       "loathe",
+       0.749
+      ],
+      [
+       "squandering",
+       0.749
+      ],
+      [
+       "zayat",
+       0.747
+      ],
+      [
+       "spanked",
+       0.746
+      ],
+      [
+       "lavater",
+       0.741
+      ]
+     ],
+     "january": [
+      [
+       "december",
+       0.801
+      ],
+      [
+       "august",
+       0.801
+      ],
+      [
+       "september",
+       0.799
+      ],
+      [
+       "reacquired",
+       0.768
+      ],
+      [
+       "kenna",
+       0.759
+      ]
+     ],
+     "run": [
+      [
+       "wetherby",
+       0.737
+      ],
+      [
+       "strathcona",
+       0.715
+      ],
+      [
+       "perot",
+       0.715
+      ],
+      [
+       "mayoralty",
+       0.713
+      ],
+      [
+       "renominated",
+       0.713
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 2,
+    "loss": 19187058.0,
+    "epoch_time_s": 93.49118618400007,
+    "analogy_semantic": 0.1601706970128023,
+    "analogy_syntactic": 0.18717918109108272,
+    "analogy_total": 0.17919609821728893,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.5858092693768571,
+    "neighbors": {
+     "king": [
+      [
+       "1399",
+       0.848
+      ],
+      [
+       "1404",
+       0.845
+      ],
+      [
+       "1371",
+       0.843
+      ],
+      [
+       "1388",
+       0.843
+      ],
+      [
+       "meulan",
+       0.837
+      ]
+     ],
+     "france": [
+      [
+       "alsace",
+       0.779
+      ],
+      [
+       "spain",
+       0.734
+      ],
+      [
+       "reconquista",
+       0.712
+      ],
+      [
+       "italy",
+       0.705
+      ],
+      [
+       "soissons",
+       0.697
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.773
+      ],
+      [
+       "movieland",
+       0.748
+      ],
+      [
+       "openfirmware",
+       0.747
+      ],
+      [
+       "headsets",
+       0.743
+      ],
+      [
+       "user",
+       0.738
+      ]
+     ],
+     "good": [
+      [
+       "gehringer",
+       0.743
+      ],
+      [
+       "lackey",
+       0.743
+      ],
+      [
+       "riordan",
+       0.736
+      ],
+      [
+       "delighted",
+       0.728
+      ],
+      [
+       "philpot",
+       0.725
+      ]
+     ],
+     "january": [
+      [
+       "february",
+       0.811
+      ],
+      [
+       "july",
+       0.805
+      ],
+      [
+       "december",
+       0.76
+      ],
+      [
+       "march",
+       0.758
+      ],
+      [
+       "september",
+       0.753
+      ]
+     ],
+     "run": [
+      [
+       "pegues",
+       0.739
+      ],
+      [
+       "burris",
+       0.739
+      ],
+      [
+       "incompletion",
+       0.738
+      ],
+      [
+       "vinatieri",
+       0.731
+      ],
+      [
+       "oxendine",
+       0.726
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 3,
+    "loss": 19064868.0,
+    "epoch_time_s": 93.28818956099985,
+    "analogy_semantic": 0.22532005689900428,
+    "analogy_syntactic": 0.22907962277665037,
+    "analogy_total": 0.22796838210561723,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.6225114962335666,
+    "neighbors": {
+     "king": [
+      [
+       "zhukovsky",
+       0.694
+      ],
+      [
+       "1462",
+       0.692
+      ],
+      [
+       "clarenceux",
+       0.692
+      ],
+      [
+       "bevil",
+       0.687
+      ],
+      [
+       "levente",
+       0.686
+      ]
+     ],
+     "france": [
+      [
+       "paris",
+       0.727
+      ],
+      [
+       "italy",
+       0.698
+      ],
+      [
+       "belgium",
+       0.669
+      ],
+      [
+       "alsace",
+       0.665
+      ],
+      [
+       "luxembourg",
+       0.663
+      ]
+     ],
+     "computer": [
+      [
+       "software",
+       0.729
+      ],
+      [
+       "spacewar",
+       0.727
+      ],
+      [
+       "freespace",
+       0.713
+      ],
+      [
+       "autodesk",
+       0.713
+      ],
+      [
+       "lerdorf",
+       0.713
+      ]
+     ],
+     "good": [
+      [
+       "certainties",
+       0.766
+      ],
+      [
+       "ordinariness",
+       0.764
+      ],
+      [
+       "exasperation",
+       0.761
+      ],
+      [
+       "kindest",
+       0.761
+      ],
+      [
+       "comradeship",
+       0.755
+      ]
+     ],
+     "january": [
+      [
+       "february",
+       0.853
+      ],
+      [
+       "november",
+       0.832
+      ],
+      [
+       "december",
+       0.821
+      ],
+      [
+       "march",
+       0.818
+      ],
+      [
+       "september",
+       0.804
+      ]
+     ],
+     "run": [
+      [
+       "ran",
+       0.752
+      ],
+      [
+       "hanulak",
+       0.739
+      ],
+      [
+       "crumpler",
+       0.735
+      ],
+      [
+       "pegues",
+       0.731
+      ],
+      [
+       "burris",
+       0.728
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 4,
+    "loss": 9714280.0,
+    "epoch_time_s": 93.19264584300072,
+    "analogy_semantic": 0.3046941678520626,
+    "analogy_syntactic": 0.2726513071505312,
+    "analogy_total": 0.2821224352505886,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.6410357457031952,
+    "neighbors": {
+     "king": [
+      [
+       "ponthieu",
+       0.839
+      ],
+      [
+       "ordainers",
+       0.819
+      ],
+      [
+       "prelates",
+       0.817
+      ],
+      [
+       "attainder",
+       0.817
+      ],
+      [
+       "1413",
+       0.815
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.788
+      ],
+      [
+       "portugal",
+       0.743
+      ],
+      [
+       "alsace",
+       0.731
+      ],
+      [
+       "britain",
+       0.71
+      ],
+      [
+       "french",
+       0.704
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.79
+      ],
+      [
+       "openfirmware",
+       0.786
+      ],
+      [
+       "cfds",
+       0.772
+      ],
+      [
+       "6502",
+       0.771
+      ],
+      [
+       "shaders",
+       0.765
+      ]
+     ],
+     "good": [
+      [
+       "kindest",
+       0.732
+      ],
+      [
+       "decent",
+       0.729
+      ],
+      [
+       "breather",
+       0.726
+      ],
+      [
+       "terrifically",
+       0.726
+      ],
+      [
+       "weirder",
+       0.721
+      ]
+     ],
+     "january": [
+      [
+       "december",
+       0.842
+      ],
+      [
+       "october",
+       0.792
+      ],
+      [
+       "february",
+       0.788
+      ],
+      [
+       "november",
+       0.783
+      ],
+      [
+       "june",
+       0.78
+      ]
+     ],
+     "run": [
+      [
+       "participations",
+       0.679
+      ],
+      [
+       "cosworth",
+       0.668
+      ],
+      [
+       "acura",
+       0.666
+      ],
+      [
+       "bvt",
+       0.661
+      ],
+      [
+       "home",
+       0.66
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 5,
+    "loss": 3476144.0,
+    "epoch_time_s": 93.05175550500007,
+    "analogy_semantic": 0.3166429587482219,
+    "analogy_syntactic": 0.3251760773546616,
+    "analogy_total": 0.3226538849646821,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.6032122961715695,
+    "neighbors": {
+     "king": [
+      [
+       "wardship",
+       0.798
+      ],
+      [
+       "boleslaus",
+       0.798
+      ],
+      [
+       "1172",
+       0.795
+      ],
+      [
+       "antiochene",
+       0.791
+      ],
+      [
+       "1338",
+       0.789
+      ]
+     ],
+     "france": [
+      [
+       "alsace",
+       0.731
+      ],
+      [
+       "aquitaine",
+       0.727
+      ],
+      [
+       "french",
+       0.72
+      ],
+      [
+       "italy",
+       0.72
+      ],
+      [
+       "spain",
+       0.72
+      ]
+     ],
+     "computer": [
+      [
+       "software",
+       0.751
+      ],
+      [
+       "computers",
+       0.748
+      ],
+      [
+       "openfirmware",
+       0.712
+      ],
+      [
+       "hightail",
+       0.705
+      ],
+      [
+       "desktop",
+       0.702
+      ]
+     ],
+     "good": [
+      [
+       "breather",
+       0.755
+      ],
+      [
+       "kindest",
+       0.715
+      ],
+      [
+       "too",
+       0.707
+      ],
+      [
+       "weirder",
+       0.705
+      ],
+      [
+       "honing",
+       0.687
+      ]
+     ],
+     "january": [
+      [
+       "december",
+       0.828
+      ],
+      [
+       "february",
+       0.82
+      ],
+      [
+       "july",
+       0.815
+      ],
+      [
+       "november",
+       0.808
+      ],
+      [
+       "june",
+       0.807
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.673
+      ],
+      [
+       "millwood",
+       0.668
+      ],
+      [
+       "crumpler",
+       0.667
+      ],
+      [
+       "crowhurst",
+       0.655
+      ],
+      [
+       "pegues",
+       0.649
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 6,
+    "loss": 3214680.0,
+    "epoch_time_s": 89.86352294900007,
+    "analogy_semantic": 0.3593172119487909,
+    "analogy_syntactic": 0.359078429031873,
+    "analogy_total": 0.3591490077362933,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.6592320203437441,
+    "neighbors": {
+     "king": [
+      [
+       "pandion",
+       0.677
+      ],
+      [
+       "vulture",
+       0.676
+      ],
+      [
+       "coot",
+       0.673
+      ],
+      [
+       "lapponica",
+       0.669
+      ],
+      [
+       "vultures",
+       0.665
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.746
+      ],
+      [
+       "french",
+       0.74
+      ],
+      [
+       "paris",
+       0.726
+      ],
+      [
+       "alsace",
+       0.697
+      ],
+      [
+       "italy",
+       0.695
+      ]
+     ],
+     "computer": [
+      [
+       "software",
+       0.743
+      ],
+      [
+       "computers",
+       0.739
+      ],
+      [
+       "6502",
+       0.737
+      ],
+      [
+       "programmable",
+       0.729
+      ],
+      [
+       "desktop",
+       0.728
+      ]
+     ],
+     "good": [
+      [
+       "bad",
+       0.714
+      ],
+      [
+       "very",
+       0.69
+      ],
+      [
+       "tough",
+       0.689
+      ],
+      [
+       "too",
+       0.668
+      ],
+      [
+       "way",
+       0.665
+      ]
+     ],
+     "january": [
+      [
+       "december",
+       0.903
+      ],
+      [
+       "august",
+       0.847
+      ],
+      [
+       "june",
+       0.841
+      ],
+      [
+       "september",
+       0.831
+      ],
+      [
+       "october",
+       0.83
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.693
+      ],
+      [
+       "marist",
+       0.643
+      ],
+      [
+       "kdka",
+       0.636
+      ],
+      [
+       "longview",
+       0.636
+      ],
+      [
+       "mayoralty",
+       0.627
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 7,
+    "loss": 2886672.0,
+    "epoch_time_s": 96.77574971300055,
+    "analogy_semantic": 0.422475106685633,
+    "analogy_syntactic": 0.4070669690820103,
+    "analogy_total": 0.41162125798856375,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.6601860914174305,
+    "neighbors": {
+     "king": [
+      [
+       "1304",
+       0.772
+      ],
+      [
+       "athelstan",
+       0.768
+      ],
+      [
+       "1172",
+       0.766
+      ],
+      [
+       "1087",
+       0.761
+      ],
+      [
+       "eadwulf",
+       0.76
+      ]
+     ],
+     "france": [
+      [
+       "french",
+       0.782
+      ],
+      [
+       "spain",
+       0.75
+      ],
+      [
+       "italy",
+       0.728
+      ],
+      [
+       "alsace",
+       0.722
+      ],
+      [
+       "paris",
+       0.713
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.794
+      ],
+      [
+       "software",
+       0.768
+      ],
+      [
+       "programmable",
+       0.757
+      ],
+      [
+       "autodesk",
+       0.755
+      ],
+      [
+       "minicomputer",
+       0.752
+      ]
+     ],
+     "good": [
+      [
+       "excellent",
+       0.697
+      ],
+      [
+       "always",
+       0.677
+      ],
+      [
+       "honing",
+       0.658
+      ],
+      [
+       "enough",
+       0.649
+      ],
+      [
+       "bad",
+       0.647
+      ]
+     ],
+     "january": [
+      [
+       "february",
+       0.922
+      ],
+      [
+       "december",
+       0.92
+      ],
+      [
+       "november",
+       0.885
+      ],
+      [
+       "march",
+       0.883
+      ],
+      [
+       "june",
+       0.882
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.781
+      ],
+      [
+       "ran",
+       0.699
+      ],
+      [
+       "start",
+       0.634
+      ],
+      [
+       "skole",
+       0.624
+      ],
+      [
+       "crowhurst",
+       0.62
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 8,
+    "loss": 2554056.0,
+    "epoch_time_s": 99.24725743899944,
+    "analogy_semantic": 0.45291607396870553,
+    "analogy_syntactic": 0.43559746926107196,
+    "analogy_total": 0.4407164480322906,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.659615437226565,
+    "neighbors": {
+     "king": [
+      [
+       "1304",
+       0.752
+      ],
+      [
+       "athelstan",
+       0.73
+      ],
+      [
+       "sobieski",
+       0.729
+      ],
+      [
+       "boleslaus",
+       0.728
+      ],
+      [
+       "harefoot",
+       0.726
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.777
+      ],
+      [
+       "italy",
+       0.771
+      ],
+      [
+       "alsace",
+       0.767
+      ],
+      [
+       "french",
+       0.765
+      ],
+      [
+       "paris",
+       0.754
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.797
+      ],
+      [
+       "software",
+       0.762
+      ],
+      [
+       "cfds",
+       0.746
+      ],
+      [
+       "computing",
+       0.741
+      ],
+      [
+       "autodesk",
+       0.741
+      ]
+     ],
+     "good": [
+      [
+       "bad",
+       0.75
+      ],
+      [
+       "humoured",
+       0.727
+      ],
+      [
+       "very",
+       0.727
+      ],
+      [
+       "kind",
+       0.72
+      ],
+      [
+       "pretty",
+       0.714
+      ]
+     ],
+     "january": [
+      [
+       "december",
+       0.958
+      ],
+      [
+       "february",
+       0.954
+      ],
+      [
+       "november",
+       0.939
+      ],
+      [
+       "march",
+       0.925
+      ],
+      [
+       "october",
+       0.92
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.706
+      ],
+      [
+       "ran",
+       0.672
+      ],
+      [
+       "runs",
+       0.651
+      ],
+      [
+       "stengel",
+       0.647
+      ],
+      [
+       "sturgis",
+       0.647
+      ]
+     ]
+    }
+   }
+  ],
+  "train_time_s": 734.4270711290001,
+  "total_time_s": 740.8439958700001,
+  "hardware": "CPU, 16 hilos",
+  "final": {
+   "epoch": 8,
+   "loss": 2554056.0,
+   "epoch_time_s": 99.24725743899944,
+   "analogy_semantic": 0.45291607396870553,
+   "analogy_syntactic": 0.43559746926107196,
+   "analogy_total": 0.4407164480322906,
+   "analogy_coverage": 0.6084731887024151,
+   "wordsim_spearman": 0.659615437226565
+  },
+  "corpus_fraction": 1.0
  }
 }
