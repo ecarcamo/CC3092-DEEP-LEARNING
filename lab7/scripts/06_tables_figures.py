@@ -5,7 +5,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from lab7.data import FIGURES_DIR, RESULTS_DIR
-from lab7.models import best_sgns_name
+from lab7.evaluation import analogy_accuracy
+from lab7.models import best_sgns_name, load_glove
 from lab7.plots import category_bars, corpus_size_plot, iteration_curves, loss_vs_quality
 
 GLOVE_INFO = {
@@ -36,7 +37,8 @@ def main():
 
     sgns_points = [(sgns[k]["corpus_tokens"], sgns[k]["final"]["analogy_total"]) for k in ("I10", "I11", "I01")]
     gensim_points = [(gensim[k]["corpus_tokens"], gensim[k]["final"]["analogy_total"]) for k in ("GB25", "GB50", "GB100", "GFULL")]
-    glove_acc = arithmetic["models"]["GloVe"]["analogy_add"]["total"]["accuracy"]
+    glove_words, glove_matrix = load_glove()
+    glove_acc = analogy_accuracy(glove_words[:30000], glove_matrix[:30000])["total"]["accuracy"]
     corpus_size_plot(sgns_points, gensim_points, glove_acc, FIGURES_DIR / "12_analogies_vs_corpus.png")
 
     best_label = classification["best_per_init"]
@@ -65,7 +67,7 @@ def main():
             "test_f1": classification["test"][best_label[name]]["f1"],
             "test_variant": best_label[name],
         }
-    (RESULTS_DIR / "comparison.json").write_text(json.dumps({"best_sgns": best, "table": table}, indent=1, ensure_ascii=False))
+    (RESULTS_DIR / "comparison.json").write_text(json.dumps({"best_sgns": best, "glove_own_top30k": glove_acc, "table": table}, indent=1, ensure_ascii=False))
     for k, v in table.items():
         print(k, {a: (round(b, 4) if isinstance(b, float) else b) for a, b in v.items()})
 
