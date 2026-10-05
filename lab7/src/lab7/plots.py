@@ -2,6 +2,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.ticker
 import numpy as np
 
 COLORS = ["#2a6fdb", "#e4572e", "#29a36a", "#f2a541", "#7b4fd6", "#17a2b8", "#d63a8c", "#6c757d", "#8c564b", "#111111"]
@@ -85,6 +86,9 @@ def corpus_size_plot(sgns_points, gensim_points, glove_acc, path):
         ax.plot(xs, ys, "o-", color=color, label=label)
     ax.axhline(glove_acc, color=COLORS[2], ls="--", label="GloVe 6B (referencia)")
     ax.set_xscale("log")
+    ticks = sorted(x for x, _ in list(sgns_points) + list(gensim_points))
+    ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+    ax.set_xticks([ticks[0], ticks[2], ticks[4], ticks[-1]], [f"{t / 1e6:.0f} M" for t in (ticks[0], ticks[2], ticks[4], ticks[-1])])
     ax.set(xlabel="tokens del corpus de entrenamiento", ylabel="accuracy total de analogías (3CosAdd)",
            title="Analogías vs tamaño del corpus")
     ax.legend(fontsize=8)
@@ -99,6 +103,8 @@ def fraction_plot(curves, path):
         stds = [np.std(points[x]) for x in xs]
         ax.errorbar(xs, means, yerr=stds, fmt="o-", ms=4, capsize=2, color=COLORS[k], label=label)
     ax.set_xscale("log")
+    ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+    ax.set_xticks(xs, [f"{100 * x:g} %" for x in xs])
     ax.set(xlabel="fracción de train de AG News", ylabel="F1 macro en test", title="F1 de test vs datos de entrenamiento")
     ax.legend(fontsize=7)
     _save(fig, path)
