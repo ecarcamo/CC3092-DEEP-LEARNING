@@ -86,12 +86,12 @@ def train(name, corpus_file, params, sections):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--params", required=True, help="JSON con dim, window, negatives, sample, min_count, epochs")
-    parser.add_argument("--runs", nargs="*", default=["G100", "G25", "G50", "GFULL"])
+    parser.add_argument("--runs", nargs="*", default=["G100"])
     args = parser.parse_args()
     params = json.loads(args.params)
     sections = load_analogies()
     results = json.loads(RESULTS_PATH.read_text()) if RESULTS_PATH.exists() else {}
-    fractions = {"G100": 1.0, "G25": 0.25, "G50": 0.5}
+    fractions = {"G100": 1.0, "GB100": 1.0, "GB25": 0.25, "GB50": 0.5}
     for name in args.runs:
         if name in results:
             print("skip", name)
@@ -99,8 +99,9 @@ def main():
         if name == "GFULL":
             corpus_file = FULL_PATH
         else:
-            corpus_file = CACHE_DIR / f"wiki_{name}.txt"
-            write_subset_file(fractions[name], corpus_file)
+            corpus_file = CACHE_DIR / f"wiki_{int(fractions[name] * 100)}.txt"
+            if not corpus_file.exists():
+                write_subset_file(fractions[name], corpus_file)
         results[name] = train(name, corpus_file, params, sections)
         results[name]["corpus_fraction"] = fractions.get(name)
         RESULTS_PATH.write_text(json.dumps(results, indent=1, ensure_ascii=False))

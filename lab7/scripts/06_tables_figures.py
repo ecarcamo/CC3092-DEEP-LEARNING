@@ -35,7 +35,7 @@ def main():
     category_bars(arithmetic["models"], FIGURES_DIR / "08_analogy_categories.png")
 
     sgns_points = [(sgns[k]["corpus_tokens"], sgns[k]["final"]["analogy_total"]) for k in ("I10", "I11", "I01")]
-    gensim_points = [(g["corpus_tokens"], g["final"]["analogy_total"]) for g in gensim.values()]
+    gensim_points = [(gensim[k]["corpus_tokens"], gensim[k]["final"]["analogy_total"]) for k in ("GB25", "GB50", "GB100", "GFULL")]
     glove_acc = arithmetic["models"]["GloVe"]["analogy_add"]["total"]["accuracy"]
     corpus_size_plot(sgns_points, gensim_points, glove_acc, FIGURES_DIR / "12_analogies_vs_corpus.png")
 

@@ -57,21 +57,6 @@ def load_wikitext():
     return load_dataset("Salesforce/wikitext", "wikitext-103-raw-v1")
 
 
-def split_articles(lines):
-    articles = []
-    current = []
-    for line in lines:
-        if is_article_title(line):
-            if current:
-                articles.append(current)
-            current = []
-        elif line.strip() and not is_heading(line):
-            current.append(line)
-    if current:
-        articles.append(current)
-    return articles
-
-
 def corpus_counts(lines):
     raw_tokens = 0
     non_empty = 0
@@ -85,10 +70,6 @@ def corpus_counts(lines):
     return {"articles": titles, "lines": len(lines), "non_empty_lines": non_empty, "raw_tokens": raw_tokens}
 
 
-def tokenize_lines(lines):
-    return [tokenize(line) for line in lines]
-
-
 def _tokenize_chunk(lines):
     return [" ".join(tokenize(line)) for line in lines]
 
@@ -100,39 +81,6 @@ def parallel_tokenize(lines, workers=16, chunk=20000):
     with Pool(workers) as pool:
         out = pool.map(_tokenize_chunk, chunks)
     return [line for part in out for line in part]
-
-
-def build_subset(articles_tokenized, target_tokens):
-    lines = []
-    article_starts = []
-    total = 0
-    for article in articles_tokenized:
-        article_starts.append(len(lines))
-        for line in article:
-            if line:
-                lines.append(line)
-                total += len(line)
-        if total >= target_tokens:
-            break
-    return lines, article_starts, total
-
-
-def fraction_of_subset(lines, article_starts, fraction):
-    total = sum(len(line) for line in lines)
-    target = fraction * total
-    acc = 0
-    for start, end in zip(article_starts, article_starts[1:] + [len(lines)]):
-        acc += sum(len(line) for line in lines[start:end])
-        if acc >= target:
-            return lines[:end]
-    return lines
-
-
-def write_lines(lines, path):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w") as f:
-        for line in lines:
-            f.write(" ".join(line) + "\n")
 
 
 def read_lines(path):
