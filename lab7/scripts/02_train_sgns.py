@@ -10,7 +10,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from lab7.corpus import load_subset
 from lab7.data import CACHE_DIR, RESULTS_DIR, build_vocab, count_words, encode
-from lab7.evaluation import load_analogies
+from lab7.evaluation import load_analogies, to_keyed_vectors
+from lab7.models import BEST_PATH, load_sgns, selection_score
 from lab7.sgns import SGNSConfig, train_sgns
 
 BASE = SGNSConfig()
@@ -27,6 +28,7 @@ ITERATIONS = {
     "I10": replace(BASE, name="I10", corpus_fraction=0.25, description="corpus 25 %"),
     "I11": replace(BASE, name="I11", corpus_fraction=0.5, description="corpus 50 %"),
 }
+COMPARISON_DIM = 100
 RESULTS_PATH = RESULTS_DIR / "sgns_iterations.json"
 RUNS_DIR = CACHE_DIR / "runs"
 
@@ -52,12 +54,26 @@ def run(config, sections, force=False):
     RESULTS_PATH.write_text(json.dumps(results, indent=1, ensure_ascii=False))
 
 
+def select_best():
+    results = load_results()
+    scores = {k: selection_score(v["final"]) for k, v in results.items()}
+    candidates = [k for k, v in results.items() if v["config"]["dim"] == COMPARISON_DIM]
+    best = max(candidates, key=scores.get)
+    BEST_PATH.write_text(json.dumps({"name": best, "scores": scores}, indent=1))
+    words, matrix = load_sgns(best)
+    vectors_dir = RESULTS_DIR / "vectors"
+    vectors_dir.mkdir(parents=True, exist_ok=True)
+    to_keyed_vectors(words, matrix).save(str(vectors_dir / "best_sgns.kv"))
+    print("best", best, round(scores[best], 4))
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("names", nargs="*", default=list(ITERATIONS))
+    parser.add_argument("names", nargs="*", default=[])
     parser.add_argument("--epochs", type=int)
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--config", type=str, help="JSON con overrides para una iteración nueva")
+    parser.add_argument("--select", action="store_true")
     args = parser.parse_args()
     sections = load_analogies()
     for name in args.names:
@@ -67,6 +83,8 @@ def main():
         if args.epochs:
             config = replace(config, epochs=args.epochs)
         run(config, sections, force=args.force)
+    if args.select:
+        select_best()
 
 
 if __name__ == "__main__":
