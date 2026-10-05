@@ -1,0 +1,2994 @@
+{
+ "GB25": {
+  "params": {
+   "dim": 100,
+   "window": 5,
+   "negatives": 5,
+   "sample": 0.0001,
+   "min_count": 5,
+   "epochs": 5
+  },
+  "corpus_tokens": 6256871,
+  "vocab_size": 43162,
+  "history": [
+   {
+    "epoch": 1,
+    "loss": 3156723.25,
+    "epoch_time_s": 6.285002313000405,
+    "analogy_semantic": 0.021191294387170677,
+    "analogy_syntactic": 0.02581438229870928,
+    "analogy_total": 0.024425905220607207,
+    "analogy_coverage": 0.5949140401146131,
+    "wordsim_spearman": 0.4048204654654426,
+    "neighbors": {
+     "king": [
+      [
+       "isesi",
+       0.77
+      ],
+      [
+       "assyrian",
+       0.761
+      ],
+      [
+       "tailapa",
+       0.752
+      ],
+      [
+       "holy",
+       0.751
+      ],
+      [
+       "vii",
+       0.751
+      ]
+     ],
+     "france": [
+      [
+       "austria",
+       0.84
+      ],
+      [
+       "russia",
+       0.82
+      ],
+      [
+       "spain",
+       0.82
+      ],
+      [
+       "netherlands",
+       0.815
+      ],
+      [
+       "italy",
+       0.813
+      ]
+     ],
+     "computer": [
+      [
+       "software",
+       0.897
+      ],
+      [
+       "amiga",
+       0.88
+      ],
+      [
+       "virtual",
+       0.874
+      ],
+      [
+       "nes",
+       0.867
+      ],
+      [
+       "console",
+       0.863
+      ]
+     ],
+     "good": [
+      [
+       "easy",
+       0.833
+      ],
+      [
+       "expect",
+       0.832
+      ],
+      [
+       "bigger",
+       0.831
+      ],
+      [
+       "glad",
+       0.831
+      ],
+      [
+       "hurt",
+       0.83
+      ]
+     ],
+     "january": [
+      [
+       "december",
+       0.883
+      ],
+      [
+       "july",
+       0.881
+      ],
+      [
+       "november",
+       0.862
+      ],
+      [
+       "september",
+       0.862
+      ],
+      [
+       "april",
+       0.85
+      ]
+     ],
+     "run": [
+      [
+       "straight",
+       0.779
+      ],
+      [
+       "touchdown",
+       0.777
+      ],
+      [
+       "clemson",
+       0.769
+      ],
+      [
+       "ladder",
+       0.768
+      ],
+      [
+       "goalkeeper",
+       0.766
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 2,
+    "loss": 2622804.25,
+    "epoch_time_s": 7.269431688999703,
+    "analogy_semantic": 0.043528064146620846,
+    "analogy_syntactic": 0.0826060233558697,
+    "analogy_total": 0.07086952782317021,
+    "analogy_coverage": 0.5949140401146131,
+    "wordsim_spearman": 0.47992691014441885,
+    "neighbors": {
+     "king": [
+      [
+       "hairan",
+       0.702
+      ],
+      [
+       "ruler",
+       0.672
+      ],
+      [
+       "pharaoh",
+       0.669
+      ],
+      [
+       "kamehameha",
+       0.664
+      ],
+      [
+       "throne",
+       0.662
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.803
+      ],
+      [
+       "italy",
+       0.79
+      ],
+      [
+       "netherlands",
+       0.772
+      ],
+      [
+       "austria",
+       0.758
+      ],
+      [
+       "belgium",
+       0.755
+      ]
+     ],
+     "computer": [
+      [
+       "atari",
+       0.812
+      ],
+      [
+       "software",
+       0.812
+      ],
+      [
+       "consoles",
+       0.81
+      ],
+      [
+       "pickford",
+       0.81
+      ],
+      [
+       "amiga",
+       0.81
+      ]
+     ],
+     "good": [
+      [
+       "tough",
+       0.71
+      ],
+      [
+       "caring",
+       0.708
+      ],
+      [
+       "easy",
+       0.699
+      ],
+      [
+       "pleasing",
+       0.696
+      ],
+      [
+       "happier",
+       0.693
+      ]
+     ],
+     "january": [
+      [
+       "november",
+       0.882
+      ],
+      [
+       "june",
+       0.873
+      ],
+      [
+       "september",
+       0.862
+      ],
+      [
+       "march",
+       0.855
+      ],
+      [
+       "april",
+       0.85
+      ]
+     ],
+     "run": [
+      [
+       "straight",
+       0.749
+      ],
+      [
+       "dantzler",
+       0.747
+      ],
+      [
+       "suggs",
+       0.746
+      ],
+      [
+       "scrimmage",
+       0.742
+      ],
+      [
+       "fumbled",
+       0.739
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 3,
+    "loss": 2498350.5,
+    "epoch_time_s": 6.3582173790000525,
+    "analogy_semantic": 0.06958762886597938,
+    "analogy_syntactic": 0.13534111862323295,
+    "analogy_total": 0.11559301625526791,
+    "analogy_coverage": 0.5949140401146131,
+    "wordsim_spearman": 0.5111126238375427,
+    "neighbors": {
+     "king": [
+      [
+       "kamehameha",
+       0.716
+      ],
+      [
+       "toirdelbach",
+       0.705
+      ],
+      [
+       "sitriuc",
+       0.704
+      ],
+      [
+       "hairan",
+       0.699
+      ],
+      [
+       "echmarcach",
+       0.699
+      ]
+     ],
+     "france": [
+      [
+       "netherlands",
+       0.775
+      ],
+      [
+       "spain",
+       0.754
+      ],
+      [
+       "italy",
+       0.736
+      ],
+      [
+       "russia",
+       0.718
+      ],
+      [
+       "belgium",
+       0.712
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.788
+      ],
+      [
+       "interactive",
+       0.754
+      ],
+      [
+       "mechanics",
+       0.751
+      ],
+      [
+       "simulator",
+       0.748
+      ],
+      [
+       "pickford",
+       0.747
+      ]
+     ],
+     "good": [
+      [
+       "decent",
+       0.721
+      ],
+      [
+       "exciting",
+       0.711
+      ],
+      [
+       "easy",
+       0.71
+      ],
+      [
+       "plenty",
+       0.709
+      ],
+      [
+       "laughs",
+       0.707
+      ]
+     ],
+     "january": [
+      [
+       "november",
+       0.884
+      ],
+      [
+       "september",
+       0.883
+      ],
+      [
+       "june",
+       0.88
+      ],
+      [
+       "february",
+       0.873
+      ],
+      [
+       "april",
+       0.871
+      ]
+     ],
+     "run": [
+      [
+       "suggs",
+       0.77
+      ],
+      [
+       "kramer",
+       0.757
+      ],
+      [
+       "dantzler",
+       0.754
+      ],
+      [
+       "zachery",
+       0.75
+      ],
+      [
+       "deshazo",
+       0.746
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 4,
+    "loss": 2154506.0,
+    "epoch_time_s": 7.198429442999895,
+    "analogy_semantic": 0.0936426116838488,
+    "analogy_syntactic": 0.18020897357098956,
+    "analogy_total": 0.15421002838221382,
+    "analogy_coverage": 0.5949140401146131,
+    "wordsim_spearman": 0.5301377459164552,
+    "neighbors": {
+     "king": [
+      [
+       "reign",
+       0.689
+      ],
+      [
+       "narasimha",
+       0.683
+      ],
+      [
+       "throne",
+       0.682
+      ],
+      [
+       "vizier",
+       0.672
+      ],
+      [
+       "kamehameha",
+       0.663
+      ]
+     ],
+     "france": [
+      [
+       "netherlands",
+       0.773
+      ],
+      [
+       "spain",
+       0.76
+      ],
+      [
+       "italy",
+       0.73
+      ],
+      [
+       "belgium",
+       0.714
+      ],
+      [
+       "russia",
+       0.702
+      ]
+     ],
+     "computer": [
+      [
+       "interactive",
+       0.763
+      ],
+      [
+       "computers",
+       0.749
+      ],
+      [
+       "blackley",
+       0.748
+      ],
+      [
+       "ibm",
+       0.743
+      ],
+      [
+       "dayz",
+       0.74
+      ]
+     ],
+     "good": [
+      [
+       "decent",
+       0.716
+      ],
+      [
+       "joking",
+       0.691
+      ],
+      [
+       "absolutely",
+       0.69
+      ],
+      [
+       "easy",
+       0.688
+      ],
+      [
+       "natured",
+       0.687
+      ]
+     ],
+     "january": [
+      [
+       "june",
+       0.908
+      ],
+      [
+       "april",
+       0.897
+      ],
+      [
+       "september",
+       0.895
+      ],
+      [
+       "november",
+       0.891
+      ],
+      [
+       "february",
+       0.88
+      ]
+     ],
+     "run": [
+      [
+       "suggs",
+       0.717
+      ],
+      [
+       "tackled",
+       0.695
+      ],
+      [
+       "zachery",
+       0.693
+      ],
+      [
+       "halladay",
+       0.692
+      ],
+      [
+       "outs",
+       0.691
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 5,
+    "loss": 2180403.0,
+    "epoch_time_s": 6.46107401900008,
+    "analogy_semantic": 0.09707903780068729,
+    "analogy_syntactic": 0.20762138905961894,
+    "analogy_total": 0.17442160488518105,
+    "analogy_coverage": 0.5949140401146131,
+    "wordsim_spearman": 0.5618110034042206,
+    "neighbors": {
+     "king": [
+      [
+       "throne",
+       0.67
+      ],
+      [
+       "reign",
+       0.665
+      ],
+      [
+       "narasimha",
+       0.66
+      ],
+      [
+       "eadberht",
+       0.659
+      ],
+      [
+       "chola",
+       0.652
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.79
+      ],
+      [
+       "italy",
+       0.757
+      ],
+      [
+       "netherlands",
+       0.755
+      ],
+      [
+       "belgium",
+       0.727
+      ],
+      [
+       "russia",
+       0.707
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.761
+      ],
+      [
+       "pickford",
+       0.76
+      ],
+      [
+       "2600",
+       0.756
+      ],
+      [
+       "amiga",
+       0.754
+      ],
+      [
+       "software",
+       0.753
+      ]
+     ],
+     "good": [
+      [
+       "easy",
+       0.704
+      ],
+      [
+       "decent",
+       0.69
+      ],
+      [
+       "natured",
+       0.687
+      ],
+      [
+       "joking",
+       0.672
+      ],
+      [
+       "hardly",
+       0.665
+      ]
+     ],
+     "january": [
+      [
+       "november",
+       0.932
+      ],
+      [
+       "february",
+       0.928
+      ],
+      [
+       "june",
+       0.927
+      ],
+      [
+       "april",
+       0.922
+      ],
+      [
+       "december",
+       0.921
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.663
+      ],
+      [
+       "kramer",
+       0.655
+      ],
+      [
+       "tackled",
+       0.655
+      ],
+      [
+       "suggs",
+       0.647
+      ],
+      [
+       "oxendine",
+       0.646
+      ]
+     ]
+    }
+   }
+  ],
+  "train_time_s": 33.572154843000135,
+  "total_time_s": 37.30493184500028,
+  "hardware": "CPU, 16 hilos",
+  "final": {
+   "epoch": 5,
+   "loss": 2180403.0,
+   "epoch_time_s": 6.46107401900008,
+   "analogy_semantic": 0.09707903780068729,
+   "analogy_syntactic": 0.20762138905961894,
+   "analogy_total": 0.17442160488518105,
+   "analogy_coverage": 0.5949140401146131,
+   "wordsim_spearman": 0.5618110034042206
+  },
+  "corpus_fraction": 0.25
+ },
+ "GB50": {
+  "params": {
+   "dim": 100,
+   "window": 5,
+   "negatives": 5,
+   "sample": 0.0001,
+   "min_count": 5,
+   "epochs": 5
+  },
+  "corpus_tokens": 12500765,
+  "vocab_size": 62918,
+  "history": [
+   {
+    "epoch": 1,
+    "loss": 5764833.5,
+    "epoch_time_s": 13.376874012999906,
+    "analogy_semantic": 0.05527638190954774,
+    "analogy_syntactic": 0.08911011290518393,
+    "analogy_total": 0.07846563488101181,
+    "analogy_coverage": 0.6149201801064266,
+    "wordsim_spearman": 0.46237159513531023,
+    "neighbors": {
+     "king": [
+      [
+       "anselm",
+       0.799
+      ],
+      [
+       "pope",
+       0.794
+      ],
+      [
+       "archbishop",
+       0.775
+      ],
+      [
+       "anjou",
+       0.775
+      ],
+      [
+       "vassal",
+       0.775
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.821
+      ],
+      [
+       "hungary",
+       0.816
+      ],
+      [
+       "germany",
+       0.807
+      ],
+      [
+       "italy",
+       0.798
+      ],
+      [
+       "russia",
+       0.796
+      ]
+     ],
+     "computer": [
+      [
+       "software",
+       0.792
+      ],
+      [
+       "simulator",
+       0.785
+      ],
+      [
+       "user",
+       0.781
+      ],
+      [
+       "virtual",
+       0.77
+      ],
+      [
+       "computers",
+       0.766
+      ]
+     ],
+     "good": [
+      [
+       "nowhere",
+       0.73
+      ],
+      [
+       "dumb",
+       0.73
+      ],
+      [
+       "learnt",
+       0.73
+      ],
+      [
+       "proud",
+       0.723
+      ],
+      [
+       "glad",
+       0.722
+      ]
+     ],
+     "january": [
+      [
+       "april",
+       0.88
+      ],
+      [
+       "december",
+       0.876
+      ],
+      [
+       "september",
+       0.858
+      ],
+      [
+       "june",
+       0.858
+      ],
+      [
+       "august",
+       0.851
+      ]
+     ],
+     "run": [
+      [
+       "wimbledon",
+       0.714
+      ],
+      [
+       "rebounded",
+       0.712
+      ],
+      [
+       "loaned",
+       0.71
+      ],
+      [
+       "vick",
+       0.708
+      ],
+      [
+       "outing",
+       0.705
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 2,
+    "loss": 4671960.5,
+    "epoch_time_s": 12.177721083000051,
+    "analogy_semantic": 0.0806664903464692,
+    "analogy_syntactic": 0.16595848002913682,
+    "analogy_total": 0.13912464636378766,
+    "analogy_coverage": 0.6149201801064266,
+    "wordsim_spearman": 0.531214254655165,
+    "neighbors": {
+     "king": [
+      [
+       "anjou",
+       0.763
+      ],
+      [
+       "thelred",
+       0.746
+      ],
+      [
+       "acceded",
+       0.743
+      ],
+      [
+       "palatinate",
+       0.741
+      ],
+      [
+       "duke",
+       0.74
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.768
+      ],
+      [
+       "luxembourg",
+       0.763
+      ],
+      [
+       "netherlands",
+       0.742
+      ],
+      [
+       "italy",
+       0.74
+      ],
+      [
+       "germany",
+       0.732
+      ]
+     ],
+     "computer": [
+      [
+       "simulator",
+       0.752
+      ],
+      [
+       "blackley",
+       0.751
+      ],
+      [
+       "cerny",
+       0.751
+      ],
+      [
+       "computers",
+       0.748
+      ],
+      [
+       "hardware",
+       0.739
+      ]
+     ],
+     "good": [
+      [
+       "bad",
+       0.67
+      ],
+      [
+       "easy",
+       0.665
+      ],
+      [
+       "luck",
+       0.663
+      ],
+      [
+       "excellent",
+       0.661
+      ],
+      [
+       "hardly",
+       0.66
+      ]
+     ],
+     "january": [
+      [
+       "september",
+       0.86
+      ],
+      [
+       "december",
+       0.836
+      ],
+      [
+       "august",
+       0.835
+      ],
+      [
+       "june",
+       0.834
+      ],
+      [
+       "july",
+       0.833
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.693
+      ],
+      [
+       "suggs",
+       0.693
+      ],
+      [
+       "ran",
+       0.687
+      ],
+      [
+       "dantzler",
+       0.67
+      ],
+      [
+       "deshazo",
+       0.669
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 3,
+    "loss": 4351229.0,
+    "epoch_time_s": 12.584938844000135,
+    "analogy_semantic": 0.1372652737371066,
+    "analogy_syntactic": 0.2298166808303994,
+    "analogy_total": 0.20069895157264103,
+    "analogy_coverage": 0.6149201801064266,
+    "wordsim_spearman": 0.5773749233947999,
+    "neighbors": {
+     "king": [
+      [
+       "anjou",
+       0.735
+      ],
+      [
+       "thelred",
+       0.723
+      ],
+      [
+       "paschal",
+       0.712
+      ],
+      [
+       "aquitaine",
+       0.709
+      ],
+      [
+       "vikramaditya",
+       0.706
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.783
+      ],
+      [
+       "netherlands",
+       0.731
+      ],
+      [
+       "italy",
+       0.706
+      ],
+      [
+       "luxembourg",
+       0.705
+      ],
+      [
+       "paris",
+       0.699
+      ]
+     ],
+     "computer": [
+      [
+       "konami",
+       0.732
+      ],
+      [
+       "computers",
+       0.732
+      ],
+      [
+       "software",
+       0.732
+      ],
+      [
+       "simulator",
+       0.724
+      ],
+      [
+       "desktop",
+       0.716
+      ]
+     ],
+     "good": [
+      [
+       "natured",
+       0.692
+      ],
+      [
+       "luck",
+       0.675
+      ],
+      [
+       "anybody",
+       0.673
+      ],
+      [
+       "decent",
+       0.669
+      ],
+      [
+       "bad",
+       0.666
+      ]
+     ],
+     "january": [
+      [
+       "september",
+       0.891
+      ],
+      [
+       "march",
+       0.88
+      ],
+      [
+       "october",
+       0.879
+      ],
+      [
+       "november",
+       0.875
+      ],
+      [
+       "december",
+       0.873
+      ]
+     ],
+     "run": [
+      [
+       "suggs",
+       0.69
+      ],
+      [
+       "dantzler",
+       0.668
+      ],
+      [
+       "oxendine",
+       0.665
+      ],
+      [
+       "neely",
+       0.664
+      ],
+      [
+       "deshazo",
+       0.663
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 4,
+    "loss": 4026525.0,
+    "epoch_time_s": 11.874508164999952,
+    "analogy_semantic": 0.15921713832319492,
+    "analogy_syntactic": 0.2873619036056817,
+    "analogy_total": 0.2470460975203861,
+    "analogy_coverage": 0.6149201801064266,
+    "wordsim_spearman": 0.6002513052964501,
+    "neighbors": {
+     "king": [
+      [
+       "thelred",
+       0.798
+      ],
+      [
+       "aldfrith",
+       0.79
+      ],
+      [
+       "fealty",
+       0.785
+      ],
+      [
+       "anjou",
+       0.781
+      ],
+      [
+       "fulk",
+       0.778
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.779
+      ],
+      [
+       "italy",
+       0.769
+      ],
+      [
+       "belgium",
+       0.728
+      ],
+      [
+       "marseille",
+       0.708
+      ],
+      [
+       "netherlands",
+       0.706
+      ]
+     ],
+     "computer": [
+      [
+       "software",
+       0.769
+      ],
+      [
+       "computers",
+       0.756
+      ],
+      [
+       "blackley",
+       0.741
+      ],
+      [
+       "atari",
+       0.738
+      ],
+      [
+       "simulator",
+       0.733
+      ]
+     ],
+     "good": [
+      [
+       "bad",
+       0.703
+      ],
+      [
+       "natured",
+       0.702
+      ],
+      [
+       "luck",
+       0.7
+      ],
+      [
+       "humoured",
+       0.696
+      ],
+      [
+       "excellent",
+       0.691
+      ]
+     ],
+     "january": [
+      [
+       "february",
+       0.929
+      ],
+      [
+       "october",
+       0.924
+      ],
+      [
+       "november",
+       0.917
+      ],
+      [
+       "september",
+       0.912
+      ],
+      [
+       "june",
+       0.907
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.676
+      ],
+      [
+       "madson",
+       0.668
+      ],
+      [
+       "suggs",
+       0.647
+      ],
+      [
+       "oxendine",
+       0.646
+      ],
+      [
+       "baserunners",
+       0.639
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 5,
+    "loss": 3882946.0,
+    "epoch_time_s": 11.838014955999824,
+    "analogy_semantic": 0.1930706162390902,
+    "analogy_syntactic": 0.32329731698433894,
+    "analogy_total": 0.28232651023464805,
+    "analogy_coverage": 0.6149201801064266,
+    "wordsim_spearman": 0.6168890116321981,
+    "neighbors": {
+     "king": [
+      [
+       "thelred",
+       0.776
+      ],
+      [
+       "anjou",
+       0.767
+      ],
+      [
+       "thelfrith",
+       0.76
+      ],
+      [
+       "acceded",
+       0.758
+      ],
+      [
+       "vikramaditya",
+       0.746
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.808
+      ],
+      [
+       "italy",
+       0.768
+      ],
+      [
+       "belgium",
+       0.746
+      ],
+      [
+       "netherlands",
+       0.731
+      ],
+      [
+       "germany",
+       0.719
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.755
+      ],
+      [
+       "software",
+       0.75
+      ],
+      [
+       "desktop",
+       0.75
+      ],
+      [
+       "blackley",
+       0.738
+      ],
+      [
+       "konami",
+       0.737
+      ]
+     ],
+     "good": [
+      [
+       "bad",
+       0.713
+      ],
+      [
+       "excellent",
+       0.705
+      ],
+      [
+       "humoured",
+       0.689
+      ],
+      [
+       "natured",
+       0.682
+      ],
+      [
+       "luck",
+       0.662
+      ]
+     ],
+     "january": [
+      [
+       "october",
+       0.942
+      ],
+      [
+       "september",
+       0.935
+      ],
+      [
+       "december",
+       0.931
+      ],
+      [
+       "june",
+       0.928
+      ],
+      [
+       "august",
+       0.924
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.684
+      ],
+      [
+       "madson",
+       0.632
+      ],
+      [
+       "oxendine",
+       0.623
+      ],
+      [
+       "baserunners",
+       0.617
+      ],
+      [
+       "ran",
+       0.614
+      ]
+     ]
+    }
+   }
+  ],
+  "train_time_s": 61.85205706099987,
+  "total_time_s": 66.47693401600009,
+  "hardware": "CPU, 16 hilos",
+  "final": {
+   "epoch": 5,
+   "loss": 3882946.0,
+   "epoch_time_s": 11.838014955999824,
+   "analogy_semantic": 0.1930706162390902,
+   "analogy_syntactic": 0.32329731698433894,
+   "analogy_total": 0.28232651023464805,
+   "analogy_coverage": 0.6149201801064266,
+   "wordsim_spearman": 0.6168890116321981
+  },
+  "corpus_fraction": 0.5
+ },
+ "GB100": {
+  "params": {
+   "dim": 100,
+   "window": 5,
+   "negatives": 5,
+   "sample": 0.0001,
+   "min_count": 5,
+   "epochs": 5
+  },
+  "corpus_tokens": 25000786,
+  "vocab_size": 90566,
+  "history": [
+   {
+    "epoch": 1,
+    "loss": 10602827.0,
+    "epoch_time_s": 26.390924216999792,
+    "analogy_semantic": 0.09075391180654338,
+    "analogy_syntactic": 0.1592455533007043,
+    "analogy_total": 0.13900100908173563,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.5454174632663342,
+    "neighbors": {
+     "king": [
+      [
+       "thelred",
+       0.769
+      ],
+      [
+       "anjou",
+       0.768
+      ],
+      [
+       "sigismund",
+       0.761
+      ],
+      [
+       "heraclius",
+       0.759
+      ],
+      [
+       "blois",
+       0.758
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.711
+      ],
+      [
+       "italy",
+       0.687
+      ],
+      [
+       "europe",
+       0.677
+      ],
+      [
+       "netherlands",
+       0.664
+      ],
+      [
+       "goodwill",
+       0.657
+      ]
+     ],
+     "computer": [
+      [
+       "spacewar",
+       0.79
+      ],
+      [
+       "simulation",
+       0.771
+      ],
+      [
+       "smartphones",
+       0.756
+      ],
+      [
+       "computers",
+       0.754
+      ],
+      [
+       "desktop",
+       0.752
+      ]
+     ],
+     "good": [
+      [
+       "proud",
+       0.745
+      ],
+      [
+       "delighted",
+       0.741
+      ],
+      [
+       "damn",
+       0.737
+      ],
+      [
+       "decent",
+       0.726
+      ],
+      [
+       "sober",
+       0.726
+      ]
+     ],
+     "january": [
+      [
+       "february",
+       0.89
+      ],
+      [
+       "november",
+       0.841
+      ],
+      [
+       "april",
+       0.841
+      ],
+      [
+       "december",
+       0.822
+      ],
+      [
+       "march",
+       0.819
+      ]
+     ],
+     "run": [
+      [
+       "haul",
+       0.726
+      ],
+      [
+       "oxendine",
+       0.725
+      ],
+      [
+       "wrecking",
+       0.703
+      ],
+      [
+       "handing",
+       0.696
+      ],
+      [
+       "dismissals",
+       0.691
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 2,
+    "loss": 8386201.0,
+    "epoch_time_s": 26.08894151300001,
+    "analogy_semantic": 0.16301564722617354,
+    "analogy_syntactic": 0.24662767100393937,
+    "analogy_total": 0.2219138916918937,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.6150371369785728,
+    "neighbors": {
+     "king": [
+      [
+       "fulk",
+       0.819
+      ],
+      [
+       "harthacnut",
+       0.807
+      ],
+      [
+       "1199",
+       0.802
+      ],
+      [
+       "bolingbroke",
+       0.797
+      ],
+      [
+       "honorius",
+       0.796
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.764
+      ],
+      [
+       "italy",
+       0.718
+      ],
+      [
+       "paris",
+       0.707
+      ],
+      [
+       "french",
+       0.686
+      ],
+      [
+       "portugal",
+       0.677
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.791
+      ],
+      [
+       "spacewar",
+       0.774
+      ],
+      [
+       "computing",
+       0.767
+      ],
+      [
+       "blackley",
+       0.753
+      ],
+      [
+       "desktop",
+       0.742
+      ]
+     ],
+     "good": [
+      [
+       "natured",
+       0.738
+      ],
+      [
+       "decent",
+       0.734
+      ],
+      [
+       "gratifying",
+       0.73
+      ],
+      [
+       "winded",
+       0.727
+      ],
+      [
+       "painfully",
+       0.717
+      ]
+     ],
+     "january": [
+      [
+       "february",
+       0.862
+      ],
+      [
+       "june",
+       0.844
+      ],
+      [
+       "december",
+       0.843
+      ],
+      [
+       "november",
+       0.832
+      ],
+      [
+       "september",
+       0.806
+      ]
+     ],
+     "run": [
+      [
+       "oxendine",
+       0.717
+      ],
+      [
+       "baserunner",
+       0.698
+      ],
+      [
+       "rbi",
+       0.686
+      ],
+      [
+       "unearned",
+       0.681
+      ],
+      [
+       "rbis",
+       0.679
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 3,
+    "loss": 7623566.0,
+    "epoch_time_s": 25.796593755999766,
+    "analogy_semantic": 0.22048364153627312,
+    "analogy_syntactic": 0.34809597708010026,
+    "analogy_total": 0.310376723847965,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.6375748133310642,
+    "neighbors": {
+     "king": [
+      [
+       "1057",
+       0.767
+      ],
+      [
+       "eadberht",
+       0.763
+      ],
+      [
+       "satyashraya",
+       0.753
+      ],
+      [
+       "rakoto",
+       0.752
+      ],
+      [
+       "bagrat",
+       0.751
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.827
+      ],
+      [
+       "germany",
+       0.751
+      ],
+      [
+       "italy",
+       0.739
+      ],
+      [
+       "netherlands",
+       0.735
+      ],
+      [
+       "portugal",
+       0.731
+      ]
+     ],
+     "computer": [
+      [
+       "desktop",
+       0.765
+      ],
+      [
+       "spacewar",
+       0.763
+      ],
+      [
+       "computers",
+       0.746
+      ],
+      [
+       "programmable",
+       0.745
+      ],
+      [
+       "architectures",
+       0.743
+      ]
+     ],
+     "good": [
+      [
+       "natured",
+       0.733
+      ],
+      [
+       "luckily",
+       0.724
+      ],
+      [
+       "bad",
+       0.702
+      ],
+      [
+       "mattered",
+       0.702
+      ],
+      [
+       "flattered",
+       0.697
+      ]
+     ],
+     "january": [
+      [
+       "december",
+       0.879
+      ],
+      [
+       "november",
+       0.866
+      ],
+      [
+       "february",
+       0.859
+      ],
+      [
+       "october",
+       0.85
+      ],
+      [
+       "august",
+       0.847
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.676
+      ],
+      [
+       "gilford",
+       0.632
+      ],
+      [
+       "airtime",
+       0.628
+      ],
+      [
+       "mayoralty",
+       0.626
+      ],
+      [
+       "longview",
+       0.623
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 4,
+    "loss": 7385086.0,
+    "epoch_time_s": 25.624620632999722,
+    "analogy_semantic": 0.2716927453769559,
+    "analogy_syntactic": 0.4042019816163304,
+    "analogy_total": 0.3650353178607467,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.658057969508439,
+    "neighbors": {
+     "king": [
+      [
+       "harthacnut",
+       0.811
+      ],
+      [
+       "thelred",
+       0.785
+      ],
+      [
+       "bolingbroke",
+       0.781
+      ],
+      [
+       "curthose",
+       0.779
+      ],
+      [
+       "aldfrith",
+       0.776
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.823
+      ],
+      [
+       "italy",
+       0.769
+      ],
+      [
+       "portugal",
+       0.76
+      ],
+      [
+       "belgium",
+       0.729
+      ],
+      [
+       "alsace",
+       0.717
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.802
+      ],
+      [
+       "spacewar",
+       0.768
+      ],
+      [
+       "desktop",
+       0.74
+      ],
+      [
+       "software",
+       0.737
+      ],
+      [
+       "computing",
+       0.735
+      ]
+     ],
+     "good": [
+      [
+       "decent",
+       0.733
+      ],
+      [
+       "natured",
+       0.724
+      ],
+      [
+       "humored",
+       0.722
+      ],
+      [
+       "humoured",
+       0.71
+      ],
+      [
+       "gratifying",
+       0.71
+      ]
+     ],
+     "january": [
+      [
+       "july",
+       0.926
+      ],
+      [
+       "december",
+       0.917
+      ],
+      [
+       "february",
+       0.911
+      ],
+      [
+       "november",
+       0.909
+      ],
+      [
+       "august",
+       0.906
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.731
+      ],
+      [
+       "drive",
+       0.67
+      ],
+      [
+       "longview",
+       0.641
+      ],
+      [
+       "redland",
+       0.637
+      ],
+      [
+       "readville",
+       0.634
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 5,
+    "loss": 4779888.0,
+    "epoch_time_s": 24.982695037999747,
+    "analogy_semantic": 0.3120910384068279,
+    "analogy_syntactic": 0.4518323982332577,
+    "analogy_total": 0.4105280861083081,
+    "analogy_coverage": 0.6084731887024151,
+    "wordsim_spearman": 0.6673353648833658,
+    "neighbors": {
+     "king": [
+      [
+       "harthacnut",
+       0.799
+      ],
+      [
+       "aldfrith",
+       0.783
+      ],
+      [
+       "curthose",
+       0.781
+      ],
+      [
+       "eadberht",
+       0.78
+      ],
+      [
+       "thelred",
+       0.775
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.832
+      ],
+      [
+       "italy",
+       0.787
+      ],
+      [
+       "alsace",
+       0.742
+      ],
+      [
+       "portugal",
+       0.731
+      ],
+      [
+       "belgium",
+       0.724
+      ]
+     ],
+     "computer": [
+      [
+       "spacewar",
+       0.789
+      ],
+      [
+       "computers",
+       0.788
+      ],
+      [
+       "desktop",
+       0.766
+      ],
+      [
+       "software",
+       0.745
+      ],
+      [
+       "programmable",
+       0.744
+      ]
+     ],
+     "good": [
+      [
+       "bad",
+       0.737
+      ],
+      [
+       "natured",
+       0.719
+      ],
+      [
+       "humoured",
+       0.712
+      ],
+      [
+       "decent",
+       0.708
+      ],
+      [
+       "humored",
+       0.699
+      ]
+     ],
+     "january": [
+      [
+       "february",
+       0.947
+      ],
+      [
+       "december",
+       0.942
+      ],
+      [
+       "july",
+       0.935
+      ],
+      [
+       "june",
+       0.934
+      ],
+      [
+       "october",
+       0.933
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.683
+      ],
+      [
+       "ran",
+       0.648
+      ],
+      [
+       "runs",
+       0.631
+      ],
+      [
+       "unearned",
+       0.623
+      ],
+      [
+       "geter",
+       0.621
+      ]
+     ]
+    }
+   }
+  ],
+  "train_time_s": 128.88377515699904,
+  "total_time_s": 136.92754240500017,
+  "hardware": "CPU, 16 hilos",
+  "final": {
+   "epoch": 5,
+   "loss": 4779888.0,
+   "epoch_time_s": 24.982695037999747,
+   "analogy_semantic": 0.3120910384068279,
+   "analogy_syntactic": 0.4518323982332577,
+   "analogy_total": 0.4105280861083081,
+   "analogy_coverage": 0.6084731887024151,
+   "wordsim_spearman": 0.6673353648833658
+  },
+  "corpus_fraction": 1.0
+ },
+ "GFULL": {
+  "params": {
+   "dim": 100,
+   "window": 5,
+   "negatives": 5,
+   "sample": 0.0001,
+   "min_count": 5,
+   "epochs": 5
+  },
+  "corpus_tokens": 85870879,
+  "vocab_size": 170595,
+  "history": [
+   {
+    "epoch": 1,
+    "loss": 29814068.0,
+    "epoch_time_s": 93.9370852080001,
+    "analogy_semantic": 0.14437420986093552,
+    "analogy_syntactic": 0.26084865969467486,
+    "analogy_total": 0.22331758188039758,
+    "analogy_coverage": 0.6280188293082276,
+    "wordsim_spearman": 0.5790919998745606,
+    "neighbors": {
+     "king": [
+      [
+       "1164",
+       0.818
+      ],
+      [
+       "1308",
+       0.799
+      ],
+      [
+       "bagler",
+       0.791
+      ],
+      [
+       "1286",
+       0.79
+      ],
+      [
+       "1166",
+       0.787
+      ]
+     ],
+     "france": [
+      [
+       "netherlands",
+       0.794
+      ],
+      [
+       "luxembourg",
+       0.768
+      ],
+      [
+       "italy",
+       0.767
+      ],
+      [
+       "spain",
+       0.766
+      ],
+      [
+       "portugal",
+       0.754
+      ]
+     ],
+     "computer": [
+      [
+       "renderman",
+       0.764
+      ],
+      [
+       "simulation",
+       0.743
+      ],
+      [
+       "psygnosis",
+       0.739
+      ],
+      [
+       "programmable",
+       0.736
+      ],
+      [
+       "sgi",
+       0.735
+      ]
+     ],
+     "good": [
+      [
+       "bad",
+       0.752
+      ],
+      [
+       "decent",
+       0.693
+      ],
+      [
+       "lousy",
+       0.675
+      ],
+      [
+       "dependable",
+       0.672
+      ],
+      [
+       "relished",
+       0.665
+      ]
+     ],
+     "january": [
+      [
+       "february",
+       0.859
+      ],
+      [
+       "december",
+       0.853
+      ],
+      [
+       "april",
+       0.842
+      ],
+      [
+       "october",
+       0.814
+      ],
+      [
+       "march",
+       0.81
+      ]
+     ],
+     "run": [
+      [
+       "odoms",
+       0.768
+      ],
+      [
+       "meger",
+       0.762
+      ],
+      [
+       "dantzler",
+       0.759
+      ],
+      [
+       "oxendine",
+       0.758
+      ],
+      [
+       "pegues",
+       0.758
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 2,
+    "loss": 18153456.0,
+    "epoch_time_s": 87.70967642400001,
+    "analogy_semantic": 0.2647281921618205,
+    "analogy_syntactic": 0.38321913691549464,
+    "analogy_total": 0.34503829232524036,
+    "analogy_coverage": 0.6280188293082276,
+    "wordsim_spearman": 0.6318073365864113,
+    "neighbors": {
+     "king": [
+      [
+       "satyashraya",
+       0.749
+      ],
+      [
+       "austrasia",
+       0.735
+      ],
+      [
+       "krishnaraja",
+       0.73
+      ],
+      [
+       "oswine",
+       0.726
+      ],
+      [
+       "neustria",
+       0.725
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.8
+      ],
+      [
+       "belgium",
+       0.756
+      ],
+      [
+       "luxembourg",
+       0.735
+      ],
+      [
+       "portugal",
+       0.728
+      ],
+      [
+       "italy",
+       0.705
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.821
+      ],
+      [
+       "renderman",
+       0.804
+      ],
+      [
+       "programmable",
+       0.792
+      ],
+      [
+       "microcomputers",
+       0.786
+      ],
+      [
+       "edsac",
+       0.772
+      ]
+     ],
+     "good": [
+      [
+       "blokes",
+       0.739
+      ],
+      [
+       "humbling",
+       0.738
+      ],
+      [
+       "humored",
+       0.733
+      ],
+      [
+       "chuffed",
+       0.732
+      ],
+      [
+       "sure",
+       0.726
+      ]
+     ],
+     "january": [
+      [
+       "november",
+       0.843
+      ],
+      [
+       "december",
+       0.836
+      ],
+      [
+       "september",
+       0.824
+      ],
+      [
+       "april",
+       0.823
+      ],
+      [
+       "october",
+       0.816
+      ]
+     ],
+     "run": [
+      [
+       "balliet",
+       0.67
+      ],
+      [
+       "barbours",
+       0.67
+      ],
+      [
+       "runs",
+       0.668
+      ],
+      [
+       "salladasburg",
+       0.666
+      ],
+      [
+       "lawshe",
+       0.664
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 3,
+    "loss": 16660508.0,
+    "epoch_time_s": 87.24229094700013,
+    "analogy_semantic": 0.3256637168141593,
+    "analogy_syntactic": 0.4406779661016949,
+    "analogy_total": 0.40361740263972623,
+    "analogy_coverage": 0.6280188293082276,
+    "wordsim_spearman": 0.6252929265377695,
+    "neighbors": {
+     "king": [
+      [
+       "chlothar",
+       0.798
+      ],
+      [
+       "villehardouin",
+       0.791
+      ],
+      [
+       "oswine",
+       0.77
+      ],
+      [
+       "theuderic",
+       0.77
+      ],
+      [
+       "guthfrith",
+       0.769
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.766
+      ],
+      [
+       "luxembourg",
+       0.762
+      ],
+      [
+       "belgium",
+       0.758
+      ],
+      [
+       "alsace",
+       0.75
+      ],
+      [
+       "portugal",
+       0.741
+      ]
+     ],
+     "computer": [
+      [
+       "univac",
+       0.79
+      ],
+      [
+       "simulation",
+       0.779
+      ],
+      [
+       "imuse",
+       0.779
+      ],
+      [
+       "fmvs",
+       0.774
+      ],
+      [
+       "renderman",
+       0.772
+      ]
+     ],
+     "good": [
+      [
+       "bad",
+       0.759
+      ],
+      [
+       "honest",
+       0.748
+      ],
+      [
+       "decent",
+       0.739
+      ],
+      [
+       "chuffed",
+       0.72
+      ],
+      [
+       "luck",
+       0.719
+      ]
+     ],
+     "january": [
+      [
+       "april",
+       0.873
+      ],
+      [
+       "february",
+       0.868
+      ],
+      [
+       "december",
+       0.827
+      ],
+      [
+       "march",
+       0.823
+      ],
+      [
+       "june",
+       0.822
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.766
+      ],
+      [
+       "ran",
+       0.714
+      ],
+      [
+       "puncheon",
+       0.683
+      ],
+      [
+       "drive",
+       0.675
+      ],
+      [
+       "readville",
+       0.666
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 4,
+    "loss": 3112848.0,
+    "epoch_time_s": 83.06134167600021,
+    "analogy_semantic": 0.3501896333754741,
+    "analogy_syntactic": 0.52878951797091,
+    "analogy_total": 0.4712400195535278,
+    "analogy_coverage": 0.6280188293082276,
+    "wordsim_spearman": 0.6447244389914227,
+    "neighbors": {
+     "king": [
+      [
+       "uncrowned",
+       0.787
+      ],
+      [
+       "austrasia",
+       0.78
+      ],
+      [
+       "neustria",
+       0.772
+      ],
+      [
+       "villehardouin",
+       0.771
+      ],
+      [
+       "satyashraya",
+       0.767
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.834
+      ],
+      [
+       "belgium",
+       0.789
+      ],
+      [
+       "portugal",
+       0.772
+      ],
+      [
+       "luxembourg",
+       0.767
+      ],
+      [
+       "netherlands",
+       0.76
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.81
+      ],
+      [
+       "univac",
+       0.787
+      ],
+      [
+       "simulation",
+       0.785
+      ],
+      [
+       "edsac",
+       0.755
+      ],
+      [
+       "imuse",
+       0.751
+      ]
+     ],
+     "good": [
+      [
+       "excellent",
+       0.715
+      ],
+      [
+       "decent",
+       0.71
+      ],
+      [
+       "bad",
+       0.703
+      ],
+      [
+       "easy",
+       0.68
+      ],
+      [
+       "honest",
+       0.679
+      ]
+     ],
+     "january": [
+      [
+       "december",
+       0.917
+      ],
+      [
+       "february",
+       0.916
+      ],
+      [
+       "july",
+       0.907
+      ],
+      [
+       "march",
+       0.904
+      ],
+      [
+       "june",
+       0.9
+      ]
+     ],
+     "run": [
+      [
+       "terblanche",
+       0.709
+      ],
+      [
+       "conforto",
+       0.701
+      ],
+      [
+       "tanvir",
+       0.692
+      ],
+      [
+       "runs",
+       0.687
+      ],
+      [
+       "sherdel",
+       0.681
+      ]
+     ]
+    }
+   },
+   {
+    "epoch": 5,
+    "loss": 651496.0,
+    "epoch_time_s": 69.31907942899988,
+    "analogy_semantic": 0.4085967130214918,
+    "analogy_syntactic": 0.5689385743478783,
+    "analogy_total": 0.5172722828743685,
+    "analogy_coverage": 0.6280188293082276,
+    "wordsim_spearman": 0.6614497642692692,
+    "neighbors": {
+     "king": [
+      [
+       "uncrowned",
+       0.758
+      ],
+      [
+       "austrasia",
+       0.749
+      ],
+      [
+       "fitzempress",
+       0.749
+      ],
+      [
+       "guthfrithson",
+       0.748
+      ],
+      [
+       "guthfrith",
+       0.743
+      ]
+     ],
+     "france": [
+      [
+       "spain",
+       0.823
+      ],
+      [
+       "belgium",
+       0.82
+      ],
+      [
+       "portugal",
+       0.804
+      ],
+      [
+       "italy",
+       0.794
+      ],
+      [
+       "luxembourg",
+       0.779
+      ]
+     ],
+     "computer": [
+      [
+       "computers",
+       0.847
+      ],
+      [
+       "univac",
+       0.802
+      ],
+      [
+       "microcomputers",
+       0.794
+      ],
+      [
+       "simulation",
+       0.765
+      ],
+      [
+       "software",
+       0.765
+      ]
+     ],
+     "good": [
+      [
+       "bad",
+       0.791
+      ],
+      [
+       "excellent",
+       0.743
+      ],
+      [
+       "luck",
+       0.728
+      ],
+      [
+       "poor",
+       0.723
+      ],
+      [
+       "sure",
+       0.688
+      ]
+     ],
+     "january": [
+      [
+       "february",
+       0.947
+      ],
+      [
+       "december",
+       0.947
+      ],
+      [
+       "march",
+       0.943
+      ],
+      [
+       "june",
+       0.937
+      ],
+      [
+       "november",
+       0.935
+      ]
+     ],
+     "run": [
+      [
+       "running",
+       0.748
+      ],
+      [
+       "ran",
+       0.709
+      ],
+      [
+       "montee",
+       0.696
+      ],
+      [
+       "montario",
+       0.682
+      ],
+      [
+       "adimchinobe",
+       0.682
+      ]
+     ]
+    }
+   }
+  ],
+  "train_time_s": 421.26947368400033,
+  "total_time_s": 442.4472749370002,
+  "hardware": "CPU, 16 hilos",
+  "final": {
+   "epoch": 5,
+   "loss": 651496.0,
+   "epoch_time_s": 69.31907942899988,
+   "analogy_semantic": 0.4085967130214918,
+   "analogy_syntactic": 0.5689385743478783,
+   "analogy_total": 0.5172722828743685,
+   "analogy_coverage": 0.6280188293082276,
+   "wordsim_spearman": 0.6614497642692692
+  },
+  "corpus_fraction": null
+ }
+}
