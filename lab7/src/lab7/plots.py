@@ -74,7 +74,7 @@ def loss_vs_quality(results, path):
     for k, (name, r) in enumerate(results.items()):
         f = r["history"][-1]
         ax.scatter(f["loss"], f["analogy_total"], color=COLORS[k % len(COLORS)])
-        ax.annotate(f"{name} {r['config']['description']}", (f["loss"], f["analogy_total"]), fontsize=6.5)
+        ax.annotate(name, (f["loss"], f["analogy_total"]), fontsize=7, xytext=(3, 3), textcoords="offset points")
     ax.set(xlabel="pérdida final (último epoch)", ylabel="accuracy de analogías", title="¿Menor pérdida = mejores embeddings?")
     _save(fig, path)
 

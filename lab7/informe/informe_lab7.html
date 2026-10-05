@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<title>Laboratorio 7 — NLP end-to-end y Embeddings</title>
+<style>
+@page { size: A4; margin: 25.4mm; }
+* { box-sizing: border-box; }
+body { font-family: "Times New Roman", Georgia, serif; font-size: 9pt; line-height: 1.22; color: #000; margin: 0; }
+h1 { font-size: 14pt; text-align: center; margin: 0 0 1mm; }
+h2 { font-size: 11pt; margin: 2mm 0 0.8mm; }
+h3 { font-size: 9.6pt; margin: 1.4mm 0 0.5mm; }
+p  { margin: 0 0 1.2mm; text-align: justify; }
+.hdr { font-size: 9.5pt; text-align: right; margin: 0 0 1mm; }
+.sub { font-size: 10pt; text-align: center; margin: 0 0 2mm; }
+table { width: 100%; border-collapse: collapse; font-size: 7.9pt; margin: 0.8mm 0 1.3mm; }
+th, td { border: 0.5pt solid #000; padding: 0.45mm 1.1mm; text-align: center; }
+th { background: #eee; }
+td.l, th.l { text-align: left; }
+.best { font-weight: bold; }
+code { font-family: "DejaVu Sans Mono", monospace; font-size: 7.6pt; }
+ul { margin: 0 0 1.2mm; padding-left: 4.5mm; }
+li { margin-bottom: 0.5mm; text-align: justify; }
+.figs { display: flex; gap: 3mm; align-items: flex-start; margin: 0.8mm 0 0.4mm; }
+.figs img { width: 50%; }
+.fig { break-inside: avoid; }
+.cap { font-size: 8pt; text-align: center; margin: 0 0 1.4mm; }
+.pb { break-before: page; }
+.refs { font-size: 8.2pt; }
+.repo { font-size: 9pt; text-align: center; margin-top: 2mm; }
+.repo a { color: #000; }
+</style></head><body>
+
+<div class="hdr">Esteban Cárcamo — carné 23016</div>
+<h1>Laboratorio 7 — NLP end-to-end y Embeddings</h1>
+<div class="sub">CC3092 · Deep Learning y Sistemas Inteligentes · WikiText-103, AG News y GloVe 100d</div>
+
+<h2>1. Investigación: embeddings en PyTorch y gensim</h2>
+<p><code>nn.Embedding(num_embeddings, embedding_dim, padding_idx, sparse)</code> es una tabla |V|×d: el ID del token selecciona una fila
+(equivale a one-hot × matriz, pero indexando). <code>padding_idx</code> fija una fila que nunca recibe gradiente (lo verificamos en el
+notebook) y <code>sparse=True</code> produce gradientes solo para las filas usadas, lo que permite <code>SparseAdam</code> con vocabularios
+grandes. <code>nn.Embedding.from_pretrained(weights, freeze)</code> carga vectores ya entrenados: <code>freeze=True</code> los deja fijos y
+<code>False</code> permite fine-tuning. <code>nn.EmbeddingBag(mode)</code> busca y agrega en un paso los vectores de cada documento
+(<code>mean</code>, <code>sum</code> o <code>max</code>) a partir de un tensor 1D concatenado y de <code>offsets</code>, que marcan dónde empieza
+cada documento; evita el padding. En gensim, <code>Word2Vec</code> (<code>sg</code>, <code>vector_size</code>, <code>window</code>,
+<code>negative</code>, <code>sample</code>, <code>min_count</code>, <code>epochs</code>) entrena en C multihilo y <code>KeyedVectors</code> consulta
+(<code>most_similar</code>, <code>evaluate_word_pairs</code>).</p>
+<p><b>CBOW</b> predice la palabra central desde el promedio del contexto (rápido, favorece palabras frecuentes); <b>skip-gram</b> predice cada
+palabra del contexto desde la central (más pares por token, mejor con palabras raras). Word2Vec usa <b>dos matrices</b>: W (palabra como
+central) y W′ (palabra como contexto). Así una palabra no necesita ser similar a sí misma, y se conserva W. <b>Word2Vec es
+predictivo</b> (SGD sobre ventanas locales); <b>GloVe es de conteo</b>: ajusta w<sub>i</sub>·w̃<sub>j</sub> + b<sub>i</sub> + b̃<sub>j</sub> ≈ log X<sub>ij</sub>
+sobre la matriz global de co-ocurrencias, con pesos f(X<sub>ij</sub>).</p>
+
+<h2>2. Datos y decisiones del pipeline</h2>
+<p>WikiText-103 (train): 29 444 artículos, 1 801 350 líneas y 101,4 M tokens crudos (85,9 M tras normalizar). Entrenamos con los primeros
+8 802 artículos: <b>25,0 M tokens</b> y 251 800 líneas. AG News: 108 000 / 12 000 (validación estratificada al 10 %) / 7 600 (test oficial, usado
+una sola vez por inicialización).</p>
+<table>
+<tr><th class="l">Decisión</th><th class="l">Elección y motivo</th></tr>
+<tr><td class="l">Normalización</td><td class="l">Minúsculas (GloVe 6B está en minúsculas); se quitan títulos <code>= … =</code> y la puntuación; <code>@,@</code>/<code>@.@</code> reconstruyen
+<code>20,000</code> y <code>3.5</code> (GloVe guarda números); <code>@-@</code> separa compuestos; contracciones estilo Treebank (<code>is</code> + <code>n't</code>, <code>army</code> + <code>'s</code>), igual que el tokenizador de Stanford usado por GloVe. Sin tokens inventados (<code>&lt;num&gt;</code>), que no existen en GloVe y bajarían la cobertura.</td></tr>
+<tr><td class="l">Tokenizador</td><td class="l">Regex propia vs NLTK Treebank en 12 oraciones: coinciden en contracciones (<code>do</code>/<code>n't</code>); difieren en guiones (<code>well-known</code> unido en NLTK), abreviaturas (<code>dr.</code> vs <code>dr</code>), alfanuméricos (<code>1990s</code>, <code>q3</code> se parten en los nuestros), puntuación y símbolos (<code>$</code>, <code>%</code>, URLs, que NLTK conserva y nosotros descartamos).</td></tr>
+<tr><td class="l">Zipf</td><td class="l">Recta en log-log con pendiente −1,06 (≈ −1): sí se cumple. Las top 10 / 1 000 / 30 000 palabras cubren el 24,3 / 64,5 / 95,8 % de los tokens.</td></tr>
+<tr><td class="l">Vocabulario</td><td class="l"><code>min_count</code> 1 / 5 / 10 / 20 → 271 737 / 90 566 / 61 449 / 41 805 palabras y 0 / 1,18 / 1,94 / 3,01 % de tokens desconocidos. Elegimos 5.</td></tr>
+<tr><td class="l">Subsampling</td><td class="l">keep = (√(f/t)+1)·t/f con t = 10⁻⁴: se descarta el 96,2 % de «the», el 94,1 % de «of» y el 93,8 % de «and» (medido: 96,2 / 94,2 / 93,7 %); «king» pierde el 25 % y «computer», el 0 %. Ayuda porque esos pares no aportan información, acelera el entrenamiento y amplía la ventana efectiva.</td></tr>
+<tr><td class="l">Pares por epoch</td><td class="l">Ventana 5 sin cruzar líneas: 239,6 M pares (24,7 M tokens) → 141,3 M con subsampling (14,9 M tokens); con la ventana dinámica de word2vec, 85,7 M.</td></tr>
+</table>
+
+<h2>3. Iteraciones de skip-gram con negative sampling (PyTorch)</h2>
+<p>Implementación propia: dos <code>nn.Embedding(sparse=True)</code> (entrada inicializada en ±0,5/d y salida en cero), pérdida
+−log σ(u<sub>o</sub>·v<sub>c</sub>) − Σ log σ(−u<sub>k</sub>·v<sub>c</sub>), negativos de unigrama<sup>0,75</sup>, pares generados en GPU en cada epoch
+(subsampling nuevo, ventana dinámica), <code>SparseAdam</code> con lr lineal decreciente y lotes de 8 192 pares. Se evalúa al final de cada epoch
+(analogías en el top 30 000 y WordSim-353); SimLex queda reservado. GPU: RTX 4050 Laptop (6 GB). Base: d = 100, ventana 5, 5 negativos,
+t = 10⁻⁴, <code>min_count</code> 5, lr 2·10⁻³, 5 epochs, 24,7 M tokens.</p>
+<table>
+<tr><th>ID</th><th class="l">Cambio respecto a la base</th><th>Tokens</th><th>Vocab.</th><th>Pérdida</th><th>Sem.</th><th>Sint.</th><th>Total</th><th>WS-353 ρ</th><th>s/epoch</th><th>GPU MB</th></tr>
+<tr><td>I01</td><td class="l">base</td><td>24,7 M</td><td>90 566</td><td>2,19</td><td>27,6</td><td>43,5</td><td>38,8</td><td>0,648</td><td>31</td><td>1 546</td></tr>
+<tr><td>I02</td><td class="l">d = 50</td><td>24,7 M</td><td>90 566</td><td>2,24</td><td>19,4</td><td>32,6</td><td>28,7</td><td>0,613</td><td>29</td><td>1 431</td></tr>
+<tr><td>I03</td><td class="l">d = 300</td><td>24,7 M</td><td>90 566</td><td>2,11</td><td>39,1</td><td>48,1</td><td>45,4</td><td class="best">0,681</td><td>150</td><td>2 005</td></tr>
+<tr><td>I04</td><td class="l">ventana 2</td><td>24,7 M</td><td>90 566</td><td>2,09</td><td>22,0</td><td>40,5</td><td>35,0</td><td>0,600</td><td>23</td><td>1 306</td></tr>
+<tr><td>I05</td><td class="l">ventana 10</td><td>24,7 M</td><td>90 566</td><td>2,25</td><td>32,5</td><td>43,6</td><td>40,3</td><td>0,674</td><td>52</td><td>1 926</td></tr>
+<tr><td>I06</td><td class="l">15 negativos</td><td>24,7 M</td><td>90 566</td><td>3,12</td><td>32,3</td><td>43,0</td><td>39,8</td><td>0,653</td><td>63</td><td>1 578</td></tr>
+<tr><td>I07</td><td class="l">t = 10⁻³</td><td>24,7 M</td><td>90 566</td><td>2,23</td><td>27,3</td><td>43,5</td><td>38,7</td><td>0,649</td><td>37</td><td>1 615</td></tr>
+<tr><td>I08</td><td class="l"><code>min_count</code> 20</td><td>24,2 M</td><td>41 805</td><td>2,24</td><td>28,3</td><td>42,9</td><td>38,6</td><td>0,658</td><td>26</td><td>1 416</td></tr>
+<tr><td>I09</td><td class="l">lr 5·10⁻³</td><td>24,7 M</td><td>90 566</td><td>2,16</td><td>36,4</td><td>45,1</td><td>42,5</td><td>0,661</td><td>29</td><td>1 547</td></tr>
+<tr><td>I10</td><td class="l">corpus 25 %</td><td>6,1 M</td><td>43 162</td><td>2,24</td><td>9,2</td><td>15,5</td><td>13,6</td><td>0,545</td><td>6</td><td>961</td></tr>
+<tr><td>I11</td><td class="l">corpus 50 %</td><td>12,3 M</td><td>62 918</td><td>2,21</td><td>18,3</td><td>29,3</td><td>25,8</td><td>0,617</td><td>14</td><td>1 165</td></tr>
+<tr class="best"><td>I12</td><td class="l">ventana 10 + 15 neg. + lr 5·10⁻³, 8 epochs</td><td>24,7 M</td><td>90 566</td><td>3,15</td><td>47,2</td><td>46,3</td><td>46,6</td><td>0,665</td><td>154</td><td>1 959</td></tr>
+</table>
+<p>Analogías en %, con 3CosAdd. Mejor modelo de d = 100 (para compararlo con GloVe-100): <b>I12</b>, con 1 234 s de entrenamiento en total.
+<b>¿Una pérdida más baja implica mejores embeddings? No</b>: I04 tiene la pérdida más baja (2,09) y analogías peores que la base; I12 tiene la más alta
+(3,15) y es el mejor. La pérdida mide una tarea que cambia con la ventana y el número de negativos, no la calidad del espacio. Los vecinos de control
+son coherentes desde el epoch 1 (<i>france</i> → italy, spain; <i>january</i> → february, december) y se afinan con los epochs.</p>
+
+<h2>4. Verificación de la aritmética vectorial</h2>
+<p><code>analogia(a, b, c, k)</code> (3CosAdd sobre vectores normalizados, excluyendo a, b y c) devuelve el mismo top-5 que <code>most_similar</code> de
+gensim en las 18 analogías y los tres modelos. También verificamos nuestro 3CosMul contra <code>most_similar_cosmul</code>: 66,25 % en ambos sobre 400 preguntas.</p>
+<table>
+<tr><th class="l">Tipo (3 analogías c/u)</th><th class="l">Ejemplo (SGNS)</th><th>SGNS</th><th>gensim</th><th>GloVe</th></tr>
+<tr><td class="l">Género</td><td class="l">man:woman :: king:<b>queen</b> (0,715), rango 1</td><td>3/3</td><td>1/3</td><td>3/3</td></tr>
+<tr><td class="l">País–capital</td><td class="l">france:paris :: italy:? → vienna; rome en el rango 4 (0,645)</td><td>1/3</td><td>2/3</td><td>2/3</td></tr>
+<tr><td class="l">País–gentilicio</td><td class="l">france:french :: germany:<b>german</b> (0,868)</td><td>3/3</td><td>3/3</td><td>3/3</td></tr>
+<tr><td class="l">Comparativo/superlativo</td><td class="l">good:better :: bad:<b>worse</b>; strongest en el rango 2</td><td>2/3</td><td>1/3</td><td>2/3</td></tr>
+<tr><td class="l">Tiempo verbal</td><td class="l">walk:walked :: run:<b>ran</b>; go:went :: see:? → came</td><td>2/3</td><td>3/3</td><td>2/3</td></tr>
+<tr><td class="l">Plural</td><td class="l">car:cars :: child:<b>children</b> (0,721)</td><td>3/3</td><td>3/3</td><td>3/3</td></tr>
+<tr><th class="l" colspan="2">Total · 1.º puesto sin excluir a, b, c (palabra de la consulta)</th><th>14/18 · 14/18</th><th>13/18 · 15/18</th><th>15/18 · 7/18</th></tr>
+</table>
+<p><b>Sin excluir</b> las palabras de la consulta, la primera suele ser c o b (king, sister, prince, run…): b − a + c sigue más cerca de c que de la respuesta, cuyo
+coseno con el vector resultado queda entre 0,55 y 0,87 en SGNS. <b>Evaluación sistemática</b> con el vocabulario compartido (las 30 000 palabras más frecuentes
+de WikiText presentes en los tres modelos): cobertura de 11 892 / 19 544 preguntas (60,8 %), las mismas para los tres.</p>
+<table>
+<tr><th class="l">Categoría (3CosAdd, %)</th><th>SGNS</th><th>gensim</th><th>GloVe</th><th>Paralelismo SGNS</th><th>Paralelismo GloVe</th></tr>
+<tr><td class="l">capital-common-countries</td><td>69</td><td>68</td><td>94</td><td>0,30</td><td>0,58</td></tr>
+<tr><td class="l">capital-world</td><td>59</td><td>58</td><td>89</td><td>0,23</td><td>0,57</td></tr>
+<tr><td class="l">currency</td><td>0</td><td>0</td><td>5</td><td>0,21</td><td>0,27</td></tr>
+<tr><td class="l">city-in-state</td><td>36</td><td>33</td><td>31</td><td>0,17</td><td>0,34</td></tr>
+<tr><td class="l">family</td><td>48</td><td>45</td><td>88</td><td>0,23</td><td>0,51</td></tr>
+<tr><td class="l">adjective-to-adverb</td><td>14</td><td>11</td><td>28</td><td>0,09</td><td>0,27</td></tr>
+<tr><td class="l">opposite</td><td>10</td><td>11</td><td>27</td><td>0,11</td><td>0,23</td></tr>
+<tr><td class="l">comparative / superlative</td><td>45 / 25</td><td>42 / 21</td><td>80 / 61</td><td>0,25 / 0,24</td><td>0,42 / 0,47</td></tr>
+<tr><td class="l">present-participle / past-tense</td><td>39 / 61</td><td>36 / 54</td><td>72 / 59</td><td>0,10 / 0,17</td><td>0,32 / 0,29</td></tr>
+<tr><td class="l">nationality-adjective</td><td>84</td><td>85</td><td>97</td><td>0,41</td><td>0,75</td></tr>
+<tr><td class="l">plural / plural-verbs</td><td>51 / 28</td><td>46 / 29</td><td>79 / 58</td><td>0,15 / 0,20</td><td>0,32 / 0,36</td></tr>
+<tr><th class="l">Semánticas (add / mul)</th><th>47,2 / 43,9</th><th>45,3 / 41,5</th><th>61,2 / 58,7</th><th rowspan="3">0,20</th><th rowspan="3">0,41</th></tr>
+<tr><th class="l">Sintácticas (add / mul)</th><th>46,4 / 42,6</th><th>43,5 / 39,8</th><th>68,3 / 66,9</th></tr>
+<tr><th class="l">Total (add / mul)</th><th>46,7 / 43,0</th><th>44,0 / 40,3</th><th>66,2 / 64,5</th></tr>
+</table>
+<p>El desglose por categoría con 3CosMul está en el notebook; 3CosMul quedó unos 3 puntos por debajo de 3CosAdd en los tres modelos. <b>Paralelismo</b> (sección 5.3): coseno promedio entre los vectores diferencia
+b − a de los pares de una misma relación; 1 indicaría flechas paralelas. t-SNE de 457 palabras en 9 grupos con el mejor SGNS: se forman los grupos esperados
+(países, números, meses y días, deportes, comida, animales, profesiones, colores y verbos), con silhouette de 0,49 en 2D y 0,19 en el espacio original (coseno).
+Solo algunos colores metálicos (silver, bronze, golden) caen junto a los animales.</p>
+<div class="fig"><div class="figs"><img src="../results/figures/09_tsne_sgns.png"><img src="../results/figures/12_analogies_vs_corpus.png"></div>
+<div class="cap">Figura 1. Izquierda: t-SNE del mejor SGNS. Derecha: analogías vs tokens del corpus (configuración base; GloVe evaluado en su propio top 30 000).</div></div>
+
+<h2>5. Clasificación de AG News (texto → tokens → vectores → EmbeddingBag(mean) → MLP 100-128-4)</h2>
+<p>Mismo <code>normalize</code> y tokenizador de la sección 2. Vocabulario del clasificador: 43 299 palabras de train con frecuencia ≥ 2 (las filas ausentes en el embedding
+se inicializan al azar). Tokens de AG News fuera del vocabulario: <b>SGNS 3,0 %</b>, gensim 3,0 % y <b>GloVe 0,7 %</b>. Adam con lr 10⁻³, lotes de 256, ≤ 10 epochs y
+early stopping por F1 de validación. Baseline: TF-IDF de uni- y bigramas (422 568 rasgos) + regresión logística.</p>
+<table>
+<tr><th class="l">Modelo (validación)</th><th>Acc.</th><th>Prec.</th><th>Recall</th><th>F1</th><th>Parámetros</th><th>Entrenables</th><th>Tiempo</th><th>F1 test</th></tr>
+<tr><td class="l">TF-IDF + LR</td><td>92,64</td><td>92,62</td><td>92,64</td><td>92,62</td><td>1 690 276</td><td>1 690 276</td><td>41 s</td><td class="best">92,13</td></tr>
+<tr><td class="l">Aleatorio</td><td>91,35</td><td>91,35</td><td>91,35</td><td>91,34</td><td>4 343 344</td><td>4 343 344</td><td>8,6 s</td><td>90,69</td></tr>
+<tr><td class="l">SGNS congelado</td><td>88,26</td><td>88,30</td><td>88,26</td><td>88,26</td><td>4 343 344</td><td>13 444</td><td>3,7 s</td><td>–</td></tr>
+<tr><td class="l">SGNS fine-tuning</td><td>92,44</td><td>92,44</td><td>92,44</td><td>92,43</td><td>4 343 344</td><td>4 343 344</td><td>4,7 s</td><td>91,72</td></tr>
+<tr><td class="l">gensim congelado / FT</td><td>87,92 / 92,44</td><td>87,98 / 92,44</td><td>87,93 / 92,44</td><td>87,92 / 92,43</td><td>4 343 344</td><td>13 444 / 4,3 M</td><td>2,6 / 4,9 s</td><td>– / 91,62</td></tr>
+<tr><td class="l">GloVe congelado</td><td>90,29</td><td>90,30</td><td>90,29</td><td>90,29</td><td>4 343 344</td><td>13 444</td><td>3,7 s</td><td>–</td></tr>
+<tr><td class="l">GloVe fine-tuning</td><td>92,47</td><td>92,48</td><td>92,47</td><td>92,46</td><td>4 343 344</td><td>4 343 344</td><td>6,8 s</td><td>91,73</td></tr>
+</table>
+<p>La mejor variante de cada inicialización (fine-tuning en los tres casos) se evaluó una sola vez en test. En las matrices de confusión el error dominante es
+Business ↔ Sci/Tech (noticias de empresas tecnológicas); Sports es casi perfecta. Spearman en SimLex-999: SGNS 0,279, gensim 0,290 y GloVe 0,298, bajos en los tres
+porque los embeddings por co-ocurrencia capturan <i>relación</i>, no <i>similitud</i> estricta (los antónimos quedan cerca).</p>
+
+<h2>6. Comparación de los tres conjuntos de embeddings</h2>
+<table>
+<tr><th class="l"></th><th>SGNS propio (I12)</th><th>Word2Vec gensim</th><th>GloVe 6B</th></tr>
+<tr><td class="l">Tokens del corpus · vocabulario · dimensión</td><td>24,7 M · 90 566 · 100</td><td>25,0 M · 90 566 · 100</td><td>6 000 M · 400 000 · 100</td></tr>
+<tr><td class="l">Tiempo y hardware</td><td>1 234 s (8 epochs), RTX 4050 Laptop, 2,0 GB de pico</td><td>734 s (8 epochs), CPU de 16 hilos</td><td>~85 min para X (1 hilo) + 50 iteraciones; Xeon E5-2658 dual a 2,1 GHz, 32 núcleos</td></tr>
+<tr><td class="l">Analogías 3CosAdd: sem. / sint. / total</td><td>47,2 / 46,4 / 46,7</td><td>45,3 / 43,5 / 44,0</td><td class="best">61,2 / 68,3 / 66,2</td></tr>
+<tr><td class="l">Analogías 3CosMul: sem. / sint. / total</td><td>43,9 / 42,6 / 43,0</td><td>41,5 / 39,8 / 40,3</td><td class="best">58,7 / 66,9 / 64,5</td></tr>
+<tr><td class="l">Spearman WordSim-353 · SimLex-999</td><td class="best">0,665 · 0,279</td><td>0,660 · 0,290</td><td>0,533 · <b>0,298</b></td></tr>
+<tr><td class="l">Coseno promedio entre vectores diferencia</td><td>0,204</td><td>0,198</td><td class="best">0,406</td></tr>
+<tr><td class="l">OOV en AG News · F1 de test</td><td>3,0 % · 91,72</td><td>3,0 % · 91,62</td><td class="best">0,7 % · 91,73</td></tr>
+</table>
+<div class="fig"><div class="figs"><img src="../results/figures/13_f1_vs_fraction.png"><img src="../results/figures/05_loss_vs_quality.png"></div>
+<div class="cap">Figura 2. Izquierda: F1 de test vs fracción de train de AG News (media ± d.e. de 3 semillas hasta el 10 %). Derecha: pérdida final vs analogías por iteración.</div></div>
+
+<h2>7. Discusión</h2>
+<ul>
+<li><b>¿Se cumple la aritmética vectorial?</b> Parcialmente: el 46,7 % de las analogías y 14 de 18 propias. Funciona mejor en gentilicios (84 %), capitales (59-69 %) y pasado
+verbal (61 %), y falla en monedas (0 %), opuestos (10 %) y adjetivo→adverbio (14 %): relaciones raras en el corpus o que no son un desplazamiento constante (sus flechas
+casi no son paralelas: coseno de 0,09 a 0,11). En nuestro SGNS lo semántico y lo sintáctico quedan parejos (47,2 frente a 46,4 %); GloVe es más fuerte en lo sintáctico.</li>
+<li><b>¿El «≈» es una igualdad?</b> No. Sin excluir la consulta, el vector más cercano a king − man + woman es <i>king</i>, y esto pasa en 14 de 18 analogías: el desplazamiento
+woman − man es pequeño frente a la norma de king. El coseno con la respuesta correcta nunca llega a 1 (de 0,55 a 0,87), y las diferencias de una misma relación tienen un
+coseno medio de solo 0,20 (0,41 en GloVe). La analogía funciona como búsqueda del vecino más cercano en un espacio ruidoso, no como una igualdad algebraica.</li>
+<li><b>¿Qué tan lejos de GloVe y por qué?</b> 19,5 puntos (46,7 frente a 66,2 %). Con la misma configuración, gensim pasa de 17,4 % (6 M tokens) a 28,2 % (12 M), 41,1 % (25 M) y
+51,7 % (86 M): entre 11 y 13 puntos por cada duplicación del corpus, y la tendencia sigue al alza. GloVe usa 240 veces más texto. La mayor parte de la distancia se explica por el corpus;
+los hiperparámetros, con el corpus fijo, aportaron +7,8 puntos (de 38,8 a 46,6 %), y el método por sí mismo poco: SGNS y GloVe empatan en F1 de AG News y SGNS supera a GloVe en WordSim.</li>
+<li><b>¿Nuestro SGNS se parece a gensim?</b> Sí: 38,8 frente a 41,1 % con la base y 46,7 frente a 44,0 % con la mejor configuración, WordSim 0,665 frente a 0,660, la misma curva con el
+tamaño del corpus y las mismas categorías fuertes y débiles. Las diferencias se deben al optimizador (SparseAdam con lotes de 8 192 pares frente a SGD por par con lr lineal de 0,025, por lo que
+el lr no es trasladable), a la tabla de negativos y a la aleatoriedad. Nuestro SGNS en GPU (31 s/epoch) no supera a gensim en CPU (26 s/epoch), cuyo código en C es muy eficiente.</li>
+<li><b>Dimensión, ventana y negativos.</b> d = 50 → 100 → 300 da 28,7 → 38,8 → 45,4 %, con 5 veces más tiempo. La ventana 2 → 5 → 10 sube las semánticas de 22,0 a 27,6 y a 32,5 %, mientras las
+sintácticas casi no cambian (40,5 / 43,5 / 43,6 %): <b>las ventanas pequeñas favorecen relativamente lo sintáctico</b> (la morfología está en los vecinos inmediatos) y las grandes aportan
+el tema (lo semántico). 15 negativos dan +1 punto con el doble de tiempo; el lr fue el ajuste más rentable (+3,7 puntos).</li>
+<li><b>AG News.</b> Con todos los datos, los preentrenados con fine-tuning (91,7 %) superan a los aleatorios (90,7 %), pero no a TF-IDF con bigramas (92,1 %): con 108 000 noticias las palabras
+clave bastan. Congelar rindió menos en todos los casos (88,3 frente a 92,4 % en validación con SGNS), aunque entrena 320 veces menos parámetros. <b>Con el 1 % de los datos</b> (1 080 noticias)
+el orden se invierte: GloVe FT 86,8 %, SGNS FT 86,2 %, GloVe congelado 85,9 %, SGNS congelado 83,6 %, TF-IDF 82,1 % y aleatorio 72,8 %. Los embeddings aportan el conocimiento que faltan los
+datos (+14 puntos frente a aleatorio) y congelar queda a menos de 1 punto del fine-tuning en GloVe. Conviene congelar cuando hay pocos datos o poco cómputo, y hacer fine-tuning cuando sobran datos.</li>
+</ul>
+
+<h2>8. Conclusiones</h2>
+<ul>
+<li>Un SGNS escrito desde cero en PyTorch reproduce a gensim (incluso lo supera ajustado: 46,7 frente a 44,0 %), lo que valida la implementación: pares con subsampling y ventana dinámica, negativos de unigrama<sup>0,75</sup> y dos matrices.</li>
+<li>El tamaño del corpus domina la calidad: ×4 tokens equivale a +25 puntos en analogías, más que cualquier hiperparámetro. Con 25 M tokens no se alcanza a GloVe (6 000 M), aunque sí se le gana en WordSim.</li>
+<li>La aritmética vectorial es aproximada: funciona por vecino más cercano y excluyendo la consulta, con flechas lejos de ser paralelas.</li>
+<li>La pérdida de entrenamiento no sirve para elegir embeddings; hay que evaluarlos en tareas intrínsecas (analogías, similitud) y extrínsecas (clasificación).</li>
+<li>En una tarea real, los embeddings preentrenados valen sobre todo cuando hay pocos datos etiquetados; con muchos datos, un TF-IDF bien hecho sigue siendo un rival muy difícil.</li>
+</ul>
+<p class="refs">Referencias: Mikolov et al. (2013), <i>Distributed Representations of Words and Phrases and their Compositionality</i>, NeurIPS. Pennington, Socher y Manning (2014), <i>GloVe: Global Vectors for Word Representation</i>, EMNLP.
+Levy y Goldberg (2014), <i>Linguistic Regularities in Sparse and Explicit Word Representations</i>, CoNLL (3CosMul). Merity et al. (2016), <i>Pointer Sentinel Mixture Models</i> (WikiText-103).</p>
+<div class="repo">Repositorio: <a href="https://github.com/ecarcamo/CC3092-DEEP-LEARNING/tree/main/lab7">https://github.com/ecarcamo/CC3092-DEEP-LEARNING/tree/main/lab7</a> — vectores del mejor modelo en <code>results/vectors/best_sgns.kv</code></div>
+</body></html>
