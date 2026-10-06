@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<title>Hoja de trabajo 2 — Transformers y mecanismos de atención</title>
+<style>
+@page { size: A4; margin: 25.4mm; }
+* { box-sizing: border-box; }
+body { font-family: "Times New Roman", "Liberation Serif", serif; font-size: 10pt; line-height: 1.36; color: #000; margin: 0; }
+h1 { font-size: 13pt; text-align: center; margin: 0 0 1mm; }
+h2 { font-size: 11pt; text-align: center; margin: 3.2mm 0 1.3mm; }
+h3 { font-size: 10.5pt; text-align: left; margin: 2.5mm 0 1mm; }
+p { margin: 0 0 1.6mm; text-align: left; text-indent: 12.7mm; }
+p.ni { text-indent: 0; }
+.author { text-align: center; margin: 0; }
+.meta { text-align: center; margin: 0 0 3mm; font-size: 10pt; }
+table { width: 100%; border-collapse: collapse; font-size: 9pt; line-height: 1.3; margin: 1mm 0 2.5mm; }
+th, td { padding: 0.8mm 1.4mm; text-align: left; vertical-align: top; }
+thead tr { border-top: 0.8pt solid #000; border-bottom: 0.5pt solid #000; }
+tbody tr:last-child { border-bottom: 0.8pt solid #000; }
+td.c, th.c { text-align: center; white-space: nowrap; }
+table.hand { font-size: 8.6pt; }
+table.hand td, table.hand th { padding: 0.8mm 0.9mm; }
+sup, sub { line-height: 0; }
+code { font-family: "DejaVu Sans Mono", monospace; font-size: 8.4pt; }
+.cap { margin: 1.5mm 0 0.6mm; font-size: 10pt; text-indent: 0; }
+.cap b { display: block; }
+.cap i { display: block; }
+.fig { break-inside: avoid; margin-bottom: 2mm; }
+.fig img { width: 100%; display: block; }
+.note { font-size: 9pt; line-height: 1.3; margin: 0.8mm 0 0; text-indent: 0; }
+ul { margin: 0 0 1.6mm; padding-left: 6mm; }
+li { margin-bottom: 1mm; text-align: left; }
+.refs p { text-indent: -12.7mm; padding-left: 12.7mm; font-size: 9pt; line-height: 1.3; margin-bottom: 0.9mm; }
+.repo { text-align: center; margin-top: 3mm; text-indent: 0; }
+.repo a { color: #000; }
+.pb { break-before: page; }
+</style></head><body>
+
+<h1>Hoja de trabajo 2: Transformers y mecanismos de atención</h1>
+<p class="author">Esteban Cárcamo (23016)</p>
+<p class="meta">CC3092 Deep Learning y Sistemas Inteligentes, Universidad del Valle de Guatemala<br>5 de octubre de 2026</p>
+
+<h2>De las RNN a la atención</h2>
+<p><b>Cuello de botella.</b> En un seq2seq con RNN el encoder comprime toda la oración en un único vector de tamaño fijo (su último estado oculto) y el
+decoder genera todo a partir de él. Cuanto más larga es la oración, más información debe caber en el mismo vector y más se diluyen las primeras
+palabras, así que la calidad cae con la longitud. La atención de Bahdanau et al. (2015) guarda <i>todos</i> los estados del encoder y, en cada paso, el
+decoder calcula un promedio ponderado de ellos (el contexto) según qué tan relevantes son para la palabra que va a generar.</p>
+<p><b>Aditiva vs multiplicativa.</b> Bahdanau puntúa con una pequeña red: v<sup>T</sup>tanh(W<sub>1</sub>s + W<sub>2</sub>h). Luong et al. (2015) usan un
+producto punto, s<sup>T</sup>h (o s<sup>T</sup>Wh). La multiplicativa es más eficiente en hardware moderno porque todos los puntajes salen de una sola
+multiplicación de matrices QK<sup>T</sup>, que las GPU ejecutan con núcleos especializados, sin la tanh ni la capa intermedia de la aditiva.</p>
+<p><b>Q, K y V.</b> Es una búsqueda «suave» en un diccionario: la consulta (query) se compara con todas las llaves (keys) y, en vez de devolver el valor de
+la llave exacta, devuelve un promedio de todos los valores (values) ponderado por la similitud. En <i>self-attention</i> Q, K y V son
+tres proyecciones lineales de la misma secuencia; en <i>cross-attention</i> Q sale del decoder y K y V salen de la salida del encoder.</p>
+<p><b>Qué elimina el Transformer.</b> Sin recurrencia, todas las posiciones se procesan en paralelo (una RNN necesita n pasos secuenciales); cualquier par
+de tokens queda conectado en un solo paso (camino de longitud O(1) en vez de O(n)); y como el gradiente no atraviesa una cadena de n multiplicaciones,
+desaparece el desvanecimiento a lo largo del tiempo.</p>
+
+<h2>La arquitectura Transformer</h2>
+<p><b>Scaled dot-product attention.</b> Si los componentes de q y k son independientes con media 0 y varianza 1, Var(q·k) = Σ<sub>i</sub> E[q<sub>i</sub><sup>2</sup>]E[k<sub>i</sub><sup>2</sup>]
+= d<sub>k</sub>. Sin escalar, con d<sub>k</sub> grande los puntajes son enormes, la softmax se satura (casi toda la probabilidad en un token) y su
+jacobiano, diag(p) − pp<sup>T</sup>, tiende a cero: el gradiente se desvanece. Dividir entre √d<sub>k</sub> devuelve la varianza a 1. La Figura 1 lo confirma:
+con d<sub>k</sub> = 1 024 la softmax sin escalar pone 0.95 en una sola llave y la norma del jacobiano cae a 0.06, contra 0.24 escalada.</p>
+
+<div class="fig">
+<p class="cap"><b>Figura 1</b><i>Efecto del escalamiento por √d<sub>k</sub> (32 llaves, 2 000 consultas aleatorias)</i></p>
+<img src="../results/figures/01_scaling.png" style="width: 74%; margin: 0 auto;">
+</div>
+
+<p><b>Multi-head attention.</b> Con h cabezas de d<sub>model</sub>/h cada una aprende su propia proyección y puede atender a un tipo de relación distinto
+(sintaxis, posición, correferencia) a la vez; una sola cabeza promediaría todo en una única distribución. El número de parámetros no cambia: 4d<sup>2</sup> + 4d
+= 1 050 624 con d = 512 para 1, 8 o 16 cabezas (verificado en el notebook).</p>
+<p><b>Codificación posicional.</b> La self-attention es equivariante a permutaciones: si se reordenan los tokens, las salidas se reordenan igual, así que no
+sabe el orden. La codificación sinusoidal suma a cada embedding PE(pos, 2i) = sin(pos/10000<sup>2i/d</sup>) y PE(pos, 2i+1) = cos(…), con frecuencias
+geométricas; es fija y un desplazamiento relativo equivale a una transformación lineal. Los embeddings aprendidos (BERT, GPT-2) son una tabla entrenable
+que no sirve más allá de la longitud máxima (512 o 1 024). RoPE (Su et al., 2021) rota q y k según la posición, de modo que q·k depende solo de la
+distancia relativa; es la que usan LLaMA y la mayoría de los modelos actuales.</p>
+<p><b>Bloque completo.</b> Cada subcapa (atención y FFN) va envuelta en una conexión residual, x + F(x), que deja pasar el gradiente, y una LayerNorm, que
+estabiliza la escala de las activaciones. La FFN (d → 4d → d con una no linealidad) se aplica igual a cada posición. Post-LN normaliza después de sumar, LN(x + F(x)); Pre-LN normaliza antes, x + F(LN(x)), y deja el camino residual como una identidad
+limpia. Al inicializar 24 capas, en Post-LN la última recibe 7.6 veces más gradiente que la primera, lo que obliga a usar <i>warm-up</i>; Pre-LN entrena
+estable sin él (Xiong et al., 2020).</p>
+<p><b>Complejidad.</b> La self-attention cuesta O(n<sup>2</sup>·d) en tiempo y O(n<sup>2</sup>) en memoria por cabeza, porque materializa la matriz n × n. En la Figura 2
+la implementación ingenua crece con pendiente ≈ 2 en ambos ejes y se queda sin memoria con n = 16 384 en una GPU de 6 GB. <b>FlashAttention</b> (Dao et al.,
+2022) calcula la softmax por bloques en la SRAM sin guardar la matriz: es exacta y deja la memoria en O(n) (33 MB con n = 32 768), pero el tiempo sigue
+siendo cuadrático y requiere kernels específicos. La <b>atención por ventanas</b> (Beltagy et al., 2020) solo mira w vecinos, O(n·w), y sacrifica las
+dependencias directas lejanas. La <b>atención lineal</b> (Katharopoulos et al., 2020) cambia la softmax por un kernel φ(q)φ(k)<sup>T</sup> y reordena el
+producto, O(n·d<sup>2</sup>), a costa de una atención menos precisa.</p>
+
+<div class="fig">
+<p class="cap"><b>Figura 2</b><i>Tiempo y memoria de la atención frente a la longitud (RTX 4050, fp16, 8 cabezas, d<sub>k</sub> = 64)</i></p>
+<img src="../results/figures/02_cost.png" style="width: 64%; margin: 0 auto;">
+</div>
+
+<h2>Atención en PyTorch y Hugging Face</h2>
+<table>
+<thead><tr><th style="width: 27%">Clase o función</th><th>Propósito y parámetros relevantes</th></tr></thead>
+<tbody>
+<tr><td><code>F.scaled_dot_product_attention</code></td><td>Atención fusionada; elige FlashAttention o memory-efficient si puede. <code>attn_mask</code>: booleana (True = atender) o aditiva; <code>dropout_p</code>: dropout sobre los pesos (solo en entrenamiento); <code>is_causal</code>: máscara triangular sin construirla; <code>scale</code>: reemplaza 1/√d<sub>k</sub>. No devuelve los pesos.</td></tr>
+<tr><td><code>nn.MultiheadAttention</code></td><td><code>embed_dim</code> y <code>num_heads</code> (cada cabeza mide embed_dim/num_heads); <code>batch_first</code>: entrada (B, n, d) en vez de (n, B, d); <code>kdim</code>, <code>vdim</code>: tamaño de K y V si vienen de otra fuente (cross-attention). Forward: <code>key_padding_mask</code> (B, n) oculta el padding, <code>attn_mask</code> (n, n) oculta pares (True = <i>no</i> atender), <code>need_weights</code> devuelve los pesos y <code>average_attn_weights</code> los promedia entre cabezas.</td></tr>
+<tr><td><code>nn.TransformerEncoderLayer</code></td><td>Bloque completo: <code>d_model</code>, <code>nhead</code>, <code>dim_feedforward</code> (ancho de la FFN), <code>dropout</code> y <code>norm_first</code> (True = Pre-LN). <code>nn.Transformer.generate_square_subsequent_mask(n)</code> crea la máscara causal: 0 en y bajo la diagonal y −∞ encima.</td></tr>
+<tr><td><code>output_attentions=True</code></td><td>Hugging Face devuelve <code>outputs.attentions</code>: un tensor por capa de forma batch × cabezas × n × n (12 capas × 12 cabezas en BERT-base y GPT-2). Requiere <code>attn_implementation="eager"</code>: los kernels fusionados no calculan los pesos.</td></tr>
+</tbody></table>
+
+<h2>Ejercicio a mano y verificaciones</h2>
+<p>Tres tokens con d = d<sub>k</sub> = 2: X = [[1, 0], [0, 1], [1, 1]], W<sub>Q</sub> = [[1, 0], [1, 1]], W<sub>K</sub> = [[1, 1], [0, 1]] y W<sub>V</sub> = [[1, 0], [0, 2]].
+Se obtienen Q = XW<sub>Q</sub>, K = XW<sub>K</sub> y V = XW<sub>V</sub>; para cada fila de QK<sup>T</sup> se divide entre √2 = 1.414, se aplica la exponencial, se normaliza
+(softmax) y se calcula la salida Σ<sub>j</sub> a<sub>ij</sub>v<sub>j</sub>. En la tabla, k y v de la fila j son los del token j.</p>
+<table class="hand">
+<thead><tr><th class="c">Token</th><th class="c">q</th><th class="c">k</th><th class="c">v</th><th class="c">q·k<sub>1..3</sub></th><th class="c">÷ √2</th><th class="c">exp (suma)</th><th class="c">Pesos a</th><th class="c">Salida</th></tr></thead>
+<tbody>
+<tr><td class="c">1</td><td class="c">[1, 0]</td><td class="c">[1, 1]</td><td class="c">[1, 0]</td><td class="c">1, 0, 1</td><td class="c">0.707, 0, 0.707</td><td class="c">2.03, 1.00, 2.03 (5.06)</td><td class="c">0.401, 0.198, 0.401</td><td class="c">[0.802, 1.198]</td></tr>
+<tr><td class="c">2</td><td class="c">[1, 1]</td><td class="c">[0, 1]</td><td class="c">[0, 2]</td><td class="c">2, 1, 3</td><td class="c">1.414, 0.707, 2.121</td><td class="c">4.11, 2.03, 8.34 (14.48)</td><td class="c">0.284, 0.140, 0.576</td><td class="c">[0.860, 1.432]</td></tr>
+<tr><td class="c">3</td><td class="c">[2, 1]</td><td class="c">[1, 2]</td><td class="c">[1, 2]</td><td class="c">3, 1, 4</td><td class="c">2.121, 0.707, 2.828</td><td class="c">8.34, 2.03, 16.92 (27.29)</td><td class="c">0.306, 0.074, 0.620</td><td class="c">[0.926, 1.389]</td></tr>
+</tbody></table>
+<p>Por ejemplo, la salida del token 2 es 0.284·[1, 0] + 0.140·[0, 2] + 0.576·[1, 2] = [0.860, 1.432]. El token 3 atiende sobre todo a k<sub>3</sub>,
+la llave más alineada con q<sub>3</sub>. Con máscara causal las filas 1 y 2 quedan [1, 0, 0] y [0.670, 0.330, 0]; la 3 no cambia. El código da lo mismo.</p>
+<p><b>Verificaciones.</b> La implementación propia coincide con <code>F.scaled_dot_product_attention</code> sin máscara, con <code>is_causal</code>, con una
+<code>attn_mask</code> de padding y con <code>scale</code> = 0.5 (error máximo 4.8 × 10<sup>−7</sup>). La multi-head propia, con los pesos copiados de
+<code>nn.MultiheadAttention</code>, reproduce sus salidas y sus pesos por cabeza con máscara causal y <code>key_padding_mask</code> (error 1.2 × 10<sup>−7</sup>).</p>
+
+<h2>Atención en BERT y GPT-2</h2>
+<p><b>Patrones por cabeza.</b> Para cada una de las 144 cabezas se midió, en ocho oraciones, la atención media al token anterior, al siguiente, a sí mismo,
+a [CLS] o primer token, a [SEP], a la puntuación y a otras apariciones de la misma palabra. La Figura 3 muestra la cabeza más representativa de cada patrón
+en «The dog chased the cat, and then the dog slept under the old tree.». Como describen Clark et al. (2019), hay cabezas posicionales casi perfectas (BERT L3-H10 mira al siguiente token con
+0.94; GPT-2 L5-H12, al anterior con 1.00), cabezas que mandan todo a [SEP] (41 de 144 en BERT le dan más de la mitad) o al punto final, y en GPT-2
+cabezas que ponen el 99 % en el primer token (L8-H3). Además, BERT L2-H12 conecta «dog» con el otro «dog» (0.48 en promedio).</p>
+
+<div class="fig">
+<p class="cap"><b>Figura 3</b><i>Mapas de atención de cuatro cabezas de capas distintas en BERT (arriba) y GPT-2 (abajo); filas = consulta, columnas = llave</i></p>
+<img src="../results/figures/09_report_heads.png" style="width: 70%; margin: 0 auto;">
+</div>
+
+<p><b>«it» → «animal» o «street».</b> En 22 de las 144 cabezas de BERT «it» atiende más a «animal» con <i>tired</i> y más a «street» con <i>wide</i>. La más
+clara es L7-H11: con <i>tired</i> da 0.28 a «animal» y 0.07 a «street»; con <i>wide</i>, 0.01 y 0.59 (Figura 4). La mayoría de las cabezas, en cambio, prefiere
+«animal» en ambos casos (cuadrante superior derecho). En GPT-2 esto no puede pasar: «it» aparece antes de <i>tired/wide</i> y la máscara causal se lo oculta.</p>
+
+<div class="fig">
+<p class="cap"><b>Figura 4</b><i>Correferencia en BERT: diferencia animal − street por cabeza en las dos oraciones (izquierda) y atención desde «it» en L7-H11 (derecha)</i></p>
+<img src="../results/figures/05_it_coreference.png" style="width: 68%; margin: 0 auto;">
+</div>
+
+<p><b>GPT-2 causal y attention sinks.</b> En todas las capas y cabezas el valor máximo por encima de la diagonal es exactamente 0 y cada fila suma 1: la matriz es
+triangular inferior. El primer token recibe el 22 % de la atención en la capa 1 y entre el 70 y el 80 % en las capas 6 a 11 (Figura 5a). No es por su
+contenido: cualquier palabra en la primera posición («The», «Paris», «Water», …) recibe ≈ 0.53, y esa misma palabra más adelante solo ≈ 0.05. Es un
+<i>attention sink</i> (Xiao et al., 2023): como la softmax obliga a repartir una masa de 1, las cabezas que no necesitan información la «estacionan» en un
+token que todas las posiciones ven y cuyo valor aporta poco (por eso StreamingLLM conserva esos tokens en la caché KV). BERT hace lo mismo con [CLS] (capas 2–4) y [SEP] (capas 5–10).</p>
+<p><b>Entropía por capa.</b> Normalizada (1 = uniforme), baja de 0.77 en la capa 1 a 0.42 en la 8 en BERT y de 0.69 a 0.34 en GPT-2 (Figura 5b): las capas
+profundas atienden de forma <b>más concentrada</b>. BERT vuelve a abrirse en las últimas capas (0.55). Gran parte de esa concentración es el sink. Al
+apagar cabezas de GPT-2 una por una (Figura 5c), 71 de 144 cambian la pérdida en menos de 0.01 y solo 6 la suben más de 0.1, mientras que L1-H1 y L1-H11
+la suben 2.5 y 2.1 nats.</p>
+
+<div class="fig">
+<p class="cap"><b>Figura 5</b><i>Atención al primer token, entropía por capa y ablación de cabezas en GPT-2 (Δ pérdida sobre un texto de 161 tokens)</i></p>
+<img src="../results/figures/08_report_sinks_entropy_ablation.png" style="width: 88%; margin: 0 auto;">
+</div>
+
+<h2>Discusión</h2>
+<p><b>¿Por qué la atención permitió modelos más grandes?</b> Una capa procesa los n tokens con unas pocas multiplicaciones de matrices en paralelo, en lugar
+de n pasos secuenciales, y aprovecha GPU con miles de núcleos; además, el camino entre dos tokens es de un paso, así que las dependencias lejanas se aprenden
+sin desvanecimiento. El precio es el costo cuadrático, aceptable mientras n no supere mucho a d (n<sup>2</sup>d frente a nd<sup>2</sup> de una RNN).</p>
+<p><b>¿Se especializan las cabezas? ¿Todas son útiles?</b> Sí hay especialización: cabezas posicionales, de separadores, de puntuación, de la misma palabra y
+de correferencia (L7-H11). Pero no todas son útiles por separado: la mitad casi no afecta la pérdida y dos cabezas de la capa 1 concentran el efecto. Aun
+así, la redundancia tiene un límite: en un texto distinto, apagar el 10, 25 y 50 % de las menos importantes sube la perplejidad de 23.9 a 26.9, 30.9 y 46.1,
+en línea con Michel et al. (2019).</p>
+<p><b>¿Los pesos de atención explican las decisiones?</b> Solo en parte. Jain y Wallace (2019) muestran que los pesos se correlacionan poco con la importancia
+medida por gradientes y que distribuciones muy distintas dan la misma predicción. Wiegreffe y Pinter (2019) responden que esas distribuciones no las produce
+el modelo entrenado y que la atención puede ser una explicación <i>plausible</i>, aunque no necesariamente <i>fiel</i>. Nuestros resultados apoyan esa postura intermedia: L7-H11 ofrece una explicación plausible de la correferencia, pero es una cabeza de 144, y en
+GPT-2 el 70–80 % de la atención va a un token sin contenido, así que un peso alto no significa importancia. Para afirmar causalidad se necesitan
+intervenciones como la ablación.</p>
+<p><b>¿Cuándo preferir una RNN o una CNN?</b> Con datos en <i>streaming</i> que necesitan memoria constante por paso (RNN o modelos de estado como
+Mamba), en dispositivos con poca memoria o latencia estricta, y con pocos datos, donde el sesgo inductivo de la CNN (localidad e invariancia a traslaciones
+en imágenes o audio) generaliza mejor.</p>
+<p><b>Documentos de 100 000 tokens.</b> La matriz de una sola cabeza tendría 10<sup>10</sup> entradas (20 GB en fp16), por cada cabeza y cada capa. FlashAttention
+resuelve la memoria, pero no el tiempo: extrapolando la Figura 2, ≈ 0.9 s por capa solo en la atención. Consideraría atención por ventanas con tokens
+globales (Longformer), atención lineal o modelos de estado, RoPE con interpolación para extender el contexto, o partir el documento y recuperar solo los
+fragmentos relevantes (RAG).</p>
+
+<h2>Conclusiones</h2>
+<ul>
+<li>La atención implementada desde cero coincide con la de PyTorch (error ≈ 10<sup>−7</sup>) y con el ejercicio a mano.</li>
+<li>Dividir entre √d<sub>k</sub> mantiene la varianza de los puntajes en 1 y evita que la softmax se sature y anule el gradiente.</li>
+<li>La atención estándar es O(n<sup>2</sup>) en tiempo y memoria; FlashAttention deja la memoria en O(n), pero no el tiempo.</li>
+<li>Las cabezas se especializan, pero muchas son redundantes, y las capas profundas concentran la atención en sinks (primer token o [SEP]).</li>
+<li>Los pesos de atención sirven para formular hipótesis sobre el modelo, no como explicación fiel de sus decisiones.</li>
+</ul>
+
+<h2>Referencias</h2>
+<div class="refs">
+<p>Bahdanau, D., Cho, K., &amp; Bengio, Y. (2015). Neural machine translation by jointly learning to align and translate. <i>ICLR</i>. https://arxiv.org/abs/1409.0473</p>
+<p>Beltagy, I., Peters, M. E., &amp; Cohan, A. (2020). <i>Longformer: The long-document transformer</i>. https://arxiv.org/abs/2004.05150</p>
+<p>Clark, K., Khandelwal, U., Levy, O., &amp; Manning, C. D. (2019). What does BERT look at? An analysis of BERT’s attention. <i>BlackboxNLP</i>, 276–286.</p>
+<p>Dao, T., Fu, D. Y., Ermon, S., Rudra, A., &amp; Ré, C. (2022). FlashAttention: Fast and memory-efficient exact attention with IO-awareness. <i>NeurIPS</i>.</p>
+<p>Jain, S., &amp; Wallace, B. C. (2019). Attention is not explanation. <i>NAACL-HLT</i>, 3543–3556.</p>
+<p>Katharopoulos, A., Vyas, A., Pappas, N., &amp; Fleuret, F. (2020). Transformers are RNNs: Fast autoregressive transformers with linear attention. <i>ICML</i>.</p>
+<p>Luong, M.-T., Pham, H., &amp; Manning, C. D. (2015). Effective approaches to attention-based neural machine translation. <i>EMNLP</i>, 1412–1421.</p>
+<p>Michel, P., Levy, O., &amp; Neubig, G. (2019). Are sixteen heads really better than one? <i>NeurIPS</i>.</p>
+<p>Su, J., Lu, Y., Pan, S., Murtadha, A., Wen, B., &amp; Liu, Y. (2021). <i>RoFormer: Enhanced transformer with rotary position embedding</i>. https://arxiv.org/abs/2104.09864</p>
+<p>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., &amp; Polosukhin, I. (2017). Attention is all you need. <i>NeurIPS</i>. https://arxiv.org/abs/1706.03762</p>
+<p>Wiegreffe, S., &amp; Pinter, Y. (2019). Attention is not not explanation. <i>EMNLP-IJCNLP</i>, 11–20.</p>
+<p>Xiao, G., Tian, Y., Chen, B., Han, S., &amp; Lewis, M. (2023). <i>Efficient streaming language models with attention sinks</i>. https://arxiv.org/abs/2309.17453</p>
+<p>Xiong, R., Yang, Y., He, D., Zheng, K., Zheng, S., Xing, C., Zhang, H., Lan, Y., Wang, L., &amp; Liu, T. (2020). On layer normalization in the transformer architecture. <i>ICML</i>.</p>
+</div>
+<p class="repo">Repositorio: <a href="https://github.com/ecarcamo/CC3092-DEEP-LEARNING/tree/main/HTD2">https://github.com/ecarcamo/CC3092-DEEP-LEARNING/tree/main/HTD2</a></p>
+</body></html>
