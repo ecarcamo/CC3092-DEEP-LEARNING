@@ -1,0 +1,9 @@
+# Hoja de trabajo 2 - Transformers y mecanismos de atención
+# Instalado sobre el venv compartido del curso (DEEP_LEARNING/venv)
+torch>=2.5
+transformers>=4.45
+bertviz>=1.4
+numpy>=1.26
+matplotlib>=3.9
+jupyter
+nbconvert
